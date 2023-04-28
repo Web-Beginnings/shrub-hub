@@ -1,39 +1,89 @@
-import 'react-native-gesture-handler';
-import React, { useEffect, useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { LoginScreen, HomeScreen, RegistrationScreen } from '../';
-import { decode, encode } from 'base-64';
+import React, { useState } from "react";
+import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import styles from "./styles";
 
-if (!global.btoa) {
-  global.btoa = encode;
-}
+type RegistrationScreenProps = {
+  navigation: any; // Change `any` to the type of your navigation props
+};
 
-if (!global.atob) {
-  global.atob = decode;
-}
+export default function RegistrationScreen({
+  navigation,
+}: RegistrationScreenProps) {
+  const [fullName, setFullName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
 
-const Stack = createStackNavigator();
+  const onFooterLinkPress = () => {
+    navigation.navigate("Login");
+  };
 
-export default function App(): JSX.Element {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [user, setUser] = useState<any>(null);
-  console.log(user);
+  const onRegisterPress = () => {};
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        {user ? (
-          <Stack.Screen name="Home">
-            {(props: any) => <HomeScreen {...props} extraData={user} />}
-          </Stack.Screen>
-        ) : (
-          <>
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Registration" component={RegistrationScreen} />
-          </>
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
+    <View style={styles.container}>
+      <KeyboardAwareScrollView
+        style={{ flex: 1, width: "100%" }}
+        keyboardShouldPersistTaps="always"
+      >
+        <Image
+          style={styles.logo}
+          source={require("../../../assets/icon.png")}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Full Name"
+          placeholderTextColor="#aaaaaa"
+          onChangeText={(text) => setFullName(text)}
+          value={fullName}
+          underlineColorAndroid="transparent"
+          autoCapitalize="none"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="E-mail"
+          placeholderTextColor="#aaaaaa"
+          onChangeText={(text) => setEmail(text)}
+          value={email}
+          underlineColorAndroid="transparent"
+          autoCapitalize="none"
+        />
+        <TextInput
+          style={styles.input}
+          placeholderTextColor="#aaaaaa"
+          secureTextEntry
+          placeholder="Password"
+          onChangeText={(text) => setPassword(text)}
+          value={password}
+          underlineColorAndroid="transparent"
+          autoCapitalize="none"
+        />
+        <TextInput
+          style={styles.input}
+          placeholderTextColor="#aaaaaa"
+          secureTextEntry
+          placeholder="Confirm Password"
+          onChangeText={(text) => setConfirmPassword(text)}
+          value={confirmPassword}
+          underlineColorAndroid="transparent"
+          autoCapitalize="none"
+        />
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => onRegisterPress()}
+        >
+          <Text style={styles.buttonTitle}>Create account</Text>
+        </TouchableOpacity>
+        <View style={styles.footerView}>
+          <Text style={styles.footerText}>
+            Already got an account?{" "}
+            <Text onPress={onFooterLinkPress} style={styles.footerLink}>
+              Log in
+            </Text>
+          </Text>
+        </View>
+      </KeyboardAwareScrollView>
+    </View>
   );
 }
