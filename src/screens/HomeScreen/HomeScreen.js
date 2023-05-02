@@ -4,7 +4,7 @@ import Footer from "./Components.js/Footer";
 import Header from "./Components.js/Header";
 import styles from "./styles";
 
-export default function HomeScreen(props) {
+export default function HomeScreen(props, extraData) {
   return (
     <View style={styles.container}>
       <Header />

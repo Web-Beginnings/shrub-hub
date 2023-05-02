@@ -3,25 +3,32 @@ import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import styles from "./styles";
 import { firebase } from "../../../firebaseConfig";
+import { NavigationProp } from "@react-navigation/native";
 
 interface Props {
   navigation: any;
 }
 
+
 const LoginScreen: React.FC<Props> = ({ navigation }) => {
+  type LoginProps = {
+    email: string;
+    password: string;
+    navigation: NavigationProp<any>;
+  };
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const onFooterLinkPress = () => {
     navigation.navigate("Registration");
   };
-
   const onLoginPress = () => {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((response) => {
-        const uid = response.user.uid;
+        const uid = response.user?.uid;
         const usersRef = firebase.firestore().collection("users");
         usersRef
           .doc(uid)
@@ -32,7 +39,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
               return;
             }
             const user = firestoreDocument.data();
-            navigation.navigate("Home", { user });
+            navigation.navigate("HomeScreen", { user });
           })
           .catch((error) => {
             alert(error);
