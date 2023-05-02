@@ -21,7 +21,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      {/* <Stack.Navigator>
         {user ? (
           <Stack.Screen name="Home">
             {(props: any) => <HomeScreen {...props} extraData={user} />}
@@ -32,7 +32,8 @@ export default function App() {
             <Stack.Screen name="Registration" component={RegistrationScreen} />
           </>
         )}
-      </Stack.Navigator>
+      </Stack.Navigator> */}
+      <HomeScreen />
     </NavigationContainer>
   );
 }
