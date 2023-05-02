@@ -6,7 +6,6 @@ import styles from "./HomeScreen/styles";
 import { getPlants } from "./Api";
 
 export default function PlantsList(props, extraData) {
-  console.log(getPlants(), "eggs");
   const [plantsArray, setPlantsArray] = useState([]);
 
   useEffect(() => {
@@ -19,9 +18,9 @@ export default function PlantsList(props, extraData) {
     <View style={styles.container}>
       <Header />
       <View style={styles.content}>
-        {console.log(plantsArray, "plants!")}
         {plantsArray.map((plant) => {
-          <Text key={plant.id}>{plant.common_name}</Text>;
+          console.log(plant, "plant");
+          return <Text key={plant.id}>{plant.common_name}</Text>;
         })}
       </View>
       <View style={styles.footer}>
