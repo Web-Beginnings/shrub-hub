@@ -5,6 +5,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { LoginScreen, HomeScreen, RegistrationScreen } from "./src/screens";
 import { decode, encode } from "base-64";
 import { NavigationProp } from "@react-navigation/native"
+import PlantsList from "./src/screens/PlantsList";
+import MyPlants from "./src/screens/MyPlants";
 
 
 
@@ -29,6 +31,9 @@ export default function App() {
             {(props) => <HomeScreen {...props} extraData={user} />}
           </Stack.Screen>
             <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="PlantsList" component={PlantsList} />
+            {/* <Stack.Screen name="MyPlants" component={MyPlants} /> */}
+            {/* <Stack.Screen name="PlantsList" component={PlantsList} /> */}
             <Stack.Screen name="Registration" component={RegistrationScreen} />   
       </Stack.Navigator>
     </NavigationContainer>
