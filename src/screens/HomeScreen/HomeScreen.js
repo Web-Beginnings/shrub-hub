@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, Button, TouchableOpacity } from "react-native";
+import { Text, View, Button, TouchableOpacity, ScrollView } from "react-native";
 import Footer from "./Components.js/Footer";
 import Header from "./Components.js/Header";
 import styles from "./styles";
@@ -25,7 +25,41 @@ export default function HomeScreen(props, extraData) {
           }}
           style={styles.buttons}
         >
-          <Text>My Plants</Text>
+          <ScrollView style={styles.content}>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+            <Text>MyPlants</Text>
+          </ScrollView>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttons}>
           <Text>Wishlist</Text>
