@@ -1,12 +1,12 @@
 import React from "react";
 import { Text, View, Button, TouchableOpacity, ScrollView } from "react-native";
-import Footer from "./Components.js/Footer";
-import Header from "./Components.js/Header";
+import Footer from "./Components/Footer";
+import Header from "./Components/Header";
 import styles from "./styles";
 
 export default function HomeScreen(props, extraData) {
   const { navigation } = props;
-  console.log("props in home:::", props);
+  // console.log("props in home:::", props);
   return (
     <View style={styles.container}>
       <Header />
@@ -66,7 +66,7 @@ export default function HomeScreen(props, extraData) {
         </TouchableOpacity>
       </View>
       <View style={styles.footer}>
-        <Footer />
+        <Footer props={props}/>
       </View>
     </View>
   );

@@ -1,10 +1,11 @@
 import * as React from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 
-const Footer = () => {
+const Footer = (props) => {
+  const { navigation } = props.props;
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => {navigation.navigate("Forum", {props: props})}}>
         <Text style={styles.buttonText}>Forum</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button}>

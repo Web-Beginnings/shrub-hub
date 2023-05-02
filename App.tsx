@@ -7,6 +7,7 @@ import { decode, encode } from "base-64";
 import { NavigationProp } from "@react-navigation/native"
 import PlantsList from "./src/screens/PlantsList";
 import MyPlants from "./src/screens/MyPlants";
+import Forum from "./src/screens/Forum/Forum";
 
 
 
@@ -22,7 +23,7 @@ const Stack = createStackNavigator();
 export default function App() {
   const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<any>(null);
-  console.log(user);
+  // console.log(user);
 
   return (
     <NavigationContainer>
@@ -34,6 +35,7 @@ export default function App() {
             <Stack.Screen name="PlantsList" component={PlantsList} />
             {/* <Stack.Screen name="MyPlants" component={MyPlants} /> */}
             {/* <Stack.Screen name="PlantsList" component={PlantsList} /> */}
+            <Stack.Screen name="Forum" component={Forum} />
             <Stack.Screen name="Registration" component={RegistrationScreen} />   
       </Stack.Navigator>
     </NavigationContainer>
