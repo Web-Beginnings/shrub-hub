@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-// import firestore from "@react-native-firebase/firestore"
+// import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { firebase } from "../../../firebaseConfig";
 
 import styles from "./styles";
 
@@ -27,23 +27,29 @@ export default function RegistrationScreen({
       alert("Passwords don't match");
       return;
     }
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const uid = userCredential.user.uid;
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((response) => {
+        const uid = response.user.uid;
         const data = {
           id: uid,
           email,
           fullName,
         };
-        // const user = userCredential.user;
-        // ...
+        const usersRef = firebase.firestore().collection("users");
+        usersRef
+          .doc(uid)
+          .set(data)
+          .then(() => {
+            navigation.navigate("Home", { user: data });
+          })
+          .catch((error) => {
+            alert(error);
+          });
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
+        alert(error);
       });
   };
 
