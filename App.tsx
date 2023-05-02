@@ -4,6 +4,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { LoginScreen, HomeScreen, RegistrationScreen } from "./src/screens";
 import { decode, encode } from "base-64";
+import { NavigationProp } from "@react-navigation/native"
+
+
 
 if (!global.btoa) {
   global.btoa = encode;
@@ -21,18 +24,31 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        {user ? (
-          <Stack.Screen name="Home">
-            {(props: any) => <HomeScreen {...props} extraData={user} />}
+      <Stack.Navigator initialRouteName={user ? 'HomeScreen' : 'Login'}>
+          <Stack.Screen name="HomeScreen">
+            {(props) => <HomeScreen {...props} extraData={user} />}
           </Stack.Screen>
-        ) : (
-          <>
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Registration" component={RegistrationScreen} />
-          </>
-        )}
+       
       </Stack.Navigator>
     </NavigationContainer>
   );
+
+  // return (
+  //   <NavigationContainer>
+  //     <Stack.Navigator>
+  //       {user ? (
+  //         <Stack.Screen name="HomeScreen">
+  //           {(props: any) => <HomeScreen {...props} extraData={user} />}
+  //         </Stack.Screen>
+  //       ) : (
+  //         <>
+  //           <Stack.Screen name="Login" component={LoginScreen} />
+  //           <Stack.Screen name="Registration" component={RegistrationScreen} />
+  //         </>
+  //       )}
+  //     </Stack.Navigator>
+  //   </NavigationContainer>
+  // );
 }
