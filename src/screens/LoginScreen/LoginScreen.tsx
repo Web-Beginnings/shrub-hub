@@ -5,12 +5,9 @@ import styles from "./styles";
 import { firebase } from "../../../firebaseConfig";
 import { NavigationProp } from "@react-navigation/native";
 
-
 interface Props {
   navigation: any;
 }
-
-
 
 
 const LoginScreen: React.FC<Props> = ({ navigation }) => {
@@ -19,6 +16,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
     password: string;
     navigation: NavigationProp<any>;
   };
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -50,7 +48,6 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
       .catch((error) => {
         alert(error);
       });
-    // do something on login press
   };
 
   return (
