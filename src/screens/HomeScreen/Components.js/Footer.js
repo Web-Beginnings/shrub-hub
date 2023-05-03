@@ -1,15 +1,20 @@
 import * as React from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 
-const Footer = ({ navigation }) => {
-  console.log(navigation);
+const Footer = (props) => {
+  const { navigation } = props.props;
   const handleMapsNav = () => {
     navigation.navigate("MapsScreen");
   };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate("Forum", { props: props });
+        }}
+      >
         <Text style={styles.buttonText}>Forum</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button}>
@@ -23,6 +28,23 @@ const Footer = ({ navigation }) => {
 };
 
 export default Footer;
+
+// const Footer = (props) => {
+//     const { navigation } = props.props;
+//     return (
+//       <View style={styles.container}>
+//         <TouchableOpacity style={styles.button} onPress={() => {navigation.navigate("Forum", {props: props})}}>
+//           <Text style={styles.buttonText}>Forum</Text>
+//         </TouchableOpacity>
+//         <TouchableOpacity style={styles.button}>
+//           <Text style={styles.buttonText}>Home</Text>
+//         </TouchableOpacity>
+//         <TouchableOpacity style={styles.button}>
+//           <Text style={styles.buttonText}>Maps</Text>
+//         </TouchableOpacity>
+//       </View>
+//     );
+//   };
 
 const styles = StyleSheet.create({
   footer: {

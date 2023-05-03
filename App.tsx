@@ -8,6 +8,7 @@ import { NavigationProp } from "@react-navigation/native";
 import PlantsList from "./src/screens/PlantsList";
 import MyPlants from "./src/screens/MyPlants";
 import MapsScreen from "./src/screens/MapsScreen";
+import Forum from "./src/screens/Forum/Forum";
 
 if (!global.btoa) {
   global.btoa = encode;
@@ -36,6 +37,7 @@ export default function App() {
         <Stack.Screen name="PlantsList" component={PlantsList} />
         {/* <Stack.Screen name="MyPlants" component={MyPlants} /> */}
         {/* <Stack.Screen name="PlantsList" component={PlantsList} /> */}
+        <Stack.Screen name="Forum" component={Forum} />
         <Stack.Screen name="Registration" component={RegistrationScreen} />
       </Stack.Navigator>
     </NavigationContainer>
