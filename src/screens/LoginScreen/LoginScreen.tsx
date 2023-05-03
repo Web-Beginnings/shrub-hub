@@ -9,7 +9,6 @@ interface Props {
   navigation: any;
 }
 
-
 const LoginScreen: React.FC<Props> = ({ navigation }) => {
   type LoginProps = {
     email: string;
@@ -58,7 +57,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
       >
         <Image
           style={styles.logo}
-          source={require("../../../assets/icon.png")}
+          source={require("../../../assets/PlantLogo.png")}
         />
         <TextInput
           style={styles.input}
