@@ -66,7 +66,7 @@ export default function HomeScreen(props, extraData) {
         </TouchableOpacity>
       </View>
       <View style={styles.footer}>
-        <Footer />
+        <Footer navigation={navigation} />
       </View>
     </View>
   );

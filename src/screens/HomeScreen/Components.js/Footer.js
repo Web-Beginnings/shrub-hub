@@ -1,7 +1,12 @@
 import * as React from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 
-const Footer = () => {
+const Footer = ({ navigation }) => {
+  console.log(navigation);
+  const handleMapsNav = () => {
+    navigation.navigate("MapsScreen");
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.button}>
@@ -10,7 +15,7 @@ const Footer = () => {
       <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>Home</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => handleMapsNav()}>
         <Text style={styles.buttonText}>Maps</Text>
       </TouchableOpacity>
     </View>
