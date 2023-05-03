@@ -16,6 +16,7 @@ const Footer = ({ navigation }, props) => {
       >
         <Text style={styles.buttonText}>Forum</Text>
       </TouchableOpacity>
+
       <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>Home</Text>
       </TouchableOpacity>
@@ -28,22 +29,6 @@ const Footer = ({ navigation }, props) => {
 
 export default Footer;
 
-// const Footer = (props) => {
-//     const { navigation } = props.props;
-//     return (
-//       <View style={styles.container}>
-//         <TouchableOpacity style={styles.button} onPress={() => {navigation.navigate("Forum", {props: props})}}>
-//           <Text style={styles.buttonText}>Forum</Text>
-//         </TouchableOpacity>
-//         <TouchableOpacity style={styles.button}>
-//           <Text style={styles.buttonText}>Home</Text>
-//         </TouchableOpacity>
-//         <TouchableOpacity style={styles.button}>
-//           <Text style={styles.buttonText}>Maps</Text>
-//         </TouchableOpacity>
-//       </View>
-//     );
-//   };
 
 const styles = StyleSheet.create({
   footer: {
