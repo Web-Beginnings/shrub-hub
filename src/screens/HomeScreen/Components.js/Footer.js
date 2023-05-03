@@ -1,8 +1,7 @@
 import * as React from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 
-const Footer = (props) => {
-  const { navigation } = props.props;
+const Footer = ({ navigation }, props) => {
   const handleMapsNav = () => {
     navigation.navigate("MapsScreen");
   };
