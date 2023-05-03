@@ -9,6 +9,8 @@ import PlantsList from "./src/screens/PlantsList";
 import MyPlants from "./src/screens/MyPlants";
 import MapsScreen from "./src/screens/MapsScreen";
 import Forum from "./src/screens/Forum/Forum";
+import { firebase } from "./firebaseConfig.js"
+import { View, Text } from "react-native";
 
 if (!global.btoa) {
   global.btoa = encode;
@@ -20,9 +22,40 @@ if (!global.atob) {
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<any>(null);
   // console.log(user);
+
+useEffect(() => {
+  const usersRef = firebase.firestore().collection('users');
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      usersRef
+        .doc(user.uid)
+        .get()
+        .then((document) => {
+          const userData = document.data()
+          setLoading(false)
+          setUser(userData)
+        })
+        .catch((error) => {
+          setLoading(false)
+        });
+    } else {
+      setLoading(false)
+    }
+  });
+}, []);
+
+
+if(loading) {
+  return (
+    <View>
+       <Text>Bare with us...</Text> 
+    </View>
+  
+  )
+}
 
   return (
     <NavigationContainer>
@@ -42,21 +75,7 @@ export default function App() {
       </Stack.Navigator>
     </NavigationContainer>
   );
-
-  // return (
-  //   <NavigationContainer>
-  //     <Stack.Navigator>
-  //       {user ? (
-  //         <Stack.Screen name="HomeScreen">
-  //           {(props: any) => <HomeScreen {...props} extraData={user} />}
-  //         </Stack.Screen>
-  //       ) : (
-  //         <>
-  //           <Stack.Screen name="Login" component={LoginScreen} />
-  //           <Stack.Screen name="Registration" component={RegistrationScreen} />
-  //         </>
-  //       )}
-  //     </Stack.Navigator>
-  //   </NavigationContainer>
-  // );
 }
+
+
+
