@@ -6,7 +6,6 @@ import styles from "./styles";
 
 export default function HomeScreen(props, extraData) {
   const { navigation } = props;
-  console.log("props in home:::", props);
   return (
     <View style={styles.container}>
       <Header />
