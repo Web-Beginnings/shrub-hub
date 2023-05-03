@@ -29,36 +29,6 @@ export default function HomeScreen(props, extraData) {
             <Text>MyPlants</Text>
             <Text>MyPlants</Text>
             <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
-            <Text>MyPlants</Text>
           </ScrollView>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttons}>
