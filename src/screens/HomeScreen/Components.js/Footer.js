@@ -16,6 +16,7 @@ const Footer = ({ navigation }, props) => {
       >
         <Text style={styles.buttonText}>Forum</Text>
       </TouchableOpacity>
+
       <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>Home</Text>
       </TouchableOpacity>
@@ -28,34 +29,18 @@ const Footer = ({ navigation }, props) => {
 
 export default Footer;
 
-// const Footer = (props) => {
-//     const { navigation } = props.props;
-//     return (
-//       <View style={styles.container}>
-//         <TouchableOpacity style={styles.button} onPress={() => {navigation.navigate("Forum", {props: props})}}>
-//           <Text style={styles.buttonText}>Forum</Text>
-//         </TouchableOpacity>
-//         <TouchableOpacity style={styles.button}>
-//           <Text style={styles.buttonText}>Home</Text>
-//         </TouchableOpacity>
-//         <TouchableOpacity style={styles.button}>
-//           <Text style={styles.buttonText}>Maps</Text>
-//         </TouchableOpacity>
-//       </View>
-//     );
-//   };
 
 const styles = StyleSheet.create({
   footer: {
     backgroundColor: "blue",
-    padding: 40,
+    padding: 20,
   },
   container: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "blue",
-    paddingVertical: 2,
+    backgroundColor: "#2e9a43",
+    paddingVertical: 5,
   },
   button: {
     backgroundColor: "#fff",
@@ -67,7 +52,7 @@ const styles = StyleSheet.create({
     transform: [{ rotate: "45deg" }],
   },
   buttonText: {
-    color: "blue",
+    color: "#cea742",
     fontSize: 7,
     // display: "flex",
     // alignItems: "flex-end",

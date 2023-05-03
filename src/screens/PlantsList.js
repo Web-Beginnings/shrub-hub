@@ -9,9 +9,10 @@ export default function PlantsList(props, extraData) {
   const [plantsArray, setPlantsArray] = useState([]);
   useEffect(() => {
     getPlants().then((result) => {
+      console.log("result:::::", result);
       setPlantsArray(result);
     });
-  }, [setPlantsArray]);
+  }, []);
   return (
     <View style={styles.container}>
       <Header />
