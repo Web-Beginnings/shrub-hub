@@ -9,10 +9,12 @@ import PlantsList from "./src/screens/PlantListScreen/PlantsList";
 import MyPlants from "./src/screens/MyPlants";
 import MapsScreen from "./src/screens/MapsScreen";
 import Forum from "./src/screens/Forum/Forum";
+import SinglePost from "./src/screens/SinglePost";
 import PlantCard from "./src/screens/PlantCardScreen/PlantCard";
 import { firebase } from "./firebaseConfig.js"
 import { View, Text } from "react-native";
 import SettingsScreen from "./src/screens/SettingsScreen/Settings";
+
 
 
 if (!global.btoa) {
@@ -82,6 +84,7 @@ if(loading) {
         {/* <Stack.Screen name="MyPlants" component={MyPlants} /> */}
         {/* <Stack.Screen name="PlantsList" component={PlantsList} /> */}
         <Stack.Screen name="Forum" component={Forum} />
+        <Stack.Screen name="SinglePost" component={SinglePost} />
         <Stack.Screen name="Registration" component={RegistrationScreen} />
         <Stack.Screen name="Settings" component={SettingsScreen}/>
       </Stack.Navigator>
