@@ -72,7 +72,7 @@ if(loading) {
           {(props) => <HomeScreen {...props} extraData={user} />}
         </Stack.Screen>
         <Stack.Screen name="MapsScreen">
-          {(props) => <MapsScreen />}
+          {(props) => <MapsScreen {...props}/>}
         </Stack.Screen>
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="PlantsList">
