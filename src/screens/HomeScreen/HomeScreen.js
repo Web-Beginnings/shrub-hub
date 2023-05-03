@@ -9,7 +9,7 @@ export default function HomeScreen(props, extraData) {
   const { navigation } = props;
   return (
     <View style={styles.container}>
-      <Header />
+      <Header props={props} navigation={navigation} />
       <View style={styles.content}>
         <TouchableOpacity
           onPress={() => {

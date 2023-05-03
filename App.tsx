@@ -11,6 +11,7 @@ import MapsScreen from "./src/screens/MapsScreen";
 import Forum from "./src/screens/Forum/Forum";
 import { firebase } from "./firebaseConfig.js"
 import { View, Text } from "react-native";
+import SettingsScreen from "./src/screens/SettingsScreen/Settings";
 
 if (!global.btoa) {
   global.btoa = encode;
@@ -21,10 +22,13 @@ if (!global.atob) {
 
 const Stack = createStackNavigator();
 
+
+
 export default function App() {
   const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<any>(null);
   // console.log(user);
+
 
 useEffect(() => {
   const usersRef = firebase.firestore().collection('users');
@@ -72,6 +76,7 @@ if(loading) {
         {/* <Stack.Screen name="PlantsList" component={PlantsList} /> */}
         <Stack.Screen name="Forum" component={Forum} />
         <Stack.Screen name="Registration" component={RegistrationScreen} />
+        <Stack.Screen name="Settings" component={SettingsScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
