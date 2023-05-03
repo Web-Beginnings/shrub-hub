@@ -62,7 +62,7 @@ export default function RegistrationScreen({
       >
         <Image
           style={styles.logo}
-          source={require("../../../assets/icon.png")}
+          source={require("../../../assets/PlantLogo.png")}
         />
         <TextInput
           style={styles.input}

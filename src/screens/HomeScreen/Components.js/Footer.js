@@ -16,6 +16,7 @@ const Footer = ({ navigation }, props) => {
       >
         <Text style={styles.buttonText}>Forum</Text>
       </TouchableOpacity>
+
       <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>Home</Text>
       </TouchableOpacity>
