@@ -5,10 +5,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { LoginScreen, HomeScreen, RegistrationScreen } from "./src/screens";
 import { decode, encode } from "base-64";
 import { NavigationProp } from "@react-navigation/native";
-import PlantsList from "./src/screens/PlantsList";
+import PlantsList from "./src/screens/PlantListScreen/PlantsList";
 import MyPlants from "./src/screens/MyPlants";
 import MapsScreen from "./src/screens/MapsScreen";
 import Forum from "./src/screens/Forum/Forum";
+import PlantCard from "./src/screens/PlantCardScreen/PlantCard";
 
 if (!global.btoa) {
   global.btoa = encode;
@@ -34,7 +35,12 @@ export default function App() {
           {(props) => <MapsScreen />}
         </Stack.Screen>
         <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="PlantsList" component={PlantsList} />
+        <Stack.Screen name="PlantsList">
+          {(props) => <PlantsList {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="PlantCard">
+          {(props) => <PlantCard {...props} />}
+        </Stack.Screen>
         {/* <Stack.Screen name="MyPlants" component={MyPlants} /> */}
         {/* <Stack.Screen name="PlantsList" component={PlantsList} /> */}
         <Stack.Screen name="Forum" component={Forum} />

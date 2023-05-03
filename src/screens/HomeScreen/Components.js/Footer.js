@@ -48,14 +48,14 @@ export default Footer;
 const styles = StyleSheet.create({
   footer: {
     backgroundColor: "blue",
-    padding: 40,
+    padding: 20,
   },
   container: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "blue",
-    paddingVertical: 2,
+    backgroundColor: "#2e9a43",
+    paddingVertical: 5,
   },
   button: {
     backgroundColor: "#fff",
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     transform: [{ rotate: "45deg" }],
   },
   buttonText: {
-    color: "blue",
+    color: "#cea742",
     fontSize: 7,
     // display: "flex",
     // alignItems: "flex-end",

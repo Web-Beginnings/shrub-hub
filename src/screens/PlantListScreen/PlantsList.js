@@ -7,12 +7,14 @@ import {
   Image,
   StyleSheet,
 } from "react-native";
-import Footer from "./HomeScreen/Components.js/Footer";
-import Header from "./HomeScreen/Components.js/Header";
-import { getPlants } from "./Api";
+import Footer from "../HomeScreen/Components.js/Footer";
+import Header from "../HomeScreen/Components.js/Header";
+import { getPlants } from "../Api";
 import { ScrollView } from "react-native-gesture-handler";
+
 export default function PlantsList(props, extraData) {
   const [plantsArray, setPlantsArray] = useState([]);
+  const { navigation } = props;
   useEffect(() => {
     getPlants().then((result) => {
       setPlantsArray(result);
@@ -28,7 +30,9 @@ export default function PlantsList(props, extraData) {
               <TouchableOpacity
                 key={plant.id}
                 style={styles.plantContainer}
-                onPress={() => {}}
+                onPress={() => {
+                  navigation.navigate("PlantCard", { plantId: plant.id });
+                }}
               >
                 <Text style={styles.title}>{plant.common_name}</Text>
                 <Image
@@ -95,12 +99,11 @@ const styles = StyleSheet.create({
   },
   footer: {
     position: "absolute",
-    bottom: 0,
+    bottom: 65,
     left: 0,
     right: 0,
-    height: 50,
-    backgroundColor: "#f0f0f0",
-    alignItems: "center",
+    height: 25,
+    backgroundColor: "#32d953",
     justifyContent: "space-between",
   },
 });
