@@ -3,8 +3,8 @@ import { Text, View, Button, TouchableOpacity } from "react-native";
 import Footer from "./HomeScreen/Components.js/Footer";
 import Header from "./HomeScreen/Components.js/Header";
 import styles from "./HomeScreen/styles";
-import { getPlants } from "./Api";
 import { ScrollView } from "react-native-gesture-handler";
+import { getPlants } from "./PlantApi";
 export default function PlantsList(props, extraData) {
   const [plantsArray, setPlantsArray] = useState([]);
   useEffect(() => {
@@ -18,7 +18,6 @@ export default function PlantsList(props, extraData) {
       <View style={styles.content}>
         <ScrollView>
           {plantsArray.map((plant) => {
-            // let plantName = plant.scientific_name;
             return (
               <TouchableOpacity key={plant.id}>
                 <Text>
