@@ -9,8 +9,8 @@ import {
 } from "react-native";
 import Footer from "../HomeScreen/Components.js/Footer";
 import Header from "../HomeScreen/Components.js/Header";
-import { getPlants } from "../Api";
 import { ScrollView } from "react-native-gesture-handler";
+import { getPlants } from "../PlantApi";
 
 export default function PlantsList(props, extraData) {
   const [plantsArray, setPlantsArray] = useState([]);
