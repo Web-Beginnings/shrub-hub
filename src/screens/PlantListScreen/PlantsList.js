@@ -20,6 +20,9 @@ export default function PlantsList(props, extraData) {
       setPlantsArray(result);
     });
   }, [setPlantsArray]);
+  if (!plantsArray) {
+    return <Text style={styles.title}>Loading Plants...</Text>;
+  }
   return (
     <View style={styles.container}>
       <Header />
@@ -57,7 +60,7 @@ export default function PlantsList(props, extraData) {
         </ScrollView>
       </View>
       <View style={styles.footer}>
-        <Footer />
+        <Footer navigation={navigation} />
       </View>
     </View>
   );
