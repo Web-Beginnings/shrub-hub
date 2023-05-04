@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import Footer from "../HomeScreen/Components.js/Footer";
 import Header from "../HomeScreen/Components.js/Header";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, TextInput, TouchableOpacity } from "react-native";
 import styles from "./styles.js";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { getAuth, signOut, deleteUser, User, updateEmail } from "firebase/auth";
+
+import { getAuth, signOut, deleteUser, User, updateEmail} from "firebase/auth";
 import { Alert } from "react-native";
+import {firebase} from "../../../firebaseConfig";
 
 type SettingProps = any;
 const auth = getAuth();
 const user: User | any = auth.currentUser;
+
 const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
+  const [newEmail, setNewEmail] = useState<string>("");
   
   const handleSignOut = () => {
     signOut(auth)
@@ -47,8 +50,11 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
       ]
     );
   };
-  const handleUpdateEmail = (newEmail: string) => {
-    console.log('email', user.email)
+  const handleUpdateEmail = (newEmail: string ) => {
+    if (!newEmail) {
+      console.log("New email is not provided.");
+      return;
+    }
     updateEmail(user, newEmail)
     .then(() => {
       console.log("Email updated successfully")
@@ -57,24 +63,56 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
       console.error("Error updating email:", error);
     })
   }
+
+  const handleChangePassword = () => {
+    const userEmail: string = auth.currentUser?.email ?? ''
+    if (!user || !user.email) {
+      console.log("User is not authenticated.");
+      return;
+    }
+    firebase.auth().sendPasswordResetEmail(userEmail)
+    .then(() => {
+      alert("Password reset email has been sent! Check your inbox!")
+    })
+    .catch((error) => {
+      alert(error)
+    })
+  }
   const settingsOptions = [
     { title: "Change avatar", onPress: () => {} },
     { title: "Change Location", onPress: () => {} },
-    { title: "Update email address", onPress: handleUpdateEmail  },
-    { title: "Update password", onPress: () => {} },
+    { title: "Update email address", onPress: () => handleUpdateEmail(newEmail)  },
+    { title: "Update password", onPress: handleChangePassword },
     { title: "Delete account", onPress: handleDeleteAccount },
     { title: "Sign out", onPress: handleSignOut },
   ];
 
   return (
     <View style={styles.container}>
-      <Header navigation={navigation} />
-      <ScrollView>
-        {settingsOptions.map(({ title, onPress }) => (
-          <View key={title} style={styles.section}>
-            <TouchableOpacity key={title} onPress={onPress}>
-              <Text style={styles.sectionHeader}>{title}</Text>
+    <Header navigation={navigation} />
+    <ScrollView>
+      {settingsOptions.map(({ title, onPress }) => (
+        <View key={title} style={styles.section}>
+          {title !== "Update email address" ? (
+           <TouchableOpacity  key={title}  style={styles.sectionHeader} onPress={() => onPress()}>
+           <Text style={styles.sectionHeader}>{title}</Text>
+         </TouchableOpacity>
+          ) : (
+            <View style={styles.inputContainer}>
+            <Text style={styles.sectionHeader}>{title}</Text>
+            <TextInput
+              style={styles.textInput}
+              placeholder="Enter new email"
+              onChangeText={(text) => setNewEmail(text)}
+            />
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => onPress()}
+            >
+              <Text style={styles.buttonText}>Save</Text>
             </TouchableOpacity>
+          </View>
+          )}
           </View>
         ))}
       </ScrollView>
