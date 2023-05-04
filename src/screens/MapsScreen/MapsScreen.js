@@ -10,10 +10,10 @@ import {
   ScrollView,
 } from "react-native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-import { GOOGLE_API_KEY } from "../../environment";
+import { GOOGLE_API_KEY } from "../../../environment";
 
-import Footer from "./HomeScreen/Components.js/Footer";
-import Header from "./HomeScreen/Components.js/Header";
+import Footer from "../HomeScreen/Components.js/Footer";
+import Header from "../HomeScreen/Components.js/Header";
 
 export default function MapsScreen({ navigation }) {
   const [plantShops, setPlantShops] = useState([]);
@@ -26,7 +26,6 @@ export default function MapsScreen({ navigation }) {
       .then(({ results }) => {
         // console.log(results);
         setPlantShops(results);
-        console.log(plantShops);
       });
   }, []);
 
@@ -46,7 +45,7 @@ export default function MapsScreen({ navigation }) {
           title={item.name}
           description={item.formatted_address}
           tracksViewChanges={false}
-          icon={require("../../assets/PlantMarker.png")}
+          icon={require("../../../assets/PlantMarker.png")}
         >
           <Callout tooltip>
             <View>
@@ -65,7 +64,7 @@ export default function MapsScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Header />
+      {/* <Header /> */}
       <View style={styles.body}>
         <View>
           <Text style={styles.header}>FIND THOSE PLANTS</Text>
