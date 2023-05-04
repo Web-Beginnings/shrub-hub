@@ -57,7 +57,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
       >
         <Image
           style={styles.logo}
-          source={require("../../../assets/PlantLogo.png")}
+          source={require("../../../assets/Shrubhublogo.png")}
         />
         <TextInput
           style={styles.input}
@@ -83,9 +83,9 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
         </TouchableOpacity>
         <View style={styles.footerView}>
           <Text style={styles.footerText}>
-            Don't have an account?{" "}
+            Don't have an account?{"     "}
             <Text onPress={onFooterLinkPress} style={styles.footerLink}>
-              Sign up
+              Sign up!
             </Text>
           </Text>
         </View>

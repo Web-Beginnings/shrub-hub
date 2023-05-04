@@ -7,9 +7,9 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/PlantLogo.png",
+      "image": "./assets/Startuplogo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#1B7130"
+      "backgroundColor": "#EA9547"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
