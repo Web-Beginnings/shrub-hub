@@ -17,7 +17,12 @@ const Footer = ({ navigation }, props) => {
         <Text style={styles.buttonText}>Forum</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate("HomeScreen", { props: props });
+        }}
+      >
         <Text style={styles.buttonText}>Home</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={() => handleMapsNav()}>
@@ -28,7 +33,6 @@ const Footer = ({ navigation }, props) => {
 };
 
 export default Footer;
-
 
 const styles = StyleSheet.create({
   footer: {
