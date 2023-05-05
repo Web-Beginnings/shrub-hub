@@ -26,6 +26,8 @@ export default function RegistrationScreen({
     if (password !== confirmPassword) {
       alert("Passwords don't match");
       return;
+    } else {
+      navigation.navigate("Login")
     }
 
     firebase
@@ -62,7 +64,7 @@ export default function RegistrationScreen({
       >
         <Image
           style={styles.logo}
-          source={require("../../../assets/PlantLogo.png")}
+          source={require("../../../assets/SignUpIcon.png")}
         />
         <TextInput
           style={styles.input}

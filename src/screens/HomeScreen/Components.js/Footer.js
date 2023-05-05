@@ -1,5 +1,12 @@
 import * as React from "react";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Pressable,
+} from "react-native";
 
 const Footer = ({ navigation }, props) => {
   const handleMapsNav = () => {
@@ -8,26 +15,32 @@ const Footer = ({ navigation }, props) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.button}
+      <Pressable
         onPress={() => {
           navigation.navigate("Forum", { props: props });
         }}
       >
-        <Text style={styles.buttonText}>Forum</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.button}
+        <Image
+          style={styles.Icon}
+          source={require("../../../../assets/ForumIcon.png")}
+        />
+      </Pressable>
+      <Pressable
         onPress={() => {
           navigation.navigate("HomeScreen", { props: props });
         }}
       >
-        <Text style={styles.buttonText}>Home</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => handleMapsNav()}>
-        <Text style={styles.buttonText}>Maps</Text>
-      </TouchableOpacity>
+        <Image
+          style={styles.Icon}
+          source={require("../../../../assets/HomeIcon.png")}
+        />
+      </Pressable>
+      <Pressable onPress={() => handleMapsNav()}>
+        <Image
+          style={styles.Icon}
+          source={require("../../../../assets/MapIcon.png")}
+        />
+      </Pressable>
     </View>
   );
 };
@@ -36,18 +49,19 @@ export default Footer;
 
 const styles = StyleSheet.create({
   footer: {
-    backgroundColor: "blue",
+    backgroundColor: "white",
     padding: 20,
   },
   container: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#2e9a43",
+    backgroundColor: "#2B937E",
     paddingVertical: 5,
+    borderRadius: 20,
   },
   button: {
-    backgroundColor: "#fff",
+    backgroundColor: "#EA9548",
     width: 65,
     height: 65,
     paddingVertical: 8,
@@ -56,13 +70,20 @@ const styles = StyleSheet.create({
     transform: [{ rotate: "45deg" }],
   },
   buttonText: {
-    color: "#cea742",
-    fontSize: 7,
+    color: "#2B937E",
+    fontSize: 10,
     // display: "flex",
     // alignItems: "flex-end",
     fontWeight: "bold",
     transform: [{ rotate: "-45deg" }],
     paddingTop: 11,
     paddingRight: 10,
+  },
+  Icon: {
+    height: 50,
+    width: 50,
+    paddingRight: 100,
+    paddingVertical: 30,
+    paddingBottom: 50,
   },
 });
