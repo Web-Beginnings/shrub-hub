@@ -1,21 +1,51 @@
 import * as React from "react";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
-
-const Header = ({ navigation }, props) => {
-  // console.log(props)
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Pressable,
+} from "react-native";
+const Header = (props, extraData) => {
+  const user = props.props;
+  const navigation = props.navigation;
+  const avatar =
+    "https://images.assetsdelivery.com/compings_v2/asmati/asmati2004/asmati200400435.jpg";
   return (
     <View style={styles.container}>
+      <View style={styles.avatarWrapper}>
+        <Image
+          alt="Profile picture"
+          source={{ uri: avatar }}
+          style={styles.avatar}
+        />
+      </View>
+      <View style={styles.titleContainer}>
+        <Text numberOfLines={5} style={styles.text}>
+          Welcome {user}
+        </Text>
+      </View>
       <View>
-      <Text style={styles.text}>Welcome User!</Text>
-    </View>
-    <View>
-      <TouchableOpacity style={styles.button}
-        onPress={() => {
-          navigation.navigate("Settings", { props: props });
-        }}>
-        <Text>⚙</Text>
-      </TouchableOpacity>
-    </View>
+        <Pressable
+          onPress={() => {
+            navigation.navigate("Settings", { props: props });
+          }}
+        >
+          <Image
+            style={styles.Icon}
+            source={require("../../../../assets/SettingsIcon.png")}
+          />
+        </Pressable>
+        {/* <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.navigate("Settings", { props: props });
+          }}
+        >
+          <Text>⚙</Text>
+        </TouchableOpacity> */}
+      </View>
     </View>
   );
 };
@@ -27,14 +57,35 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "green",
-    paddingVertical: 30,
+    backgroundColor: "#EA9547",
+    paddingVertical: 0,
+  },
+  titleContainer: {
+    maxWidth: 200,
   },
   text: {
-    color: "blue",
+    color: "#484240",
     fontSize: 20,
-    // display: "flex",
-    // alignItems: "flex-end",
     fontWeight: "bold",
+    marginRight: 0,
+    marginLeft: 10,
+    marginTop: 10,
+  },
+  avatar: {
+    width: 50,
+    height: 50,
+    marginTop: 10,
+    marginRight: 5,
+    marginBottom: 0,
+    marginLeft: 20,
+    borderRadius: 9999,
+  },
+  Icon: {
+    height: 100,
+    width: 100,
+    paddingRight: 20,
+    paddingLeft: 10,
+    // paddingVertical: 30,
+    paddingBottom: 50,
   },
 });

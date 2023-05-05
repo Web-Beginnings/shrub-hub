@@ -18,21 +18,21 @@ export default StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#ecf0f1",
+    backgroundColor: "#484240",
   },
   content: {
     flex: 1,
   },
   footer: {
-    backgroundColor: "blue",
+    backgroundColor: "#484240",
     padding: 25,
   },
   section: {
+    paddingVertical: 30,
     paddingHorizontal: 24,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+    // justifyContent: "flex-start",
     height: 50,
-    flexDirection: 'row'
+    flexDirection: "row",
   },
   sectionHeader: {
     paddingVertical: 12,
@@ -40,6 +40,25 @@ export default StyleSheet.create({
     fontWeight: "600",
     textTransform: "uppercase",
     letterSpacing: 1.1,
-   
+  },
+  inputContainer: {
+    height: 20,
+  },
+  textInput: {
+    marginTop: 15,
+    marginBottom: 15,
+    padding: 5,
+  },
+  button: {
+    backgroundColor: "#EA9547",
+
+    paddingVertical: 5,
+    paddingHorizontal: 5,
+    borderRadius: 5,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "#fff",
+    fontWeight: "bold",
   },
 });

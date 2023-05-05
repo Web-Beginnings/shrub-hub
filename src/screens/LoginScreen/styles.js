@@ -4,16 +4,16 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    paddingTop: "30%",
-    backgroundColor: "#1B7130",
+    paddingTop: "0%",
+    backgroundColor: "#484240",
   },
   title: {},
   logo: {
     flex: 1,
-    height: 120,
-    width: 90,
+    height: 400,
+    width: 400,
     alignSelf: "center",
-    margin: 30,
+    margin: 0,
   },
   input: {
     height: 48,
@@ -27,7 +27,7 @@ export default StyleSheet.create({
     paddingLeft: 16,
   },
   button: {
-    backgroundColor: "#23B13C",
+    backgroundColor: "#EA9547",
     marginLeft: 30,
     marginRight: 30,
     marginTop: 20,
@@ -48,7 +48,7 @@ export default StyleSheet.create({
   },
   footerText: {
     fontSize: 16,
-    color: "#2e2e2d",
+    color: "#2B937E",
   },
   footerLink: {
     color: "white",
