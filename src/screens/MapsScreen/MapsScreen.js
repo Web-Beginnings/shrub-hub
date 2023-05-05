@@ -92,10 +92,10 @@ export default function MapsScreen({ navigation }) {
       longitude: cityCoordinates[`${selectedItem}`].longitude,
       longitudeDelta: cityCoordinates[`${selectedItem}`].longitudeDelta,
     };
-    // console.log("loggg", cityCoordinates[`${search}`].latitude);
 
     this.map.animateToRegion(chosenCity, 1000);
   };
+
   useEffect(() => {
     fetch(
       `https://maps.googleapis.com/maps/api/place/textsearch/json?query=plant+shops+${search}&key=${GOOGLE_API_KEY}`
