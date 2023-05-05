@@ -19,7 +19,7 @@ const avatar =
     "https://images.assetsdelivery.com/compings_v2/asmati/asmati2004/asmati200400435.jpg";
 
 const user: User | any = auth.currentUser;
- const url = user.providerData.photoURL || avatar;
+ const url = avatar;
 const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
   const [newEmail, setNewEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -143,7 +143,7 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
           />
         </View>
       <ScrollView>
-        {settingsOptions.map(({ title, onPress, source }) => (
+        {settingsOptions.map(({ title, onPress}) => (
           <View key={title} style={styles.section}>
             {title !== "Update email address" ? (
               <TouchableOpacity
