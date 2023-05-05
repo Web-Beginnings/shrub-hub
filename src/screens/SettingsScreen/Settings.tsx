@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import Footer from "../HomeScreen/Components.js/Footer";
 import Header from "../HomeScreen/Components.js/Header";
-import {
-  View,
-  Text,
-  ScrollView,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, ScrollView, TextInput, TouchableOpacity, Image, Pressable, Alert} from "react-native";
 import styles from "./styles.js";
 
 import {
@@ -16,9 +10,7 @@ import {
   deleteUser,
   User,
 } from "firebase/auth";
-import { Alert } from "react-native";
 import { firebase } from "../../../firebaseConfig";
-import storage from '@react-native-firebase/storage';
 
 
 type SettingProps = any;
@@ -136,17 +128,22 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
   const settingsOptions = [
     { title: "Update email address", onPress: handleUpdateEmail },
     { title: "Change avatar", onPress: handleChangeAvatar},
-
     { title: "Update password", onPress: handleChangePassword },
     { title: "Delete account", onPress: handleDeleteAccount },
     { title: "Sign out", onPress: handleSignOut },
+
   ];
 
   return (
     <View style={styles.container}>
-      <Header navigation={navigation} />
+       <View>
+          <Image
+            style={styles.SettingsIcon}
+            source={require("../../../assets/SettingsTitleIcon.png")}
+          />
+        </View>
       <ScrollView>
-        {settingsOptions.map(({ title, onPress }) => (
+        {settingsOptions.map(({ title, onPress, source }) => (
           <View key={title} style={styles.section}>
             {title !== "Update email address" ? (
               <TouchableOpacity
@@ -193,6 +190,7 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
                 </View>
               </View>
             )}
+
           </View>
         ))}
       </ScrollView>

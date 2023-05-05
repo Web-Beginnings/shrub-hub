@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
+import { Image } from "react-native";
 import MapView, {
   Callout,
   Marker,
@@ -148,11 +149,15 @@ export default function MapsScreen({ navigation }) {
     <View style={styles.container}>
       <View style={styles.body}>
         <View>
-          <Text style={styles.header}>FIND THOSE PLANTS</Text>
+          <Image
+            style={styles.Icon}
+            source={require("../../../assets/FindThosePlantsIcon.png")}
+          />
+          {/* <Text style={styles.header}>FIND THOSE PLANTS</Text> */}
         </View>
 
         <View style={styles.spacer}>
-          <Text>Locate your nearest plant nursery</Text>
+          <Text style={styles.infoText}>Locate your nearest plant nursery</Text>
         </View>
         {/* <TextInput
           style={styles.input}
@@ -168,11 +173,12 @@ export default function MapsScreen({ navigation }) {
           </TouchableOpacity>
         </TouchableWithoutFeedback> */}
         <SelectDropdown
+          buttonStyle={styles.drop}
           data={cityOptions}
           onSelect={(selectedItem) => handleOnSelect(selectedItem)}
         />
         <View style={styles.spacer}>
-          <Text>Showing results near {search}</Text>
+          <Text style={styles.infoText}>Showing results near {search}</Text>
         </View>
         <MapView
           style={styles.map}
@@ -201,11 +207,12 @@ export default function MapsScreen({ navigation }) {
 const styles = StyleSheet.create({
   spacer: {
     padding: 10,
+    color: "#EA9547",
   },
   container: {
     flex: 1,
-    backgroundColor: "#1B7130",
-    paddingTop: "30%",
+    backgroundColor: "#484240",
+    paddingTop: "17%",
   },
   bubble: {
     flexDirection: "column",
@@ -256,13 +263,17 @@ const styles = StyleSheet.create({
   },
   map: {
     width: "90%",
-    height: "90%",
+    height: "60%",
     borderColor: "#3A914F",
-    paddingTop: 30,
+    paddingVertical: 30,
+    marginBottom: 50,
+    borderRadius: 30,
   },
   footer: {
-    backgroundColor: "blue",
-    padding: 25,
+    backgroundColor: "#484240",
+    paddingBottom: 10,
+    paddingTop: 10,
+    paddingHorizontal: 25,
   },
   header: {
     fontSize: 20,
@@ -284,6 +295,23 @@ const styles = StyleSheet.create({
   input: {
     borderColor: "#888",
     borderWidth: 1,
+  },
+  Icon: {
+    height: 100,
+    width: 200,
+    paddingRight: 150,
+    paddingLeft: 150,
+    // paddingVertical: 30,
+    // paddingBottom: 50,
+    marginLeft: 25,
+    // marginTop: 25,
+  },
+  drop: {
+    borderRadius: 20,
+    backgroundColor: "#EA9547",
+  },
+  infoText: {
+    color: "#EA9547",
   },
 });
 
