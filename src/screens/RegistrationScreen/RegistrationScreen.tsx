@@ -27,7 +27,7 @@ export default function RegistrationScreen({
       alert("Passwords don't match");
       return;
     } else {
-      navigation.navigate("Login")
+      navigation.navigate("Login");
     }
 
     firebase
@@ -39,13 +39,15 @@ export default function RegistrationScreen({
           id: uid,
           email,
           fullName,
+          MyPlant: [],
+          Wishlist: [],
         };
         const usersRef = firebase.firestore().collection("users");
         usersRef
           .doc(uid)
           .set(data)
           .then(() => {
-            navigation.navigate("Home", { user: data });
+            navigation.navigate("HomeScreen", { user: data });
           })
           .catch((error) => {
             alert(error);
