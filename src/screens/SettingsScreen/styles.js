@@ -6,7 +6,7 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   input: {
-    height: 48,
+    height: 50,
     borderRadius: 5,
     overflow: "hidden",
     backgroundColor: "white",
@@ -28,9 +28,10 @@ export default StyleSheet.create({
     padding: 25,
   },
   section: {
-    paddingVertical: 30,
+    paddingVertical: 50,
     paddingHorizontal: 24,
-    // justifyContent: "flex-start",
+    justifyContent: "space-between",
+    alignItems: "center",
     height: 50,
     flexDirection: "row",
   },
@@ -42,16 +43,15 @@ export default StyleSheet.create({
     letterSpacing: 1.1,
   },
   inputContainer: {
-    height: 20,
+    height: 50,
   },
   textInput: {
-    marginTop: 15,
+    marginTop: 10,
     marginBottom: 15,
     padding: 5,
   },
   button: {
     backgroundColor: "#007AAA",
-   
     paddingVertical: 5,
     paddingHorizontal: 5,
     borderRadius: 5,
