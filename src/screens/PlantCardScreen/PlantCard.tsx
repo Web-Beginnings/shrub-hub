@@ -20,6 +20,7 @@ export default function PlantCard(props: PlantCardProps) {
   const { route } = props;
   const navigation = useNavigation();
   const id = route.params.plantId;
+
   useEffect(() => {
     getPlantsById(id).then((result) => {
       setPlant(result);

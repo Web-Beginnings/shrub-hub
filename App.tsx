@@ -72,7 +72,7 @@ export default function App() {
           component={LoginScreen}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="PlantsList">
+        <Stack.Screen name="PlantsList" options={{ headerShown: false }}>
           {(props) => <PlantsList {...props} />}
         </Stack.Screen>
         <Stack.Screen name="PlantCard">
