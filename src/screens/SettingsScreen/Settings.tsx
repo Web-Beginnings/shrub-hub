@@ -99,7 +99,10 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
          </TouchableOpacity>
           ) : (
             <View style={styles.inputContainer}>
-            <Text style={styles.sectionHeader}>{title}</Text>
+            <Text style={{fontSize: 12,
+    fontWeight: "600",
+    textTransform: "uppercase",
+    letterSpacing: 1.1,}}>Update email address</Text>
             <TextInput
               style={styles.textInput}
               placeholder="Enter new email"
