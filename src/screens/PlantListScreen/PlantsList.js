@@ -37,17 +37,14 @@ export default function PlantsList(props, extraData) {
 
   const handleValueChange = (value) => {
     setRange(parseInt(value));
-    // sortPlantsByHardiness(range).then((result) => {
-    //   setPlantsArray(result);
-    // });
   };
 
-  const handleSlider = (value) => {
-    const hardiness = parseInt(value);
-    sortPlantsByHardiness(hardiness).then((result) => {
-      setPlantsArray(result);
-    });
-  };
+  // const handleSlider = (value) => {
+  //   const hardiness = parseInt(value);
+  //   sortPlantsByHardiness(hardiness).then((result) => {
+  //     setPlantsArray(result);
+  //   });
+  // };
 
   return (
     <View style={styles.container}>
@@ -65,7 +62,7 @@ export default function PlantsList(props, extraData) {
             value={0}
             // thumbImage={require("../../../assets/PlantLogo.png")}
             onValueChange={(value) => handleValueChange(value)}
-            onSlidingComplete={(value) => handleSlider(value)}
+            // onSlidingComplete={(value) => handleSlider(value)}
           />
         </View>
         <ScrollView>
