@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useState } from "react";
-import * as ImagePicker from 'expo-image-picker';
+import * as ImagePicker from "expo-image-picker";
 // import firestore from '@react-native-firebase/firestore';
 import Footer from "../HomeScreen/Components.js/Footer";
 import AllPosts from "./AllPosts";
@@ -24,22 +24,22 @@ const Forum = (props) => {
     photo: photo,
   };
 
-const db = getFirestore();
+  const db = getFirestore();
 
-const colRef = collection(db, "forumPosts");
+  const colRef = collection(db, "forumPosts");
 
-const forumPosts = [];
-
-getDocs(colRef)
-  .then((snapshot) => {
-    snapshot.docs.forEach((doc) => {
-      forumPosts.push({...doc.data(), id: doc.id});
+  const forumPosts = [];
+  const { navigation } = props;
+  getDocs(colRef)
+    .then((snapshot) => {
+      snapshot.docs.forEach((doc) => {
+        forumPosts.push({ ...doc.data(), id: doc.id });
+      });
+      console.log("posts", forumPosts);
+    })
+    .catch((error) => {
+      console.log(error.message);
     });
-    console.log("posts", forumPosts);
-  })
-  .catch((error) => {
-    console.log(error.message);
-  })
 
   const handleAttachPhoto = async () => {
     const galleryStatus =
@@ -102,7 +102,7 @@ getDocs(colRef)
         <AllPosts props={props} forumPosts={forumPosts} />
       </View>
       <View style={styles.footer}>
-        <Footer props={props} />
+        <Footer props={props} navigation={navigation} />
       </View>
     </View>
   );

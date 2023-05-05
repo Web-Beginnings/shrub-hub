@@ -89,7 +89,14 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-    <Header navigation={navigation} />
+      <View>
+          <Image
+            style={styles.SettingsIcon}
+            source={require("../../../assets/SettingsTitleIcon.png")}
+          />
+          {/* <Text style={styles.header}>FIND THOSE PLANTS</Text> */}
+        </View>
+    {/* <Header navigation={navigation} /> */}
     <ScrollView>
       {settingsOptions.map(({ title, onPress, source }) => (
         <View key={title} style={styles.section}>
