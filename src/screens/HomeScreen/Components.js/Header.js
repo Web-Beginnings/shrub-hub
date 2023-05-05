@@ -8,10 +8,8 @@ import {
   Pressable,
 } from "react-native";
 const Header = (props, extraData) => {
-  // console.log("exxxxx::::::", extraData);
   const user = props.props;
   const navigation = props.navigation;
-  console.log("OOOOOOjjjO", navigation);
   const avatar =
     "https://images.assetsdelivery.com/compings_v2/asmati/asmati2004/asmati200400435.jpg";
   return (
