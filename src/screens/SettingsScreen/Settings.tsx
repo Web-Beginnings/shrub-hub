@@ -3,7 +3,6 @@ import Footer from "../HomeScreen/Components.js/Footer";
 import Header from "../HomeScreen/Components.js/Header";
 import { View, Text, ScrollView, TextInput, TouchableOpacity, Image, Pressable, Alert} from "react-native";
 import styles from "./styles.js";
-
 import {
   getAuth,
   signOut,
@@ -11,19 +10,15 @@ import {
   User,
 } from "firebase/auth";
 import { firebase } from "../../../firebaseConfig";
-
-
 type SettingProps = any;
 const auth = getAuth();
 const avatar =
     "https://images.assetsdelivery.com/compings_v2/asmati/asmati2004/asmati200400435.jpg";
-
 const user: User | any = auth.currentUser;
  const url = avatar;
 const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
   const [newEmail, setNewEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -59,7 +54,6 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
       ]
     );
   };
-
   function handleUpdateEmail(newEmail: string, password: string) {
     if (user) {
       firebase.auth().onAuthStateChanged((user) => {
@@ -68,7 +62,6 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
             user.email!,
             password
           );
-
           user
             .reauthenticateWithCredential(credential)
             .then(() => {
@@ -77,7 +70,6 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
                 .then(() => {
                   console.log("Email updated successfully")
                   alert("Your email has been successfully updated!");})
-
                 .catch((error: any) => console.log(error));
             })
             .catch((error: any) => console.log(error));
@@ -87,7 +79,6 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
       });
     }
   }
-
   const handleChangePassword = () => {
     const userEmail: string = auth.currentUser?.email ?? "";
     if (!user || !user.email) {
@@ -104,10 +95,8 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
         alert(error);
       });
   };
-
   function handleChangeAvatar(url: string) {
     const user = firebase.auth().currentUser;
-  
     if (user) {
       user
         .updateProfile({
@@ -120,20 +109,13 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
         .catch((error) => console.log(error));
     }
   }
-
-
-
-
-  
   const settingsOptions = [
-    { title: "Update email address", onPress: handleUpdateEmail },
-    { title: "Change avatar", onPress: handleChangeAvatar},
-    { title: "Update password", onPress: handleChangePassword },
-    { title: "Delete account", onPress: handleDeleteAccount },
-    { title: "Sign out", onPress: handleSignOut },
-
+    { title: "Update email address", onPress: handleUpdateEmail, source: require("../../../assets/UpdateEmailButton.png")  },
+    { title: "Change avatar", onPress: handleChangeAvatar, source: require("../../../assets/ChangeAvatarButton.png") },
+    { title: "Update password", onPress: handleChangePassword, source: require("../../../assets/UpdatePWButton.png") },
+    { title: "Delete account", onPress: handleDeleteAccount, source: require("../../../assets/DeleteAccountButton.png") },
+    { title: "Sign out", onPress: handleSignOut, source: require("../../../assets/SignOutButton.png") },
   ];
-
   return (
     <View style={styles.container}>
        <View>
@@ -143,29 +125,40 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
           />
         </View>
       <ScrollView>
-        {settingsOptions.map(({ title, onPress}) => (
+        {settingsOptions.map(({ title, onPress, source}) => (
           <View key={title} style={styles.section}>
             {title !== "Update email address" ? (
-              <TouchableOpacity
-                key={title}
-                style={styles.sectionHeader}
-                onPress={() => onPress && onPress(newEmail, password) }
-              >
-                <Text style={styles.sectionHeader}>{title}</Text>
-              </TouchableOpacity>
+              <Pressable
+              onPress={() => onPress && onPress(newEmail, password) }
+            >
+              <Image
+                style={styles.Icon}
+                source={source}
+              />
+            </Pressable>
+              // <TouchableOpacity
+              //   key={title}
+              //   style={styles.sectionHeader}
+              //   onPress={() => onPress && onPress(newEmail, password) }
+              // >
+              //   <Text style={styles.sectionHeader}>{title}</Text>
+              // </TouchableOpacity>
             ) : (
               <View style={styles.inputContainer}>
-                <Text
+                 <Image
+                style={styles.Icon}
+                source={require("../../../assets/UpdateEmailButton.png")}
+              />
+                {/* <Text
                   style={{
                     fontSize: 12,
-                    fontWeight: "600",
-                    textTransform: "uppercase",
+                    fontWeight: "600”,
+                    textTransform: "uppercase”,
                     letterSpacing: 1.1,
                   }}
                 >
                   Update email address
-                </Text>
-
+                </Text> */}
                 <View>
                   <TextInput
                     style={styles.textInput}
@@ -179,18 +172,24 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
                     secureTextEntry={true}
                   />
                 </View>
-
                 <View>
-                  <TouchableOpacity
+                <Pressable
+              onPress={() => onPress && onPress(newEmail, password) }
+            >
+              <Image
+                style={styles.saveIcon}
+                source={require("../../../assets/SaveButton.png")}
+              />
+            </Pressable>
+                  {/* <TouchableOpacity
                     style={styles.button}
                     onPress={() => handleUpdateEmail(newEmail, password)}
                   >
                     <Text style={styles.buttonText}>Save</Text>
-                  </TouchableOpacity>
+                  </TouchableOpacity> */}
                 </View>
               </View>
             )}
-
           </View>
         ))}
       </ScrollView>
