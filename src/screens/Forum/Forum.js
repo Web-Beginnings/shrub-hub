@@ -1,43 +1,84 @@
 import {
   View,
   Text,
+  Image,
   TextInput,
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
 import { useState } from "react";
+import * as ImagePicker from 'expo-image-picker';
+import firestore from '@react-native-firebase/firestore';
 import Footer from "../HomeScreen/Components.js/Footer";
 import AllPosts from "./AllPosts";
 
 const Forum = (props) => {
-  const [text, setText] = useState("");
+
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
   const [photo, setPhoto] = useState(null);
-  const handleAttachPhoto = () => {
-    // Open photo picker or camera here
+  const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
+  const wholePost = {
+    title: title,
+    text: body,
+    photo: photo
+  }
+
+  const forumPostsCollection = firestore()
+    .collection('forumPosts')
+    .get()
+    .then(collectionSnapshot => {
+      collectionSnapshot
+        .forEach(documentSnapshot => {
+          console.log('Forum post:', documentSnapshot.data())
+        })
+    })
+    // get request for all forum posts to send through to allPosts.js as props
+
+  const handleAttachPhoto = async () => {
+    const galleryStatus = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      setHasGalleryPermission(galleryStatus.status === 'granted');
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowEditing: true,
+      Aspect: [4,3],
+      quality: 1,
+    });
+
+
+    if(!result.canceled) setPhoto(result.assets[0].uri);
   };
+
+  if(hasGalleryPermission === false) {
+    return <Text>No access to internal storage</Text>
+  }
+
   const handleSubmit = () => {
-    // Submit post to forum here
+    // Submit post to forum Firebase collection here
+    // Info gathered and stored in wholePost variable
   };
+
   return (
     <View style={styles.container}>
       <View style={styles.newPostInput}>
         <View>
         <TextInput
           style={styles.titleInput}
-          placeholder="Enter your title here"
+          placeholder="Enter your title here.."
           multiline={true}
           numberOfLines={1}
-          onChangeText={(text) => setText(text)}
+          onChangeText={(title) => setTitle(title)}
           />
         <TextInput
-          style={styles.textInput}
-          placeholder="Enter your post here"
+          style={styles.bodyInput}
+          placeholder="Enter your post here.."
           multiline={true}
           numberOfLines={2}
-          onChangeText={(text) => setText(text)}
+          onChangeText={(body) => setBody(body)}
           />
         </View>
         <View style={{ flexDirection:"row" }}>
+        {photo ? <Image source={{uri: photo}} style={{width: 110, height: 110, marginLeft: 16}}/> : null}
         <TouchableOpacity onPress={handleAttachPhoto}>
           <Text style={styles.button}>Attach Photo</Text>
         </TouchableOpacity>
@@ -46,15 +87,16 @@ const Forum = (props) => {
         </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.allPosts}>
-        <AllPosts props={props}/>
-      </View>
-      <View style={styles.footer}>
-        <Footer props={props} />
-      </View>
+        <View style={styles.allPosts}>
+          <AllPosts props={props} forumPosts={forumPostsCollection}/>
+        </View>
+        <View style={styles.footer}>
+          <Footer props={props} />
+        </View>
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'space-between',
@@ -66,7 +108,7 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 5,
   },
-  textInput: {
+  bodyInput: {
     padding: 10,
     backgroundColor: "lightgray",
     margin: 15,

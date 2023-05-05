@@ -5,7 +5,6 @@ const SinglePost = (props) => {
 
     const post = props.route.params.props;
 
-    console.log(post)
     return (
         <View style={styles.container}>
             <View style={styles.content}>

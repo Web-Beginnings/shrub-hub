@@ -2,7 +2,9 @@ import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
 
-const AllPosts = ({props}) => {
+const AllPosts = ({props, forumPostsCollection}) => {
+
+    console.log(forumPostsCollection);
 
     const { navigation } = props;
 
