@@ -64,8 +64,8 @@ export default StyleSheet.create({
   Icon: {
     height: 50,
     width: 200,
-    paddingRight: 120,
-    paddingLeft: 20,
+    paddingRight: 100,
+    paddingLeft: 50,
     // paddingVertical: 30,
     paddingBottom: 50,
     // marginLeft: 70,
@@ -82,5 +82,15 @@ export default StyleSheet.create({
     // marginLeft: 70,
     // marginTop: 25,
     marginBottom: 100,
+  },
+  SettingsIcon: {
+    height: 100,
+    width: 200,
+    paddingRight: 150,
+    paddingLeft: 150,
+    paddingVertical: 30,
+    // paddingBottom: 50,
+    marginLeft: 50,
+    marginTop: 30,
   },
 });

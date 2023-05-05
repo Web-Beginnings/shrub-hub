@@ -27,6 +27,7 @@ export default function RegistrationScreen({
       alert("Passwords don't match");
       return;
     } else {
+      
       navigation.navigate("Login")
     }
 
@@ -45,7 +46,8 @@ export default function RegistrationScreen({
           .doc(uid)
           .set(data)
           .then(() => {
-            navigation.navigate("Home", { user: data });
+            console.log("here:::::::::::")
+            navigation.navigate("HomeScreen", { user: data });
           })
           .catch((error) => {
             alert(error);

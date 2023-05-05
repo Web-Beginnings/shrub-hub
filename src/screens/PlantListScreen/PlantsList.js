@@ -15,6 +15,7 @@ import { getPlants } from "../PlantApi";
 export default function PlantsList(props, extraData) {
   const [plantsArray, setPlantsArray] = useState([]);
   const { navigation } = props;
+  const { user } = props;
   useEffect(() => {
     getPlants().then((result) => {
       setPlantsArray(result);
@@ -25,7 +26,14 @@ export default function PlantsList(props, extraData) {
   }
   return (
     <View style={styles.container}>
-      <Header />
+      <View style={styles.titleContainer}>
+        <Image
+          style={styles.titleIcon}
+          source={require("../../../assets/AllPlantsTitleIcon.png")}
+        />
+        {/* <Text style={styles.header}>FIND THOSE PLANTS</Text> */}
+      </View>
+      {/* <Header user={user} navigation={navigation} /> */}
       <View style={[styles.content, { flex: 1 }]}>
         <ScrollView>
           {plantsArray.map((plant) => {
@@ -105,13 +113,20 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   footer: {
-    position: "absolute",
-    bottom: 65,
-    left: 0,
-    right: 0,
-    height: 25,
     backgroundColor: "#484240",
-    justifyContent: "space-between",
-    padding: 5,
+    padding: 25,
+  },
+  titleIcon: {
+    height: 100,
+    width: 200,
+    paddingRight: 150,
+    paddingLeft: 150,
+    paddingVertical: 30,
+    // paddingBottom: 50,
+    marginLeft: 50,
+    marginTop: 30,
+  },
+  titleContainer: {
+    backgroundColor: "#484240",
   },
 });
