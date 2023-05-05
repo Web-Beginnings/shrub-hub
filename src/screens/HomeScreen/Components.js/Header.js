@@ -7,8 +7,11 @@ import {
   Image,
   Pressable,
 } from "react-native";
-const Header = ({ navigation }, props, extraData) => {
-  console.log("exxxxx::::::", extraData);
+const Header = (props, extraData) => {
+  // console.log("exxxxx::::::", extraData);
+  const user = props.props;
+  const navigation = props.navigation;
+  console.log("OOOOOOjjjO", navigation);
   const avatar =
     "https://images.assetsdelivery.com/compings_v2/asmati/asmati2004/asmati200400435.jpg";
   return (
@@ -20,8 +23,10 @@ const Header = ({ navigation }, props, extraData) => {
           style={styles.avatar}
         />
       </View>
-      <View>
-        <Text style={styles.text}>Welcome User!</Text>
+      <View style={styles.titleContainer}>
+        <Text numberOfLines={5} style={styles.text}>
+          Welcome {user}
+        </Text>
       </View>
       <View>
         <Pressable
@@ -55,11 +60,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: "#EA9547",
-    paddingVertical: 30,
+    paddingVertical: 0,
+  },
+  titleContainer: {
+    maxWidth: 200,
   },
   text: {
-    color: "#2B937E",
-    fontSize: 30,
+    color: "#484240",
+    fontSize: 20,
     fontWeight: "bold",
     marginRight: 0,
     marginLeft: 10,
@@ -71,7 +79,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginRight: 5,
     marginBottom: 0,
-    marginLeft: 10,
+    marginLeft: 20,
     borderRadius: 9999,
   },
   Icon: {

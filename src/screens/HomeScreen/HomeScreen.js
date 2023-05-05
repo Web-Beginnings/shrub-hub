@@ -12,11 +12,14 @@ import Footer from "./Components.js/Footer";
 import Header from "./Components.js/Header";
 import styles from "./styles";
 
-export default function HomeScreen(props, extraData) {
+export default function HomeScreen(props) {
+  const user = props.extraData.fullName;
+  console.log("b", user);
   const { navigation } = props;
+  console.log("AAAAAA::::", navigation);
   return (
     <View style={styles.container}>
-      <Header props={props} navigation={navigation} />
+      <Header props={user} navigation={navigation} />
       <View style={styles.content}>
         <Pressable
           onPress={() => {
