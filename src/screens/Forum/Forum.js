@@ -7,11 +7,11 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useState } from "react";
-// import * as ImagePicker from 'expo-image-picker';
+import * as ImagePicker from 'expo-image-picker';
 // import firestore from '@react-native-firebase/firestore';
 import Footer from "../HomeScreen/Components.js/Footer";
 import AllPosts from "./AllPosts";
-import { getFirestore } from "@firebase/firestore";
+import { getFirestore, collection, getDocs } from "@firebase/firestore";
 
 const Forum = (props) => {
   const [title, setTitle] = useState("");
@@ -24,15 +24,22 @@ const Forum = (props) => {
     photo: photo,
   };
 
-  const forumPostsCollection = getFirestore()
-    .collection("forumPosts")
-    .get()
-    .then((collectionSnapshot) => {
-      collectionSnapshot.forEach((documentSnapshot) => {
-        console.log("Forum post:", documentSnapshot.data());
-      });
+const db = getFirestore();
+
+const colRef = collection(db, "forumPosts");
+
+const forumPosts = [];
+
+getDocs(colRef)
+  .then((snapshot) => {
+    snapshot.docs.forEach((doc) => {
+      forumPosts.push({...doc.data(), id: doc.id});
     });
-  // get request for all forum posts to send through to allPosts.js as props
+    console.log("posts", forumPosts);
+  })
+  .catch((error) => {
+    console.log(error.message);
+  })
 
   const handleAttachPhoto = async () => {
     const galleryStatus =
@@ -92,7 +99,7 @@ const Forum = (props) => {
         </View>
       </View>
       <View style={styles.allPosts}>
-        <AllPosts props={props} forumPosts={forumPostsCollection} />
+        <AllPosts props={props} forumPosts={forumPosts} />
       </View>
       <View style={styles.footer}>
         <Footer props={props} />
