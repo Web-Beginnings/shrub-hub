@@ -73,12 +73,15 @@ const styles = StyleSheet.create({
   content: {
     paddingHorizontal: 10,
     paddingBottom: 50,
+    backgroundColor: "#484240",
   },
   plantContainer: {
+    alignItems: "center",
     marginBottom: 10,
+    marginTop: 20,
     padding: 10,
-    backgroundColor: "#ffffff",
-    borderRadius: 5,
+    backgroundColor: "#D6D7DB",
+    borderRadius: 25,
     shadowColor: "#000000",
     shadowOpacity: 0.2,
     shadowOffset: {
@@ -96,6 +99,7 @@ const styles = StyleSheet.create({
     width: "50%",
     height: 100,
     marginBottom: 10,
+    borderRadius: 50,
   },
   plantTitles: {
     fontWeight: "bold",
@@ -106,7 +110,8 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     height: 25,
-    backgroundColor: "#32d953",
+    backgroundColor: "#484240",
     justifyContent: "space-between",
+    padding: 5,
   },
 });

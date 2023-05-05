@@ -1,25 +1,35 @@
-import React, {useEffect, useState} from "react";
-import { Text, View, Button, TouchableOpacity, ScrollView } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  Text,
+  View,
+  Button,
+  TouchableOpacity,
+  ScrollView,
+  Pressable,
+  Image,
+} from "react-native";
 import Footer from "./Components.js/Footer";
 import Header from "./Components.js/Header";
 import styles from "./styles";
 
-export default function HomeScreen(props, extraData) {
-
+export default function HomeScreen(props) {
+  const user = props.extraData.fullName;
   const { navigation } = props;
   return (
     <View style={styles.container}>
-      <Header props={props} navigation={navigation} />
+      <Header props={user} navigation={navigation} />
       <View style={styles.content}>
-        <TouchableOpacity
+        <Pressable
           onPress={() => {
             navigation.navigate("PlantsList");
           }}
-          style={styles.buttons}
         >
-          <Text>View Plants List</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+          <Image
+            style={styles.Icon}
+            source={require("../../../assets/ViewAllButton.png")}
+          />
+        </Pressable>
+        {/* <TouchableOpacity
           onPress={() => {
             navigation.navigate("MyPlants");
           }}
@@ -31,12 +41,15 @@ export default function HomeScreen(props, extraData) {
             <Text>MyPlants</Text>
           </ScrollView>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttons}>
-          <Text>Wishlist</Text>
-        </TouchableOpacity>
+        <View style={styles.menuButtons}>
+          <TouchableOpacity style={styles.buttons}>
+            <Text style={styles.buttonText}>Wishlist</Text>
+          </TouchableOpacity>
+        </View> */}
       </View>
       <View style={styles.footer}>
         <Footer props={props} navigation={navigation} />
       </View>
     </View>
-    )}
+  );
+}

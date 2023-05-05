@@ -18,13 +18,13 @@ export default StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#ecf0f1",
+    backgroundColor: "#484240",
   },
   content: {
     flex: 1,
   },
   footer: {
-    backgroundColor: "blue",
+    backgroundColor: "#484240",
     padding: 25,
   },
   section: {
@@ -51,14 +51,14 @@ export default StyleSheet.create({
     padding: 5,
   },
   button: {
-    backgroundColor: "#007AAA",
+    backgroundColor: "#EA9547",
     paddingVertical: 5,
     paddingHorizontal: 5,
     borderRadius: 5,
     alignItems: "center",
   },
   buttonText: {
-    color: '#fff',
-    fontWeight: 'bold',
+    color: "#fff",
+    fontWeight: "bold",
   },
 });
