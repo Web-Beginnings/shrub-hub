@@ -11,45 +11,46 @@ import { useState } from "react";
 // import firestore from '@react-native-firebase/firestore';
 import Footer from "../HomeScreen/Components.js/Footer";
 import AllPosts from "./AllPosts";
+import { getFirestore } from "@firebase/firestore";
 
 const Forum = (props) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  // const [photo, setPhoto] = useState(null);
-  // const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
-  // const wholePost = {
-  //   title: title,
-  //   text: body,
-  //   photo: photo
-  // }
+  const [photo, setPhoto] = useState(null);
+  const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
+  const wholePost = {
+    title: title,
+    text: body,
+    photo: photo,
+  };
 
-  // const forumPostsCollection = firestore()
-  //   .collection("forumPosts")
-  //   .get()
-  //   .then((collectionSnapshot) => {
-  //     collectionSnapshot.forEach((documentSnapshot) => {
-  //       console.log("Forum post:", documentSnapshot.data());
-  //     });
-  //   });
+  const forumPostsCollection = getFirestore()
+    .collection("forumPosts")
+    .get()
+    .then((collectionSnapshot) => {
+      collectionSnapshot.forEach((documentSnapshot) => {
+        console.log("Forum post:", documentSnapshot.data());
+      });
+    });
   // get request for all forum posts to send through to allPosts.js as props
 
-  // const handleAttachPhoto = async () => {
-  //   const galleryStatus =
-  //     await ImagePicker.requestMediaLibraryPermissionsAsync();
-  //   setHasGalleryPermission(galleryStatus.status === "granted");
-  //   let result = await ImagePicker.launchImageLibraryAsync({
-  //     mediaTypes: ImagePicker.MediaTypeOptions.Images,
-  //     allowEditing: true,
-  //     Aspect: [4, 3],
-  //     quality: 1,
-  //   });
+  const handleAttachPhoto = async () => {
+    const galleryStatus =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
+    setHasGalleryPermission(galleryStatus.status === "granted");
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowEditing: true,
+      Aspect: [4, 3],
+      quality: 1,
+    });
 
-  //   if (!result.canceled) setPhoto(result.assets[0].uri);
-  // };
+    if (!result.canceled) setPhoto(result.assets[0].uri);
+  };
 
-  // if (hasGalleryPermission === false) {
-  //   return <Text>No access to internal storage</Text>;
-  // }
+  if (hasGalleryPermission === false) {
+    return <Text>No access to internal storage</Text>;
+  }
 
   const handleSubmit = () => {
     // Submit post to forum Firebase collection here
@@ -76,13 +77,13 @@ const Forum = (props) => {
           />
         </View>
         <View style={{ flexDirection: "row" }}>
-          {/* {photo ? (
+          {photo ? (
             <Image
               source={{ uri: photo }}
               style={{ width: 110, height: 110, marginLeft: 16 }}
             />
-          ) : null} */}
-          <TouchableOpacity /*onPress={handleAttachPhoto}*/>
+          ) : null}
+          <TouchableOpacity onPress={handleAttachPhoto}>
             <Text style={styles.button}>Attach Photo</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={handleSubmit}>
@@ -91,7 +92,7 @@ const Forum = (props) => {
         </View>
       </View>
       <View style={styles.allPosts}>
-        <AllPosts props={props} /*forumPosts={forumPostsCollection}*/ />
+        <AllPosts props={props} forumPosts={forumPostsCollection} />
       </View>
       <View style={styles.footer}>
         <Footer props={props} />
