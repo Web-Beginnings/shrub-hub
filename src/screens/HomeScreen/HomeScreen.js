@@ -14,9 +14,7 @@ import styles from "./styles";
 
 export default function HomeScreen(props) {
   const user = props.extraData.fullName;
-  console.log("b", user);
   const { navigation } = props;
-  console.log("AAAAAA::::", navigation);
   return (
     <View style={styles.container}>
       <Header props={user} navigation={navigation} />
