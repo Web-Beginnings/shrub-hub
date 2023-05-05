@@ -43,45 +43,45 @@ export default function PlantCard(props: PlantCardProps) {
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>+ Wish List</Text>
         </TouchableOpacity>
-        <View>
-          <Text>
+        <View style={styles.info}>
+          <Text style={styles.plantInfo}>
             <Text style={styles.plantTitles}>Scientific Name: </Text>
             {plant.scientific_name}
           </Text>
-          <Text>
+          <Text style={styles.plantInfo}>
             <Text style={styles.plantTitles}>Care Level: </Text>
             {plant.care_level}
           </Text>
-          <Text>
+          <Text style={styles.plantInfo}>
             <Text style={styles.plantTitles}>Watering: </Text>
             {plant.watering}
           </Text>
-          <Text>
+          <Text style={styles.plantInfo}>
             <Text style={styles.plantTitles}>Cycle: </Text>
             {plant.cycle}
           </Text>
-          <Text>
+          <Text style={styles.plantInfo}>
             <Text style={styles.plantTitles}>Poisonous to Pets: </Text>
             {plant.poisonous_to_pets}
           </Text>
-          <Text>
+          <Text style={styles.plantInfo}>
             <Text style={styles.plantTitles}>Maintenance: </Text>
             {plant.maintenance}
           </Text>
-          <Text>
+          <Text style={styles.plantInfo}>
             <Text style={styles.plantTitles}>Growth Rate: </Text>
             {plant.growth_rate}
           </Text>
-          <Text>
+          <Text style={styles.plantInfo}>
             <Text style={styles.plantTitles}>Sunlight: </Text>
             {plant.sunlight}
           </Text>
-          <Text>
+          <Text style={styles.plantInfo}>
             <Text style={styles.plantTitles}>Flowering Season: </Text>
             {plant.flowering_season}
-          </Text>
-          <Text>
-            <Text style={styles.plantTitles}>Propagation: </Text>
+          </Text >
+          <Text style={styles.plantInfo}>
+            <Text style={styles.plantTitles}>Propagation: </Text >
             {plant.propagation}
           </Text>
           <Text>
@@ -101,29 +101,40 @@ const styles = StyleSheet.create({
   content: {
     paddingHorizontal: 20,
     paddingBottom: 10,
+    backgroundColor: "#484240"
+  },
+  info: {
+    paddingVertical: 20
   },
   plantTitles: {
     fontWeight: "bold",
+    color: "#EA9547"
+  },
+  plantInfo: {
+    color: "white"
   },
   plantImage: {
-    width: "50%",
+    width: "75%",
     height: 200,
     marginBottom: 10,
     alignItems: "center",
     marginTop: 20,
     alignSelf: "center",
+    borderRadius: 100
   },
   title: {
+    paddingTop: 10,
     marginBottom: 5,
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
+    color: "#EA9547"
   },
   button: {
-    backgroundColor: "#2ecc71",
+    backgroundColor: "#EA9547",
     padding: 10,
     borderRadius: 20,
-    marginTop: 10,
+    marginTop: 20,
     marginBottom: 10,
     width: "50%",
     alignSelf: "center",
