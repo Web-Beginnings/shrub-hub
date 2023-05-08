@@ -59,7 +59,7 @@ export default function PlantsList(props, extraData) {
             minimumTrackTintColor="#FFFFFF"
             maximumTrackTintColor="#000000"
             thumbTintColor="#EA9547"
-            value={0}
+            value={range}
             // thumbImage={require("../../../assets/PlantLogo.png")}
             onValueChange={(value) => handleValueChange(value)}
             // onSlidingComplete={(value) => handleSlider(value)}
