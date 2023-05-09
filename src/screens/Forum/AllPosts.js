@@ -22,7 +22,7 @@ const AllPosts = ({ props }) => {
         console.log(error.message);
         setIsLoading(false);
       });
-  }, [forumPosts]);
+  }, []);
   if (isLoading) {
     return (
       <View style={styles.container}>
@@ -35,7 +35,6 @@ const AllPosts = ({ props }) => {
       <View style={styles.content}>
         <ScrollView>
           {forumPosts.map((post) => {
-            console.log("post::::", post);
             return (
               <TouchableOpacity
                 key={post.id}
