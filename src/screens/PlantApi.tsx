@@ -52,3 +52,13 @@ export const sortPlantsByHardiness = (hardinessLevel: any) => {
       return response.data;
     });
 };
+
+export const sortPlantsByWatering = (watering: string) => {
+  return axios
+    .get(
+      `https://perenual.com/api/species-list?key=sk-QnAZ64551cecd426b769&indoor=1&watering=${watering}`
+    )
+    .then((response) => {
+      return response.data;
+    });
+};

@@ -10,59 +10,58 @@ import {
 import Footer from "../HomeScreen/Components.js/Footer";
 import Header from "../HomeScreen/Components.js/Header";
 import { ScrollView } from "react-native-gesture-handler";
-import { getPlants, sortPlantsByHardiness } from "../PlantApi";
+import {
+  getPlants,
+  sortPlantsByHardiness,
+  sortPlantsByWatering,
+} from "../PlantApi";
 import Slider from "@react-native-community/slider";
 
 export default function PlantsList(props, extraData) {
   const { navigation } = props;
   const [plantsArray, setPlantsArray] = useState([]);
-  const [sortPlantsArray, setSortPlantsArray] = useState([]);
-  const [range, setRange] = useState("0");
+  const [sliderValue, setSliderValue] = useState(0);
   const [sliding, setSliding] = useState("");
 
+  const wateringDisplay = {
+    1: "none",
+    2: "minimum",
+    3: "average",
+    4: "frequent",
+  };
+
   useEffect(() => {
-    getPlants().then((result) => {
-      setPlantsArray(result);
-    });
-  }, [setPlantsArray]);
+    sliderValue === 0
+      ? getPlants().then((result) => {
+          setPlantsArray(result);
+        })
+      : sortPlantsByWatering(wateringDisplay[sliderValue]).then((result) => {
+          setPlantsArray(result);
+          console.log(wateringDisplay[sliderValue]);
+        });
+  }, [setPlantsArray, setSliding]);
+
   if (!plantsArray) {
     return <Text style={styles.title}>Loading Plants...</Text>;
   }
-
-  // useEffect(() => {
-  //   sortPlantsByHardiness(range).then((result) => {
-  //     setSortPlantsArray(result);
-  //   });
-  // }, [range]);
-
-  const handleValueChange = (value) => {
-    setRange(parseInt(value));
-  };
-
-  // const handleSlider = (value) => {
-  //   const hardiness = parseInt(value);
-  //   sortPlantsByHardiness(hardiness).then((result) => {
-  //     setPlantsArray(result);
-  //   });
-  // };
 
   return (
     <View style={styles.container}>
       <Header />
       <View style={[styles.content, { flex: 1 }]}>
         <View style={styles}>
-          <Text style={styles.sliderText}>{range}</Text>
+          <Text style={styles.sliderText}>{wateringDisplay[sliderValue]}</Text>
           <Slider
             style={{ width: 300, height: 10 }}
             minimumValue={0}
-            maximumValue={13}
+            maximumValue={4}
             minimumTrackTintColor="#FFFFFF"
             maximumTrackTintColor="#000000"
             thumbTintColor="#EA9547"
-            value={range}
-            // thumbImage={require("../../../assets/PlantLogo.png")}
-            onValueChange={(value) => handleValueChange(value)}
-            // onSlidingComplete={(value) => handleSlider(value)}
+            step={1}
+            value={sliderValue}
+            onValueChange={(value) => setSliderValue(value)}
+            onSlidingComplete={() => setSliding("Complete")}
           />
         </View>
         <ScrollView>
@@ -79,10 +78,12 @@ export default function PlantsList(props, extraData) {
                   }}
                 >
                   <Text style={styles.title}>{plant.common_name}</Text>
-                  <Image
-                    source={{ uri: plant.default_image.medium_url }}
-                    style={styles.plantImage}
-                  />
+                  {plant.default_image && (
+                    <Image
+                      source={{ uri: plant.default_image.small_url }}
+                      style={styles.plantImage}
+                    />
+                  )}
                   <Text>
                     <Text style={styles.plantTitles}>Scientific Name:</Text>{" "}
                     {plant.scientific_name}
@@ -119,6 +120,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#484240",
   },
   sliderText: {
+    paddingTop: 10,
     fontSize: 20,
     fontWeight: "bold",
   },
