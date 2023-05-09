@@ -14,13 +14,22 @@ import "firebase/compat/firestore";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
+// const firebaseConfig = {
+//   apiKey: "AIzaSyACnNgUBeXsUuqVjw61yDjv9jqnfRFrQUw",
+//   authDomain: "shrub-hub.firebaseapp.com",
+//   projectId: "shrub-hub",
+//   storageBucket: "shrub-hub.appspot.com",
+//   messagingSenderId: "890051548377",
+//   appId: "1:890051548377:web:0ac68cb8c596d8890b5ac8",
+// };
+
 const firebaseConfig = {
-  apiKey: "AIzaSyACnNgUBeXsUuqVjw61yDjv9jqnfRFrQUw",
-  authDomain: "shrub-hub.firebaseapp.com",
-  projectId: "shrub-hub",
-  storageBucket: "shrub-hub.appspot.com",
-  messagingSenderId: "890051548377",
-  appId: "1:890051548377:web:0ac68cb8c596d8890b5ac8",
+  apiKey: "AIzaSyCykvz66Nvsju2sayxww_QiHD27QDSlZxc",
+  authDomain: "shrub-hub-3.firebaseapp.com",
+  projectId: "shrub-hub-3",
+  storageBucket: "shrub-hub-3.appspot.com",
+  messagingSenderId: "716420825854",
+  appId: "1:716420825854:web:74276a1172ddabc2dc1baf",
 };
 
 // Initialize Firebase
