@@ -38,7 +38,7 @@ export async function getPlants (): Promise<PlantData[]> {
   pageNumbers.forEach((page) => {
     const axiosResponse: Promise<PlantResponseObject> =  axios
       .get(
-        `https://perenual.com/api/species-list?page=${page}&key=sk-qJgc644b804bb8091687
+        `https://perenual.com/api/species-list?page=${page}&key=sk-AvXS6459fd7394fbf751
         &indoor=1`
       )
     result.push(axiosResponse)
