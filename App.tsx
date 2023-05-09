@@ -80,7 +80,9 @@ export default function App() {
         </Stack.Screen>
         {/* <Stack.Screen name="MyPlants" component={MyPlants} /> */}
         {/* <Stack.Screen name="PlantsList" component={PlantsList} /> */}
-        <Stack.Screen name="Forum" component={Forum} options={{ headerShown: false }} />
+        <Stack.Screen name="Forum" options={{ headerShown: false }}>
+          {(props) => <Forum {...props} user={user} />}
+        </Stack.Screen>
         <Stack.Screen name="SinglePost" component={SinglePost} options={{ headerShown: false }} />
         <Stack.Screen
           name="Registration"
