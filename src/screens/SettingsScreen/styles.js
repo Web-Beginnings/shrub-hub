@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -14,10 +13,10 @@ export default StyleSheet.create({
   },
   section: {
     paddingVertical: 40,
-    paddingHorizontal: 24,
+    paddingHorizontal: 80,
     justifyContent: "space-between",
+    alignContent: "center",
     alignItems: "center",
-  
     flexDirection: "row",
   },
   sectionHeader: {
@@ -35,35 +34,38 @@ export default StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     padding: 5,
-    color: "#ffff",
+    backgroundColor: "#EA9547",
+    borderRadius: 10,
   },
   textInput2: {
     marginTop: 10,
-    marginBottom: 10,
-    color: "#ffff",
-
+    marginBottom: 0,
+    padding: 5,
+    backgroundColor: "#EA9547",
+    borderRadius: 10,
   },
   button: {
     backgroundColor: "#EA9547",
     paddingVertical: 5,
-    padding: 20,
+    padding: 10,
     marginTop: 10,
     borderRadius: 5,
-    alignSelf: 'flex-end',
+    alignSelf: "flex-end",
   },
   buttonText: {
     color: "#ffff",
     fontWeight: "bold",
   },
   Icon: {
-    height: 50,
+    height: 35,
     width: 200,
     paddingRight: 100,
     paddingLeft: 50,
     // paddingVertical: 30,
-    paddingBottom: 50,
+    paddingBottom: 10,
+    // marginBottom: 20,
     // marginLeft: 70,
-    marginTop: 25,
+    marginTop: 10,
   },
   saveIcon: {
     height: 10,
@@ -71,7 +73,7 @@ export default StyleSheet.create({
     // paddingRight: 120,
     paddingLeft: 20,
     // paddingVertical: 30,
-    paddingBottom: 0,
+    paddingBottom: 20,
     paddingTop: 30,
     // marginLeft: 70,
     // marginTop: 25,
