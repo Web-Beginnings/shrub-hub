@@ -46,26 +46,26 @@ export default function PlantCard(props: PlantCardProps) {
   const db = getFirestore();
 
   // This code below gets the data from myPlants for the user - This will be needed for My Plants page.
-  // const colRef = collection(
-  //   db,
-  //   "users",
-  //   "GZ0fx9ooAAWqHxPpKynjFRmq3cj2",
-  //   "myPlants"
-  // );
+  const colRef = collection(
+    db,
+    "users"
+    // "GZ0fx9ooAAWqHxPpKynjFRmq3cj2",
+    // "myPlants"
+  );
 
-  // const user = firebase.auth().currentUser;
-  // const users: any = [];
+  const user = firebase.auth().currentUser;
+  const users: any = [];
 
-  // getDocs(colRef)
-  //   .then((snapshot) => {
-  //     snapshot.docs.filter((doc) => {
-  //       users.push({ ...doc.data(), id: doc.id });
-  //     });
-  //     console.log("users", users);
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
+  getDocs(colRef)
+    .then((snapshot) => {
+      snapshot.docs.filter((doc) => {
+        users.push({ ...doc.data(), id: doc.id });
+      });
+      console.log(users, "<-- users");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 
   const postPlant = (id: number) => {
     const user = firebase.auth().currentUser;
