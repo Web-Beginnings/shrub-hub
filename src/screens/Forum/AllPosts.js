@@ -22,7 +22,7 @@ const AllPosts = ({ props }) => {
         console.log(error.message);
         setIsLoading(false);
       });
-  }, []);
+  }, [forumPosts]);
   if (isLoading) {
     return (
       <View style={styles.container}>
