@@ -7,8 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useState } from "react";
-import * as ImagePicker from 'expo-image-picker';
-// import firestore from '@react-native-firebase/firestore';
+import * as ImagePicker from "expo-image-picker";
 import Footer from "../HomeScreen/Components.js/Footer";
 import AllPosts from "./AllPosts";
 import { getFirestore, collection, getDocs } from "@firebase/firestore";
@@ -24,22 +23,7 @@ const Forum = (props) => {
     photo: photo,
   };
 
-const db = getFirestore();
-
-const colRef = collection(db, "forumPosts");
-
-const forumPosts = [];
-
-getDocs(colRef)
-  .then((snapshot) => {
-    snapshot.docs.forEach((doc) => {
-      forumPosts.push({...doc.data(), id: doc.id});
-    });
-    console.log("posts", forumPosts);
-  })
-  .catch((error) => {
-    console.log(error.message);
-  })
+  const { navigation } = props;
 
   const handleAttachPhoto = async () => {
     const galleryStatus =
@@ -59,10 +43,7 @@ getDocs(colRef)
     return <Text>No access to internal storage</Text>;
   }
 
-  const handleSubmit = () => {
-    // Submit post to forum Firebase collection here
-    // Info gathered and stored in wholePost variable
-  };
+  const handleSubmit = () => {};
 
   return (
     <View style={styles.container}>
@@ -99,10 +80,10 @@ getDocs(colRef)
         </View>
       </View>
       <View style={styles.allPosts}>
-        <AllPosts props={props} forumPosts={forumPosts} />
+        <AllPosts props={props} />
       </View>
       <View style={styles.footer}>
-        <Footer props={props} />
+        <Footer props={props} navigation={navigation} />
       </View>
     </View>
   );

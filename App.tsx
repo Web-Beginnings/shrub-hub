@@ -72,22 +72,26 @@ export default function App() {
           component={LoginScreen}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="PlantsList" options={{ headerShown: false }}>
+
+        
+
+        <Stack.Screen name="PlantsList" options={{ headerShown: false }}> 
+
           {(props) => <PlantsList {...props} />}
         </Stack.Screen>
-        <Stack.Screen name="PlantCard">
+        <Stack.Screen name="PlantCard" options={{ headerShown: false }}>
           {(props) => <PlantCard {...props} />}
         </Stack.Screen>
         {/* <Stack.Screen name="MyPlants" component={MyPlants} /> */}
         {/* <Stack.Screen name="PlantsList" component={PlantsList} /> */}
-        <Stack.Screen name="Forum" component={Forum} />
-        <Stack.Screen name="SinglePost" component={SinglePost} />
+        <Stack.Screen name="Forum" component={Forum} options={{ headerShown: false }} />
+        <Stack.Screen name="SinglePost" component={SinglePost} options={{ headerShown: false }} />
         <Stack.Screen
           name="Registration"
           component={RegistrationScreen}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="Settings" component={SettingsScreen} />
+        <Stack.Screen name="Settings" component={SettingsScreen} options={{ headerShown: false }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

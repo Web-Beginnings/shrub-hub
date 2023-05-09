@@ -19,6 +19,7 @@ import Slider from "@react-native-community/slider";
 
 export default function PlantsList(props, extraData) {
   const { navigation } = props;
+
   const [plantsArray, setPlantsArray] = useState([]);
   const [sortPlantsArray, setSortPlantsArray] = useState([]);
   const [sliderValue, setSliderValue] = useState(0);
@@ -28,9 +29,11 @@ export default function PlantsList(props, extraData) {
   const wateringDisplay = {
     0: "All",
     1: "Minimum",
-    2: "average",
+    2: "Average",
     3: "Frequent",
   };
+
+  const { user } = props;
 
   useEffect(() => {
     sliderValue === 0
@@ -56,7 +59,14 @@ export default function PlantsList(props, extraData) {
 
   return (
     <View style={styles.container}>
-      <Header />
+      <View style={styles.titleContainer}>
+        <Image
+          style={styles.titleIcon}
+          source={require("../../../assets/AllPlantsTitleIcon.png")}
+        />
+        {/* <Text style={styles.header}>FIND THOSE PLANTS</Text> */}
+      </View>
+      {/* <Header user={user} navigation={navigation} /> */}
       <View style={[styles.content, { flex: 1 }]}>
         <View>
           <Text style={styles.filterText}>
@@ -173,13 +183,20 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   footer: {
-    position: "absolute",
-    bottom: 65,
-    left: 0,
-    right: 0,
-    height: 25,
     backgroundColor: "#484240",
-    justifyContent: "space-between",
-    padding: 5,
+    padding: 25,
+  },
+  titleIcon: {
+    height: 100,
+    width: 200,
+    paddingRight: 150,
+    paddingLeft: 150,
+    paddingVertical: 30,
+    // paddingBottom: 50,
+    marginLeft: 50,
+    marginTop: 30,
+  },
+  titleContainer: {
+    backgroundColor: "#484240",
   },
 });

@@ -33,13 +33,11 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
           .doc(uid)
           .get()
           .then((firestoreDocument) => {
-            console.log("BANG::::::::::,", firestoreDocument)
             if (!firestoreDocument.exists) {
               alert("User does not exist anymore.");
               return;
             }
             const user = firestoreDocument.data();
-            console.log("user::::::::::::", user)
             navigation.navigate("HomeScreen", { user: user } );
           })
           .catch((error) => {

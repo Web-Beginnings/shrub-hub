@@ -39,7 +39,7 @@ export default function RegistrationScreen({
           id: uid,
           email,
           fullName,
-          MyPlant: [],
+          MyPlants: [],
           Wishlist: [],
         };
         const usersRef = firebase.firestore().collection("users");
@@ -47,6 +47,10 @@ export default function RegistrationScreen({
           .doc(uid)
           .set(data)
           .then(() => {
+
+
+            console.log("here:::::::::::");
+
             navigation.navigate("HomeScreen", { user: data });
           })
           .catch((error) => {

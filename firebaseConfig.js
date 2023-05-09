@@ -23,6 +23,18 @@ import "firebase/compat/firestore";
 //   appId: "1:890051548377:web:0ac68cb8c596d8890b5ac8",
 // };
 
+
+
+// const firebaseConfig = {
+//   apiKey: "AIzaSyBwZW02R8EW4Nw8cpGc47lriUd3YBaohLw",
+//   authDomain: "shrub-hub-2.firebaseapp.com",
+//   projectId: "shrub-hub-2",
+//   storageBucket: "shrub-hub-2.appspot.com",
+//   messagingSenderId: "726087563354",
+//   appId: "1:726087563354:web:b6191cdaa3d4c6f7284063",
+// };
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyCykvz66Nvsju2sayxww_QiHD27QDSlZxc",
   authDomain: "shrub-hub-3.firebaseapp.com",

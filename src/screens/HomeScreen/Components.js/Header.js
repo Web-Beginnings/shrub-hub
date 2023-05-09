@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: "#EA9547",
-    paddingVertical: 0,
+    paddingTop: 15,
   },
   titleContainer: {
     maxWidth: 200,

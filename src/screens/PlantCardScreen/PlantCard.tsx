@@ -10,6 +10,20 @@ import {
 } from "react-native";
 import Footer from "../HomeScreen/Components.js/Footer";
 import { useNavigation } from "@react-navigation/native";
+import { firebase } from "../../../firebaseConfig";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  doc,
+  onSnapshot,
+  where,
+  setDoc,
+  updateDoc,
+  arrayUnion,
+} from "firebase/firestore";
 
 interface PlantCardProps {
   route: any;
@@ -17,6 +31,9 @@ interface PlantCardProps {
 
 export default function PlantCard(props: PlantCardProps) {
   const [plant, setPlant] = useState<any>(null);
+  const [isMyPlantAdded, setIsMyPlantAdded] = useState<any>(false);
+  const [isMyPlantAddedWishlist, setIsMyPlantAddedWishlist] =
+    useState<any>(false);
   const { route } = props;
   const navigation = useNavigation();
   const id = route.params.plantId;
@@ -26,9 +43,62 @@ export default function PlantCard(props: PlantCardProps) {
       setPlant(result);
     });
   }, [id]);
+
   if (!plant) {
     return <Text>Loading Plant...</Text>;
   }
+
+  const updateMyPlants = (id: number) => {
+    setIsMyPlantAdded(true);
+    const user = firebase.auth().currentUser;
+    // init services
+    const db = getFirestore();
+    if (!user) {
+      console.log("No user found");
+      return;
+    }
+
+    const { uid } = user;
+
+    const dbRef = doc(db, "users", `${uid}`);
+
+    const data = {
+      MyPlants: arrayUnion(id),
+    };
+    updateDoc(dbRef, data)
+      .then((docRef) => {
+        console.log("Document has been added successfully");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const updateWishlist = (id: number) => {
+    setIsMyPlantAddedWishlist(true);
+    const user = firebase.auth().currentUser;
+    // init services
+    const db = getFirestore();
+    if (!user) {
+      console.log("No user found");
+      return;
+    }
+
+    const { uid } = user;
+
+    const dbRef = doc(db, "users", `${uid}`);
+
+    const data = {
+      Wishlist: arrayUnion(id),
+    };
+    updateDoc(dbRef, data)
+      .then((docRef) => {
+        console.log("Document has been added successfully");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <View style={styles.content}>
@@ -38,50 +108,69 @@ export default function PlantCard(props: PlantCardProps) {
           source={{ uri: plant.default_image.medium_url }}
           style={styles.plantImage}
         />
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>+ My Plants</Text>
+        <TouchableOpacity
+          style={[styles.button, isMyPlantAdded && styles.buttonInactivate]}
+        >
+          <Text
+            style={styles.buttonText}
+            onPress={() => updateMyPlants(id)}
+            disabled={isMyPlantAdded}
+          >
+            + My Plants
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>+ Wish List</Text>
+        <TouchableOpacity
+          style={[
+            styles.button,
+            isMyPlantAddedWishlist && styles.buttonInactivate,
+          ]}
+        >
+          <Text
+            style={styles.buttonText}
+            onPress={() => updateWishlist(id)}
+            disabled={isMyPlantAddedWishlist}
+          >
+            + Wish List
+          </Text>
         </TouchableOpacity>
-        <View>
-          <Text>
+        <View style={styles.info}>
+          <Text style={styles.plantInfo}>
             <Text style={styles.plantTitles}>Scientific Name: </Text>
             {plant.scientific_name}
           </Text>
-          <Text>
+          <Text style={styles.plantInfo}>
             <Text style={styles.plantTitles}>Care Level: </Text>
             {plant.care_level}
           </Text>
-          <Text>
+          <Text style={styles.plantInfo}>
             <Text style={styles.plantTitles}>Watering: </Text>
             {plant.watering}
           </Text>
-          <Text>
+          <Text style={styles.plantInfo}>
             <Text style={styles.plantTitles}>Cycle: </Text>
             {plant.cycle}
           </Text>
-          <Text>
+          <Text style={styles.plantInfo}>
             <Text style={styles.plantTitles}>Poisonous to Pets: </Text>
             {plant.poisonous_to_pets}
           </Text>
-          <Text>
+          <Text style={styles.plantInfo}>
             <Text style={styles.plantTitles}>Maintenance: </Text>
             {plant.maintenance}
           </Text>
-          <Text>
+          <Text style={styles.plantInfo}>
             <Text style={styles.plantTitles}>Growth Rate: </Text>
             {plant.growth_rate}
           </Text>
-          <Text>
+          <Text style={styles.plantInfo}>
             <Text style={styles.plantTitles}>Sunlight: </Text>
             {plant.sunlight}
           </Text>
-          <Text>
+          <Text style={styles.plantInfo}>
             <Text style={styles.plantTitles}>Flowering Season: </Text>
             {plant.flowering_season}
           </Text>
-          <Text>
+          <Text style={styles.plantInfo}>
             <Text style={styles.plantTitles}>Propagation: </Text>
             {plant.propagation}
           </Text>
@@ -102,29 +191,49 @@ const styles = StyleSheet.create({
   content: {
     paddingHorizontal: 20,
     paddingBottom: 10,
+    backgroundColor: "#484240",
+  },
+  info: {
+    paddingVertical: 20,
   },
   plantTitles: {
     fontWeight: "bold",
+    color: "#EA9547",
+  },
+  plantInfo: {
+    color: "white",
   },
   plantImage: {
-    width: "50%",
+    width: "75%",
     height: 200,
     marginBottom: 10,
     alignItems: "center",
     marginTop: 20,
     alignSelf: "center",
+    borderRadius: 100,
   },
   title: {
+    paddingTop: 10,
     marginBottom: 5,
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
+    color: "#EA9547",
   },
   button: {
-    backgroundColor: "#2ecc71",
+    backgroundColor: "#EA9547",
     padding: 10,
     borderRadius: 20,
-    marginTop: 10,
+    marginTop: 20,
+    marginBottom: 10,
+    width: "50%",
+    alignSelf: "center",
+  },
+  buttonInactivate: {
+    backgroundColor: "#7e634a",
+    padding: 10,
+    borderRadius: 20,
+    marginTop: 20,
     marginBottom: 10,
     width: "50%",
     alignSelf: "center",
