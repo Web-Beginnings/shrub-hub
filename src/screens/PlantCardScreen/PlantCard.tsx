@@ -21,6 +21,8 @@ import {
   onSnapshot,
   where,
   setDoc,
+  updateDoc,
+  arrayUnion,
 } from "firebase/firestore";
 
 interface PlantCardProps {
@@ -29,6 +31,9 @@ interface PlantCardProps {
 
 export default function PlantCard(props: PlantCardProps) {
   const [plant, setPlant] = useState<any>(null);
+  const [isMyPlantAdded, setIsMyPlantAdded] = useState<any>(false);
+  const [isMyPlantAddedWishlist, setIsMyPlantAddedWishlist] =
+    useState<any>(false);
   const { route } = props;
   const navigation = useNavigation();
   const id = route.params.plantId;
@@ -59,15 +64,16 @@ export default function PlantCard(props: PlantCardProps) {
   getDocs(colRef)
     .then((snapshot) => {
       snapshot.docs.filter((doc) => {
-        users.push({ ...doc.data(), id: doc.id });
+        users.push({ ...doc.data().MyPlants });
       });
-      console.log(users, "<-- users");
+      console.log(users, "<-- users, myplants");
     })
     .catch((error) => {
       console.log(error);
     });
 
-  const postPlant = (id: number) => {
+  const updateMyPlants = (id: number) => {
+    setIsMyPlantAdded(true);
     const user = firebase.auth().currentUser;
     // init services
     const db = getFirestore();
@@ -78,12 +84,38 @@ export default function PlantCard(props: PlantCardProps) {
 
     const { uid } = user;
 
-    const dbRef = collection(db, "users", `${uid}`, "myPlants");
+    const dbRef = doc(db, "users", `${uid}`);
 
     const data = {
-      plant_id: id,
+      MyPlants: arrayUnion(id),
     };
-    addDoc(dbRef, data)
+    updateDoc(dbRef, data)
+      .then((docRef) => {
+        console.log("Document has been added successfully");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const updateWishlist = (id: number) => {
+    setIsMyPlantAddedWishlist(true);
+    const user = firebase.auth().currentUser;
+    // init services
+    const db = getFirestore();
+    if (!user) {
+      console.log("No user found");
+      return;
+    }
+
+    const { uid } = user;
+
+    const dbRef = doc(db, "users", `${uid}`);
+
+    const data = {
+      Wishlist: arrayUnion(id),
+    };
+    updateDoc(dbRef, data)
       .then((docRef) => {
         console.log("Document has been added successfully");
       })
@@ -100,13 +132,30 @@ export default function PlantCard(props: PlantCardProps) {
           source={{ uri: plant.default_image.medium_url }}
           style={styles.plantImage}
         />
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText} onPress={() => postPlant(id)}>
+        <TouchableOpacity
+          style={[styles.button, isMyPlantAdded && styles.buttonInactivate]}
+        >
+          <Text
+            style={styles.buttonText}
+            onPress={() => updateMyPlants(id)}
+            disabled={isMyPlantAdded}
+          >
             + My Plants
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>+ Wish List</Text>
+        <TouchableOpacity
+          style={[
+            styles.button,
+            isMyPlantAddedWishlist && styles.buttonInactivate,
+          ]}
+        >
+          <Text
+            style={styles.buttonText}
+            onPress={() => updateWishlist(id)}
+            disabled={isMyPlantAddedWishlist}
+          >
+            + Wish List
+          </Text>
         </TouchableOpacity>
         <View style={styles.info}>
           <Text style={styles.plantInfo}>
@@ -197,6 +246,15 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "#EA9547",
+    padding: 10,
+    borderRadius: 20,
+    marginTop: 20,
+    marginBottom: 10,
+    width: "50%",
+    alignSelf: "center",
+  },
+  buttonInactivate: {
+    backgroundColor: "#7e634a",
     padding: 10,
     borderRadius: 20,
     marginTop: 20,

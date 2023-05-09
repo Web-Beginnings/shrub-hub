@@ -46,10 +46,12 @@ export default function PlantsList(props, extraData) {
                 }}
               >
                 <Text style={styles.title}>{plant.common_name}</Text>
-                <Image
-                  source={{ uri: plant.default_image.medium_url }}
-                  style={styles.plantImage}
-                />
+                {plant.default_image && (
+                  <Image
+                    source={{ uri: plant.default_image.small_url }}
+                    style={styles.plantImage}
+                  />
+                )}
                 <Text>
                   <Text style={styles.plantTitles}>Scientific Name:</Text>{" "}
                   {plant.scientific_name}
