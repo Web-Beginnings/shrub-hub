@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { getFirestore, collection, getDocs } from "@firebase/firestore";
+import { getFirestore, collection, onSnapshot } from "@firebase/firestore";
 import React, { useState, useEffect } from "react";
 const AllPosts = ({ props }) => {
   const { navigation } = props;
@@ -9,20 +9,20 @@ const AllPosts = ({ props }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [forumPosts, setForumPosts] = useState([]);
   useEffect(() => {
-    getDocs(colRef)
-      .then((snapshot) => {
-        const posts = [];
-        snapshot.docs.forEach((doc) => {
-          posts.push({ ...doc.data(), id: doc.id });
-        });
-        setForumPosts(posts);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.log(error.message);
-        setIsLoading(false);
+    const renderPosts = onSnapshot(colRef, (snapshot) => {
+      const posts = [];
+      snapshot.docs.forEach((doc) => {
+        posts.push({ ...doc.data(), id: doc.id });
       });
-  }, [forumPosts]);
+
+      setForumPosts(posts);
+      setIsLoading(false);
+    });
+    return () => {
+      renderPosts();
+    };
+  }, []);
+
   if (isLoading) {
     return (
       <View style={styles.container}>
@@ -35,7 +35,6 @@ const AllPosts = ({ props }) => {
       <View style={styles.content}>
         <ScrollView>
           {forumPosts.map((post) => {
-            console.log("post::::", post);
             return (
               <TouchableOpacity
                 key={post.id}
