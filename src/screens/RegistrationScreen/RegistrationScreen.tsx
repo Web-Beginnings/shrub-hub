@@ -47,7 +47,10 @@ export default function RegistrationScreen({
           .doc(uid)
           .set(data)
           .then(() => {
+
+
             console.log("here:::::::::::");
+
             navigation.navigate("HomeScreen", { user: data });
           })
           .catch((error) => {
