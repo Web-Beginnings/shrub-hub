@@ -10,20 +10,53 @@ import {
 import Footer from "../HomeScreen/Components.js/Footer";
 import Header from "../HomeScreen/Components.js/Header";
 import { ScrollView } from "react-native-gesture-handler";
-import { getPlants } from "../PlantApi";
+import {
+  getPlants,
+  sortPlantsByHardiness,
+  sortPlantsByWatering,
+} from "../PlantApi";
+import Slider from "@react-native-community/slider";
 
 export default function PlantsList(props, extraData) {
-  const [plantsArray, setPlantsArray] = useState([]);
   const { navigation } = props;
+
+  const [plantsArray, setPlantsArray] = useState([]);
+  const [sortPlantsArray, setSortPlantsArray] = useState([]);
+  const [sliderValue, setSliderValue] = useState(0);
+  // const [sliding, setSliding] = useState("");
+  const [pageArray, setPageArray] = useState([]);
+
+  const wateringDisplay = {
+    0: "All",
+    1: "Minimum",
+    2: "Average",
+    3: "Frequent",
+  };
+
   const { user } = props;
+
   useEffect(() => {
-    getPlants().then((result) => {
-      setPlantsArray(result);
-    });
-  }, [setPlantsArray]);
+    sliderValue === 0
+      ? getPlants().then((result) => {
+          setPlantsArray(result);
+        })
+      : sortPlantsByWatering(wateringDisplay[sliderValue]).then((result) => {
+          setSortPlantsArray(result);
+        });
+  }, [sliderValue]);
+
   if (!plantsArray) {
     return <Text style={styles.title}>Loading Plants...</Text>;
   }
+
+  useEffect(() => {
+    if (sliderValue === 0) {
+      setPageArray([...plantsArray]);
+    } else {
+      setPageArray([...sortPlantsArray]);
+    }
+  }, [plantsArray, sortPlantsArray, sliderValue]);
+
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -35,8 +68,30 @@ export default function PlantsList(props, extraData) {
       </View>
       {/* <Header user={user} navigation={navigation} /> */}
       <View style={[styles.content, { flex: 1 }]}>
+        <View>
+          <Text style={styles.filterText}>
+            Filter by watering level: {wateringDisplay[sliderValue]}{" "}
+          </Text>
+        </View>
         <ScrollView>
-          {plantsArray.map((plant) => {
+          <View style={styles.slideContent}>
+            <Text style={styles.sliderText}>
+              {wateringDisplay[sliderValue]}
+            </Text>
+            <Slider
+              style={{ width: 300, height: 10 }}
+              minimumValue={0}
+              maximumValue={3}
+              minimumTrackTintColor="#FFFFFF"
+              maximumTrackTintColor="#000000"
+              thumbTintColor="#EA9547"
+              step={1}
+              value={0}
+              onValueChange={(value) => setSliderValue(value)}
+              // onSlidingComplete={() => setSliding("Complete")}
+            />
+          </View>
+          {pageArray.map((plant) => {
             return (
               <TouchableOpacity
                 key={plant.id}
@@ -80,11 +135,24 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  filterText: {
+    fontSize: 20,
+  },
   content: {
+    alignItems: "center",
     paddingHorizontal: 10,
     paddingBottom: 50,
     backgroundColor: "#484240",
   },
+  slideContent: {
+    alignItems: "center",
+  },
+  sliderText: {
+    paddingTop: 10,
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  slider: {},
   plantContainer: {
     alignItems: "center",
     marginBottom: 10,

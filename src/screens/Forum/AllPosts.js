@@ -14,6 +14,7 @@ const AllPosts = ({ props }) => {
       snapshot.docs.forEach((doc) => {
         posts.push({ ...doc.data(), id: doc.id });
       });
+
       setForumPosts(posts);
       setIsLoading(false);
     });
@@ -21,6 +22,7 @@ const AllPosts = ({ props }) => {
       renderPosts();
     };
   }, []);
+
   if (isLoading) {
     return (
       <View style={styles.container}>
