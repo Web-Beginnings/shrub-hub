@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import Footer from "./HomeScreen/Components.js/Footer";
 import { useState, useEffect } from "react";
+import Constants from "expo-constants";
 import {
   getFirestore,
   collection,
@@ -164,7 +165,9 @@ const SinglePost = (props) => {
           );
         })}
       </ScrollView>
-      <Footer style={styles.footer} navigation={navigation} />
+      <View style={styles.footer}>
+        <Footer style={styles.footer} navigation={navigation} />
+      </View>
     </View>
   );
 };
@@ -304,8 +307,11 @@ const styles = StyleSheet.create({
     color: "#2B937E",
   },
   footer: {
-    padding: 25,
-    backgroundColor: "blue",
+    paddingBottom: Constants.statusBarHeight,
+    bottom: "-3%",
+    backgroundColor: "#484240",
+    paddingTop: 10,
+    paddingHorizontal: 25,
   },
   commentBody: {
     color: "white",
