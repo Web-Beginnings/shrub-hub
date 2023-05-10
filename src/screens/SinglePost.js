@@ -5,13 +5,24 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  TextInput,
+  KeyboardAvoidingView,
+  Alert,
 } from "react-native";
 import Footer from "./HomeScreen/Components.js/Footer";
 import { useState, useEffect } from "react";
-import { getFirestore, collection, getDocs } from "@firebase/firestore";
-
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  addDoc,
+  deleteDoc,
+  doc,
+} from "@firebase/firestore";
+import { firebase } from "../../firebaseConfig";
 const SinglePost = (props) => {
-  const navigation = props.navigation;
+  const currentUserInfo = firebase.auth().currentUser;
+  const navigation = props.navigation.setOptions;
   const db = getFirestore();
   const colRef = collection(db, "comments");
   const post = props.route.params.props;
@@ -21,8 +32,13 @@ const SinglePost = (props) => {
   const [likes, setLikes] = useState(post.likes);
   const [liked, setLiked] = useState(false);
   const [comments, setComments] = useState([]);
+  const [commentBody, setCommentBody] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-
+  const commentExample = {
+    username: currentUserInfo.providerData[0].uid,
+    body: commentBody,
+    postId: post.id,
+  };
   const handleLike = () => {
     if (liked) {
       setLikes(likes - 1);
@@ -30,6 +46,38 @@ const SinglePost = (props) => {
     } else {
       setLikes(likes + 1);
       setLiked(true);
+    }
+  };
+  const handleSubmit = () => {
+    if (commentExample.body.length === 0) {
+      Alert.alert("Alert", "Please include a body for your post");
+      return;
+    }
+    const dbRef = collection(db, "comments");
+    addDoc(dbRef, commentExample)
+      .then((docRef) => {
+        console.log("Comment has been added successfully");
+        setComments([commentExample, ...comments]);
+      })
+      .catch((error) => {
+        console.log("Error", error.message);
+      });
+    setCommentBody("");
+  };
+  const handleDeleteComment = (commentId) => {
+    const comment = comments.find((c) => c.id === commentId);
+    if (comment.username === currentUserInfo.providerData[0].uid) {
+      deleteDoc(doc(db, "comments", commentId))
+        .then(() => {
+          setComments((prevComments) =>
+            prevComments.filter((c) => c.id !== commentId)
+          );
+          Alert.alert("Success", "Your comment has been deleted.");
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    } else {
     }
   };
   useEffect(() => {
@@ -47,7 +95,6 @@ const SinglePost = (props) => {
         setIsLoading(false);
       });
   }, []);
-
   if (isLoading) {
     return (
       <View style={styles.container}>
@@ -82,6 +129,19 @@ const SinglePost = (props) => {
         {likes} {likes === 1 ? "like" : "likes"}
       </Text>
       <Text style={styles.commentsTitle}>Comments</Text>
+      <KeyboardAvoidingView behavior="padding">
+        <TextInput
+          style={styles.commentBodyInput}
+          placeholder="Enter your comment here..."
+          multiline={true}
+          numberOfLines={2}
+          value={commentBody}
+          onChangeText={(commentBody) => setCommentBody(commentBody)}
+        />
+        <TouchableOpacity onPress={handleSubmit}>
+          <Text style={styles.commentSubmitButton}>Submit</Text>
+        </TouchableOpacity>
+      </KeyboardAvoidingView>
       <ScrollView style={styles.content}>
         {comments.map((comment) => {
           return (
@@ -91,6 +151,16 @@ const SinglePost = (props) => {
                 said:
               </Text>
               <Text style={styles.commentBody}>{comment.body}</Text>
+              {comment.username === currentUserInfo.providerData[0].uid && (
+                <TouchableOpacity
+                  style={styles.commentDeleteButton}
+                  onPress={() => handleDeleteComment(comment.id)}
+                >
+                  <Text style={styles.commentDeleteButtonText}>
+                    🗑 Delete comment
+                  </Text>
+                </TouchableOpacity>
+              )}
             </View>
           );
         })}
@@ -106,6 +176,24 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginLeft: 0,
     backgroundColor: "#484240",
+  },
+  commentBodyInput: {
+    paddingTop: 10,
+    paddingBottom: 20,
+    marginBottom: 20,
+    paddingLeft: 5,
+    backgroundColor: "gainsboro",
+    borderRadius: 10,
+  },
+  commentSubmitButton: {
+    fontSize: 15,
+    backgroundColor: "#2B937E",
+    color: "#fff",
+    height: 35,
+    borderRadius: 50,
+    padding: 5,
+    marginBottom: 15,
+    textAlign: "center",
   },
   image: {
     width: 120,
@@ -155,7 +243,7 @@ const styles = StyleSheet.create({
     paddingLeft: 3,
     paddingHorizontal: 320,
     paddingTop: 0,
-    fontSize: 17,
+    fontSize: 10,
     textAlign: "right",
     color: "#2B937E",
   },
@@ -163,23 +251,23 @@ const styles = StyleSheet.create({
     paddingLeft: 3,
     paddingBottom: 5,
     paddingTop: 0,
-    fontSize: 17,
+    fontSize: 14,
   },
   likedButton: {
     paddingLeft: 3,
     paddingTop: 0,
-    fontSize: 17,
+    fontSize: 14,
   },
   likedButtontext: {
     paddingLeft: 3,
     paddingTop: 0,
-    fontSize: 17,
+    fontSize: 14,
     color: "#2B937E",
   },
   likeButtonText: {
     paddingLeft: 3,
     paddingTop: 0,
-    fontSize: 17,
+    fontSize: 14,
     color: "#2B937E",
   },
   commentsTitle: {
@@ -208,6 +296,7 @@ const styles = StyleSheet.create({
     color: "white",
   },
   boldUsername: {
+    fontSize: 25,
     fontWeight: "bold",
     color: "#2B937E",
   },
@@ -217,6 +306,23 @@ const styles = StyleSheet.create({
   },
   commentBody: {
     color: "white",
+    fontSize: 20,
+  },
+  commentDeleteButton: {
+    marginTop: 20,
+    marginLeft: 1,
+    paddingLeft: 10,
+    backgroundColor: "#EA9548",
+    borderRadius: 50,
+    marginRight: 200,
+    marginBottom: 0,
+    paddingVertical: 5,
+  },
+  commentDeleteButtonText: {
+    color: "white",
+    // backgroundColor: "#EA9548",
+    borderRadius: 50,
+    fontSize: 10,
   },
 });
 
