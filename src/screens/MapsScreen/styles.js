@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import Constants from "expo-constants";
 
 export default StyleSheet.create({
   spacer: {
@@ -66,8 +67,9 @@ export default StyleSheet.create({
     borderRadius: 30,
   },
   footer: {
+    paddingBottom: Constants.statusBarHeight,
+    bottom: "-3%",
     backgroundColor: "#484240",
-    paddingBottom: 10,
     paddingTop: 10,
     paddingHorizontal: 25,
   },

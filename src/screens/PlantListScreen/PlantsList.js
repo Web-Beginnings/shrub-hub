@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import Footer from "../HomeScreen/Components.js/Footer";
 import Header from "../HomeScreen/Components.js/Header";
+import Constants from "expo-constants";
 import { ScrollView } from "react-native-gesture-handler";
 import {
   getPlants,
@@ -59,14 +60,13 @@ export default function PlantsList(props, extraData) {
 
   return (
     <View style={styles.container}>
+      <View style={styles.constant}></View>
       <View style={styles.titleContainer}>
         <Image
           style={styles.titleIcon}
           source={require("../../../assets/AllPlantsTitleIcon.png")}
         />
-        {/* <Text style={styles.header}>FIND THOSE PLANTS</Text> */}
       </View>
-      {/* <Header user={user} navigation={navigation} /> */}
       <View style={[styles.content, { flex: 1 }]}>
         <View>
           <Text style={styles.filterText}>

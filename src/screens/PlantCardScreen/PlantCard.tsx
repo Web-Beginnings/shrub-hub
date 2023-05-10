@@ -8,6 +8,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+import Constants from "expo-constants";
 import Footer from "../HomeScreen/Components.js/Footer";
 import { useNavigation } from "@react-navigation/native";
 import { firebase } from "../../../firebaseConfig";
@@ -24,6 +25,7 @@ import {
   updateDoc,
   arrayUnion,
 } from "firebase/firestore";
+import { CONSTANTS } from "@firebase/util";
 
 interface PlantCardProps {
   route: any;
@@ -149,10 +151,6 @@ export default function PlantCard(props: PlantCardProps) {
             {plant.cycle}
           </Text>
           <Text style={styles.plantInfo}>
-            <Text style={styles.plantTitles}>Poisonous to Pets: </Text>
-            {plant.poisonous_to_pets}
-          </Text>
-          <Text style={styles.plantInfo}>
             <Text style={styles.plantTitles}>Maintenance: </Text>
             {plant.maintenance}
           </Text>
@@ -163,10 +161,6 @@ export default function PlantCard(props: PlantCardProps) {
           <Text style={styles.plantInfo}>
             <Text style={styles.plantTitles}>Sunlight: </Text>
             {plant.sunlight}
-          </Text>
-          <Text style={styles.plantInfo}>
-            <Text style={styles.plantTitles}>Flowering Season: </Text>
-            {plant.flowering_season}
           </Text>
           <Text style={styles.plantInfo}>
             <Text style={styles.plantTitles}>Propagation: </Text>
@@ -187,6 +181,7 @@ export default function PlantCard(props: PlantCardProps) {
 
 const styles = StyleSheet.create({
   content: {
+    paddingTop: Constants.statusBarHeight,
     paddingHorizontal: 20,
     paddingBottom: 10,
     backgroundColor: "#484240",
@@ -242,13 +237,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   footer: {
-    position: "absolute",
-    bottom: -110,
-    left: 0,
-    right: 0,
-    height: 25,
-    backgroundColor: "#32d953",
-    justifyContent: "space-between",
+    paddingBottom: Constants.statusBarHeight,
+    // position: "absolute",
+    bottom: "-3%",
+    // left: 0,
+    // right: 0,
+    // height: 25,
+    // backgroundColor: "#32d953",
+    // justifyContent: "space-between",
   },
 });
 
