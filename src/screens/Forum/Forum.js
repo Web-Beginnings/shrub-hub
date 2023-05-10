@@ -115,7 +115,14 @@ const Forum = (props) => {
           {photo ? (
             <Image
               source={{ uri: photo }}
-              style={{ width: 110, height: 110, marginLeft: 16 }}
+              style={{
+                width: 100,
+                height: 100,
+                marginLeft: 16,
+                borderRadius: 40,
+                padding: 5,
+                marginBottom: 5,
+              }}
             />
           ) : null}
           <Pressable onPress={handleSubmit}>
@@ -151,9 +158,9 @@ const styles = StyleSheet.create({
     height: 5,
     width: 5,
     paddingRight: 80,
-    paddingLeft: 80,
+    paddingLeft: 90,
     paddingBottom: 50,
-    marginLeft: 10,
+    marginLeft: -40,
     marginTop: 0,
   },
   container: {

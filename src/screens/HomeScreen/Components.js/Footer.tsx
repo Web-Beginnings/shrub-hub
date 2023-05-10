@@ -15,9 +15,8 @@ import {
 } from "@react-navigation/native";
 
 interface FooterProps {
-props: any
+  props: any;
 }
-
 
 const Footer: React.FC<FooterProps> = ({ props }) => {
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
@@ -27,7 +26,7 @@ const Footer: React.FC<FooterProps> = ({ props }) => {
 
   return (
     <View style={styles.container}>
-      <Pressable
+      <TouchableOpacity
         onPress={() => {
           navigation.navigate("Forum", { props: navigation });
         }}
@@ -36,8 +35,8 @@ const Footer: React.FC<FooterProps> = ({ props }) => {
           style={styles.Icon}
           source={require("../../../../assets/ForumIcon.png")}
         />
-      </Pressable>
-      <Pressable
+      </TouchableOpacity>
+      <TouchableOpacity
         onPress={() => {
           navigation.navigate("HomeScreen", { props: navigation });
         }}
@@ -46,13 +45,13 @@ const Footer: React.FC<FooterProps> = ({ props }) => {
           style={styles.Icon}
           source={require("../../../../assets/HomeIcon.png")}
         />
-      </Pressable>
-      <Pressable onPress={handleMapsNav}>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleMapsNav}>
         <Image
           style={styles.Icon}
           source={require("../../../../assets/MapIcon.png")}
         />
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 };

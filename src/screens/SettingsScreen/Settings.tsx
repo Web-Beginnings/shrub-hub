@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import Footer from "../HomeScreen/Components.js/Footer";
-import { View, ScrollView, TextInput, Image, Pressable, Alert} from "react-native";
-import styles from "./styles.js";
 import {
-  getAuth,
-  signOut,
-  deleteUser,
-  User,
-} from "firebase/auth";
+  View,
+  Text,
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  Pressable,
+  Alert,
+} from "react-native";
+import styles from "./styles.js";
+import { getAuth, signOut, deleteUser, User } from "firebase/auth";
 
 import { firebase } from "../../../firebaseConfig";
 type SettingProps = any;
 const auth = getAuth();
 
 const user: User | any = auth.currentUser;
-
 
 const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
   const [newEmail, setNewEmail] = useState<string>("");
@@ -68,8 +71,9 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
               user
                 .updateEmail(newEmail)
                 .then(() => {
-                  console.log("Email updated successfully")
-                  alert("Your email has been successfully updated!");})
+                  console.log("Email updated successfully");
+                  alert("Your email has been successfully updated!");
+                })
                 .catch((error: any) => console.log(error));
             })
             .catch((error: any) => console.log(error));
@@ -98,7 +102,7 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
   function handleChangeAvatar(url: string) {
     const user = firebase.auth().currentUser;
     let avatar =
-    "https://images.assetsdelivery.com/compings_v2/asmati/asmati2004/asmati200400435.jpg";
+      "https://images.assetsdelivery.com/compings_v2/asmati/asmati2004/asmati200400435.jpg";
     if (user) {
       user
         .updateProfile({
@@ -107,45 +111,74 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
         .then(() => {
           console.log("Profile picture updated successfully");
           // show an alert or notification to the user
-          console.log(user)
+          console.log(user);
         })
         .catch((error) => console.log(error));
     }
   }
 
   const settingsOptions = [
-    { title: "Update email address", onPress: handleUpdateEmail, source: require("../../../assets/UpdateEmailButton.png")  },
-    { title: "Change avatar", onPress: handleChangeAvatar, source: require("../../../assets/ChangeAvatarButton.png") },
-    { title: "Update password", onPress: handleChangePassword, source: require("../../../assets/UpdatePWButton.png") },
-    { title: "Delete account", onPress: handleDeleteAccount, source: require("../../../assets/DeleteAccountButton.png") },
-    { title: "Sign out", onPress: handleSignOut, source: require("../../../assets/SignOutButton.png") },
+    {
+      title: "Update email address",
+      onPress: handleUpdateEmail,
+      source: require("../../../assets/UpdateEmailButton.png"),
+    },
+    {
+      title: "Change avatar",
+      onPress: handleChangeAvatar,
+      source: require("../../../assets/ChangeAvatarButton.png"),
+    },
+    {
+      title: "Update password",
+      onPress: handleChangePassword,
+      source: require("../../../assets/UpdatePWButton.png"),
+    },
+    {
+      title: "Delete account",
+      onPress: handleDeleteAccount,
+      source: require("../../../assets/DeleteAccountButton.png"),
+    },
+    {
+      title: "Sign out",
+      onPress: handleSignOut,
+      source: require("../../../assets/SignOutButton.png"),
+    },
   ];
   return (
     <View style={styles.container}>
-       <View>
-          <Image
-            style={styles.SettingsIcon}
-            source={require("../../../assets/SettingsTitleIcon.png")}
-          />
-        </View>
+      <View>
+        <Image
+          style={styles.SettingsIcon}
+          source={require("../../../assets/SettingsTitleIcon.png")}
+        />
+      </View>
       <ScrollView>
-        {settingsOptions.map(({ title, onPress, source}) => (
+        {settingsOptions.map(({ title, onPress, source }) => (
           <View key={title} style={styles.section}>
             {title !== "Update email address" ? (
-              <Pressable
-              onPress={() => onPress && onPress(newEmail, password) }
-            >
-              <Image
-                style={styles.Icon}
-                source={source}
-              />
-            </Pressable>
+              <TouchableOpacity
+                onPress={() => onPress && onPress(newEmail, password)}
+              >
+                <Image style={styles.Icon} source={source} />
+              </TouchableOpacity>
             ) : (
+            
               <View style={styles.inputContainer}>
-                 <Image
-                style={styles.Icon}
-                source={require("../../../assets/UpdateEmailButton.png")}
-              />
+                <Image
+                  style={styles.Icon}
+                  source={require("../../../assets/UpdateEmailButton.png")}
+                />
+                {/* <Text
+                  style={{
+                    fontSize: 12,
+                    fontWeight: "600”,
+                    textTransform: "uppercase”,
+                    letterSpacing: 1.1,
+                  }}
+                >
+                  Update email address
+                </Text> */}
+
                 <View>
                   <TextInput
                     style={styles.textInput}
@@ -160,14 +193,16 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
                   />
                 </View>
                 <View>
-                <Pressable
-              onPress={() => onPress && onPress(newEmail, password) }
-            >
-              <Image
-                style={styles.saveIcon}
-                source={require("../../../assets/SaveButton.png")}
-              />
-            </Pressable>
+
+                  <TouchableOpacity
+                    onPress={() => onPress && onPress(newEmail, password)}
+                  >
+                    <Image
+                      style={styles.saveIcon}
+                      source={require("../../../assets/SaveButton.png")}
+                    />
+                  </TouchableOpacity>
+                  
                 </View>
               </View>
             )}

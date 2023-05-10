@@ -80,6 +80,7 @@ export default function PlantsList(props, extraData) {
               {wateringDisplay[sliderValue]}
             </Text>
             <Slider
+              thumbImage={(source = "../../../assets/waterIcon.png")}
               style={{ width: 300, height: 10 }}
               minimumValue={0}
               maximumValue={3}
@@ -89,7 +90,6 @@ export default function PlantsList(props, extraData) {
               step={1}
               value={0}
               onValueChange={(value) => setSliderValue(value)}
-          
             />
           </View>
           {pageArray.map((plant) => {
@@ -125,9 +125,12 @@ export default function PlantsList(props, extraData) {
           })}
         </ScrollView>
       </View>
-      <TouchableOpacity   style={styles.backButton} onPress={() => navigation.goBack()}>
-        <Text style={styles.backButtonText}>Return</Text>
-       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => navigation.goBack()}
+      >
+        <Text style={styles.backButtonText}>Back</Text>
+      </TouchableOpacity>
       <View style={styles.footer}>
         <Footer navigation={navigation} />
       </View>
@@ -138,6 +141,7 @@ export default function PlantsList(props, extraData) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#484240",
   },
   filterText: {
     fontSize: 20,
@@ -206,17 +210,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#484240",
   },
   backButton: {
-    // borderRadius: 50,
+    borderRadius: 50,
     // width: 70,
     // margin: 10,
-  //  flexDirection: 'row',
-   alignItems: 'center',
-   backgroundColor: 'khaki'
-
+    //  flexDirection: 'row',
+    marginHorizontal: 140,
+    alignItems: "center",
+    backgroundColor: "#EA9547",
   },
   backButtonText: {
-    textAlign: 'center',
-    color: 'green',
-    
-  }
+    textAlign: "center",
+    color: "white",
+  },
 });
