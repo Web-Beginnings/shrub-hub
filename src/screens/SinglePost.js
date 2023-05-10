@@ -197,11 +197,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   image: {
-    width: 120,
-    height: 120,
+    width: 180,
+    height: 70,
     marginTop: 30,
     borderRadius: 20,
-    marginLeft: 125,
+    marginLeft: 95,
   },
   imageContainer: {
     marginBottom: 0,
@@ -214,9 +214,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 25,
     fontWeight: "bold",
-    marginTop: 30,
+    marginTop: 10,
     marginBottom: 10,
-    marginLeft: 27,
+    marginLeft: 70,
+    marginRight: 50,
     color: "#EA9548",
   },
   body: {
@@ -272,11 +273,11 @@ const styles = StyleSheet.create({
     color: "#2B937E",
   },
   commentsTitle: {
-    fontSize: 25,
+    fontSize: 20,
     fontWeight: "bold",
     marginTop: 0,
     marginBottom: 10,
-    marginLeft: 120,
+    marginLeft: 135,
     color: "#EA9548",
   },
   commentContainer: {
