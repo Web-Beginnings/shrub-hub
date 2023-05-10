@@ -15,12 +15,12 @@ import {
 } from "@react-navigation/native";
 
 interface FooterProps {
-  navigation: NavigationProp<ParamListBase>;
+props: any
 }
 
 
-const Footer: React.FC<FooterProps> = ({ navigation }) => {
-  // const navigation = useNavigation<NavigationProp<ParamListBase>>();
+const Footer: React.FC<FooterProps> = ({ props }) => {
+  const navigation = useNavigation<NavigationProp<ParamListBase>>();
   const handleMapsNav = () => {
     navigation.navigate("MapsScreen");
   };

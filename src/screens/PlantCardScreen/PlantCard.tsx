@@ -34,7 +34,7 @@ interface PlantCardProps {
 export default function PlantCard(props: PlantCardProps) {
   const [plant, setPlant] = useState<any>(null);
   const [isMyPlantAdded, setIsMyPlantAdded] = useState(false);
-  const [isMyPlantAddedWishlist, setIsMyPlantAddedWishlist] = useState(false);
+  const [isMyPlantAddedWishlist, setIsMyPlantAddedWishlist] = useState<boolean>(false);
   const [addPlantButtonText, setAddPlantButtonText] = useState('+ My Plants');
   const [addWishlistButtonText, setAddWishlistButtonText] = useState('+ Wish List');
   const { route } = props;
@@ -246,19 +246,10 @@ const styles = StyleSheet.create({
   },
   footer: {
     paddingBottom: Constants.statusBarHeight,
-    // position: "absolute",
     bottom: "-3%",
-    // left: 0,
-    // right: 0,
-    // height: 25,
-    // backgroundColor: "#32d953",
-    // justifyContent: "space-between",
   },
   backButton: {
-    // borderRadius: 50,
-    // width: 70,
-    // margin: 10,
-  //  flexDirection: 'row',
+   
    alignItems: 'center',
    backgroundColor: 'khaki'
 

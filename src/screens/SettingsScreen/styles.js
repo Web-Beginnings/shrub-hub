@@ -13,7 +13,6 @@ export default StyleSheet.create({
   },
   section: {
     paddingVertical: 50,
-    paddingVertical: 40,
     paddingHorizontal: 24,
     justifyContent: "space-between",
     alignItems: "center",

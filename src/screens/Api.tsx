@@ -11,14 +11,13 @@ export const getPlants = () => {
   });
 };
 
-export const getPlantsById = (id) => {
+export const getPlantsById = (id: number) => {
   return axios
     .get(
 
       `https://perenual.com/api/species/details/${id}?key=sk-fgc6645ba1a85a079861`
     )
     .then((response) => {
-      // console.log("hereeeeee?", response);
       return response.data;
     });
 };

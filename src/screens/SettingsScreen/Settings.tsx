@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Footer from "../HomeScreen/Components.js/Footer";
-import Header from "../HomeScreen/Components.js/Header";
-import { View, Text, ScrollView, TextInput, TouchableOpacity, Image, Pressable, Alert} from "react-native";
+import { View, ScrollView, TextInput, Image, Pressable, Alert} from "react-native";
 import styles from "./styles.js";
 import {
   getAuth,
@@ -141,29 +140,12 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
                 source={source}
               />
             </Pressable>
-              // <TouchableOpacity
-              //   key={title}
-              //   style={styles.sectionHeader}
-              //   onPress={() => onPress && onPress(newEmail, password) }
-              // >
-              //   <Text style={styles.sectionHeader}>{title}</Text>
-              // </TouchableOpacity>
             ) : (
               <View style={styles.inputContainer}>
                  <Image
                 style={styles.Icon}
                 source={require("../../../assets/UpdateEmailButton.png")}
               />
-                {/* <Text
-                  style={{
-                    fontSize: 12,
-                    fontWeight: "600”,
-                    textTransform: "uppercase”,
-                    letterSpacing: 1.1,
-                  }}
-                >
-                  Update email address
-                </Text> */}
                 <View>
                   <TextInput
                     style={styles.textInput}
@@ -186,12 +168,6 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
                 source={require("../../../assets/SaveButton.png")}
               />
             </Pressable>
-                  {/* <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => handleUpdateEmail(newEmail, password)}
-                  >
-                    <Text style={styles.buttonText}>Save</Text>
-                  </TouchableOpacity> */}
                 </View>
               </View>
             )}
