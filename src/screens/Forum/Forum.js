@@ -89,6 +89,8 @@ const Forum = (props) => {
       setPhoto('')
   };
 
+  // hello world
+
   return (
     <View style={styles.container}>
       <View style={styles.newPostInput}>
