@@ -22,38 +22,37 @@ const Wishlist = ({props}) => {
     const [myWishlistArray, setMyWishlistArray] = useState([]);
     const wishlistResArray = [];
 
+    // useEffect(() => {
+    //     getDocs(colRef)
+    //       .then((snapshot) => {
+    //         snapshot.docs.filter((doc) => {
+    //           users.push({
+    //             myWishlist: Object.values({ ...doc.data().Wishlist }),
+    //             id: doc.id,
+    //           });
+    //           console.log(users)
+    //           users.map((person) => {
+    //             if (person.id === props.extraData.id) {
+    //               currentUser.push(person);
+    //               currentUser[0].Wishlist.map((plantid) => {
+    //                 getPlantsById(plantid).then((result) => {
+    //                   wishlistResArray.push(result);
+    //                   setMyWishlistArray(wishlistResArray);
+    //                   // return result;
+    //                 });
+    //               });
+    //             }
+    //           });
+    //         });
+    //       })
+    //       .catch((error) => {
+    //         console.log("error", error.message);
+    //       });
+    //   }, [setMyWishlistArray]);
 
+    //   console.log(myWishlistArray)
 
-
-    useEffect(() => {
-        getDocs(colRef)
-          .then((snapshot) => {
-            snapshot.docs.filter((doc) => {
-              users.push({
-                myWishlist: Object.values({ ...doc.data().Wishlist }),
-                id: doc.id,
-              });
-              users.map((person) => {
-                if (person.id === props.extraData.id) {
-                  currentUser.push(person);
-                  currentUser[0].Wishlist.map((plantid) => {
-                    getPlantsById(plantid).then((result) => {
-                      wishlistResArray.push(result);
-                      setMyWishlistArray(wihlistResArray);
-                      // return result;
-                    });
-                  });
-                }
-              });
-            });
-          })
-          .catch((error) => {
-            console.log("error");
-          });
-      }, [setMyWishlistArray]);
-
-
-
+    // original useEffect ^^^
 
 
 
@@ -83,6 +82,7 @@ const Wishlist = ({props}) => {
     // }
     // }, []);
 
+    // attempt at onSnapshot useEffect ^^^
 
 
     return (
