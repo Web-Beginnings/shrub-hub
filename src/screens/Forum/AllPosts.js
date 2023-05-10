@@ -22,6 +22,7 @@ const AllPosts = ({ props }) => {
     };
   }, []);
 
+
   if (isLoading) {
     return (
       <View style={styles.container}>

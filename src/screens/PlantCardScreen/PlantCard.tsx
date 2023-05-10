@@ -31,9 +31,8 @@ interface PlantCardProps {
 
 export default function PlantCard(props: PlantCardProps) {
   const [plant, setPlant] = useState<any>(null);
-  const [isMyPlantAdded, setIsMyPlantAdded] = useState<any>(false);
-  const [isMyPlantAddedWishlist, setIsMyPlantAddedWishlist] =
-    useState<any>(false);
+  const [isMyPlantAdded, setIsMyPlantAdded] = useState(false);
+  const [isMyPlantAddedWishlist, setIsMyPlantAddedWishlist] = useState(false);
   const { route } = props;
   const navigation = useNavigation();
   const id = route.params.plantId;
@@ -252,3 +251,22 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
 });
+
+// const db = getFirestore();
+
+// // This code below gets the data from myPlants for the user - This will be needed for My Plants page.
+// const colRef = collection(db, "users");
+
+// const user = firebase.auth().currentUser;
+// const users: any = [];
+
+// getDocs(colRef)
+//   .then((snapshot) => {
+//     snapshot.docs.filter((doc) => {
+//       users.push({ ...doc.data().MyPlants });
+//     });
+//     console.log(users, "<-- users, myplants");
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
