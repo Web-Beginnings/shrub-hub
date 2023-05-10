@@ -184,6 +184,7 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     backgroundColor: "gainsboro",
     borderRadius: 10,
+    paddingHorizontal: 10,
   },
   commentSubmitButton: {
     fontSize: 15,

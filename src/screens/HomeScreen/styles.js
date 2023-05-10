@@ -118,4 +118,14 @@ export default StyleSheet.create({
   title: {
     fontWeight: "bold",
   },
+  arrows: {
+    height: 80,
+    width: "100%",
+    paddingRight: 10,
+    paddingLeft: 10,
+    // paddingVertical: 30,
+    paddingBottom: 0,
+
+    marginTop: -140,
+  },
 });
