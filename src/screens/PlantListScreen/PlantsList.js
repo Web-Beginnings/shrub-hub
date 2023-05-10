@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import Footer from "../HomeScreen/Components.js/Footer";
 import Header from "../HomeScreen/Components.js/Header";
+import Constants from "expo-constants";
 import { ScrollView } from "react-native-gesture-handler";
 import {
   getPlants,
@@ -59,13 +60,14 @@ export default function PlantsList(props, extraData) {
 
   return (
     <View style={styles.container}>
+      <View style={styles.constant}></View>
       <View style={styles.titleContainer}>
         <Image
           style={styles.titleIcon}
           source={require("../../../assets/AllPlantsTitleIcon.png")}
         />
       </View>
-   
+
       <View style={[styles.content, { flex: 1 }]}>
         <View>
           <Text style={styles.filterText}>
@@ -139,6 +141,7 @@ const styles = StyleSheet.create({
   },
   filterText: {
     fontSize: 20,
+    color: "#EA9547",
   },
   content: {
     alignItems: "center",
@@ -153,6 +156,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     fontSize: 20,
     fontWeight: "bold",
+    color: "#EA9547",
   },
   slider: {},
   plantContainer: {
@@ -192,7 +196,7 @@ const styles = StyleSheet.create({
     height: 100,
     width: 200,
     paddingRight: 150,
-    paddingLeft: 150,
+    paddingLeft: 170,
     paddingVertical: 30,
     // paddingBottom: 50,
     marginLeft: 50,

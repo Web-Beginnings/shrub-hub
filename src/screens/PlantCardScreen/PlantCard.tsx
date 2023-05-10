@@ -8,6 +8,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+import Constants from "expo-constants";
 import Footer from "../HomeScreen/Components.js/Footer";
 import { useNavigation } from "@react-navigation/native";
 import { firebase } from "../../../firebaseConfig";
@@ -24,6 +25,7 @@ import {
   updateDoc,
   arrayUnion,
 } from "firebase/firestore";
+import { CONSTANTS } from "@firebase/util";
 
 interface PlantCardProps {
   route: any;
@@ -33,6 +35,8 @@ export default function PlantCard(props: PlantCardProps) {
   const [plant, setPlant] = useState<any>(null);
   const [isMyPlantAdded, setIsMyPlantAdded] = useState(false);
   const [isMyPlantAddedWishlist, setIsMyPlantAddedWishlist] = useState(false);
+  const [addPlantButtonText, setAddPlantButtonText] = useState('+ My Plants');
+  const [addWishlistButtonText, setAddWishlistButtonText] = useState('+ Wish List');
   const { route } = props;
   const navigation = useNavigation();
   const id = route.params.plantId;
@@ -48,6 +52,7 @@ export default function PlantCard(props: PlantCardProps) {
   }
   const updateMyPlants = (id: number) => {
     setIsMyPlantAdded(true);
+    setAddPlantButtonText('Added!')
     const user = firebase.auth().currentUser;
     // init services
     const db = getFirestore();
@@ -74,6 +79,7 @@ export default function PlantCard(props: PlantCardProps) {
 
   const updateWishlist = (id: number) => {
     setIsMyPlantAddedWishlist(true);
+    setAddWishlistButtonText('Added!')
     const user = firebase.auth().currentUser;
     // init services
     const db = getFirestore();
@@ -114,7 +120,7 @@ export default function PlantCard(props: PlantCardProps) {
             onPress={() => updateMyPlants(id)}
             disabled={isMyPlantAdded}
           >
-            + My Plants
+            {addPlantButtonText}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -128,7 +134,7 @@ export default function PlantCard(props: PlantCardProps) {
             onPress={() => updateWishlist(id)}
             disabled={isMyPlantAddedWishlist}
           >
-            + Wish List
+            {addWishlistButtonText}
           </Text>
         </TouchableOpacity>
         <View style={styles.info}>
@@ -149,10 +155,6 @@ export default function PlantCard(props: PlantCardProps) {
             {plant.cycle}
           </Text>
           <Text style={styles.plantInfo}>
-            <Text style={styles.plantTitles}>Poisonous to Pets: </Text>
-            {plant.poisonous_to_pets}
-          </Text>
-          <Text style={styles.plantInfo}>
             <Text style={styles.plantTitles}>Maintenance: </Text>
             {plant.maintenance}
           </Text>
@@ -163,10 +165,6 @@ export default function PlantCard(props: PlantCardProps) {
           <Text style={styles.plantInfo}>
             <Text style={styles.plantTitles}>Sunlight: </Text>
             {plant.sunlight}
-          </Text>
-          <Text style={styles.plantInfo}>
-            <Text style={styles.plantTitles}>Flowering Season: </Text>
-            {plant.flowering_season}
           </Text>
           <Text style={styles.plantInfo}>
             <Text style={styles.plantTitles}>Propagation: </Text>
@@ -191,6 +189,7 @@ export default function PlantCard(props: PlantCardProps) {
 
 const styles = StyleSheet.create({
   content: {
+    paddingTop: Constants.statusBarHeight,
     paddingHorizontal: 20,
     paddingBottom: 10,
     backgroundColor: "#484240",
@@ -246,13 +245,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   footer: {
-    position: "absolute",
-    bottom: -110,
-    left: 0,
-    right: 0,
-    height: 25,
-    backgroundColor: "#32d953",
-    justifyContent: "space-between",
+    paddingBottom: Constants.statusBarHeight,
+    // position: "absolute",
+    bottom: "-3%",
+    // left: 0,
+    // right: 0,
+    // height: 25,
+    // backgroundColor: "#32d953",
+    // justifyContent: "space-between",
   },
   backButton: {
     // borderRadius: 50,

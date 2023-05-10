@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import Footer from "./HomeScreen/Components.js/Footer";
 import { useState, useEffect } from "react";
+import Constants from "expo-constants";
 import {
   getFirestore,
   collection,
@@ -104,6 +105,8 @@ const SinglePost = (props) => {
   }
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>{post.title}</Text>
+      <Text style={styles.body}>{post.body}</Text>
       {post.img && (
         <Image
           style={styles.image}
@@ -111,9 +114,6 @@ const SinglePost = (props) => {
           // resizeMode="contain"
         />
       )}
-
-      <Text style={styles.title}>{post.title}</Text>
-      <Text style={styles.body}>{post.body}</Text>
       <Text style={styles.createdAt}>
         {post.username} posted at: {formattedDate}, {formattedTime}{" "}
       </Text>
@@ -165,7 +165,9 @@ const SinglePost = (props) => {
           );
         })}
       </ScrollView>
-      <Footer style={styles.footer} navigation={navigation} />
+      <View style={styles.footer}>
+        <Footer style={styles.footer} navigation={navigation} />
+      </View>
     </View>
   );
 };
@@ -185,6 +187,8 @@ const styles = StyleSheet.create({
     backgroundColor: "gainsboro",
     borderRadius: 10,
     paddingHorizontal: 10,
+    marginHorizontal: 20,
+    marginVertical: -5,
   },
   commentSubmitButton: {
     fontSize: 15,
@@ -197,11 +201,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   image: {
-    width: 120,
-    height: 120,
-    marginTop: 30,
+    width: 180,
+    height: 70,
+    marginTop: 0,
     borderRadius: 20,
-    marginLeft: 125,
+    marginLeft: 95,
   },
   imageContainer: {
     marginBottom: 0,
@@ -214,9 +218,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 25,
     fontWeight: "bold",
-    marginTop: 30,
+    marginTop: 40,
     marginBottom: 10,
-    marginLeft: 27,
+    marginLeft: 70,
+    marginRight: 50,
     color: "#EA9548",
   },
   body: {
@@ -236,7 +241,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     display: "flex",
     textAlign: "right",
-    paddingRight: 3,
+    paddingRight: 80,
     paddingTop: 3,
     color: "white",
   },
@@ -272,11 +277,11 @@ const styles = StyleSheet.create({
     color: "#2B937E",
   },
   commentsTitle: {
-    fontSize: 25,
+    fontSize: 20,
     fontWeight: "bold",
     marginTop: 0,
     marginBottom: 10,
-    marginLeft: 120,
+    marginLeft: 135,
     color: "#EA9548",
   },
   commentContainer: {
@@ -302,8 +307,11 @@ const styles = StyleSheet.create({
     color: "#2B937E",
   },
   footer: {
-    padding: 25,
-    backgroundColor: "blue",
+    paddingBottom: Constants.statusBarHeight,
+    bottom: "-3%",
+    backgroundColor: "#484240",
+    paddingTop: 10,
+    paddingHorizontal: 25,
   },
   commentBody: {
     color: "white",

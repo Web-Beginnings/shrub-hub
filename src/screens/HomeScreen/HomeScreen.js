@@ -11,6 +11,7 @@ import {
 import PagerView from "react-native-pager-view";
 import Footer from "./Components.js/Footer";
 import Header from "./Components.js/Header";
+import Wishlist from "./Wishlist.js"
 import styles from "./styles";
 import {
   getFirestore,
@@ -87,9 +88,9 @@ export default function HomeScreen(props) {
             <Text>{myPlantsArray[0].common_name}</Text>
           </View> */}
               {myPlantsArray.map((plant) => {
-                {
-                  console.log("heloooooo", plant);
-                }
+                // {
+                //   console.log("heloooooo", plant);
+                // }
                 return (
                   <View key={plant.id} style={styles.plantcard}>
                     <TouchableOpacity
@@ -119,6 +120,9 @@ export default function HomeScreen(props) {
               style={styles.arrows}
               source={require("../../../assets/ArrowsIcon.png")}
             />
+          </View>
+          <View>
+            <Wishlist props={props}/>
           </View>
         </View>
       </ScrollView>

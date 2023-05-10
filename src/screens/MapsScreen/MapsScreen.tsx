@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { Image } from "react-native";
 import { cityCoordinates, cityOptions } from "./CityCoordinates";
 import styles from "./styles";
+import Constants from "expo-constants";
 import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import {
   Text,

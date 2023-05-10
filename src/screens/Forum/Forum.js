@@ -21,6 +21,7 @@ import {
   where,
   setDoc,
 } from "firebase/firestore";
+import Constants from "expo-constants";
 import * as ImagePicker from "expo-image-picker";
 import Footer from "../HomeScreen/Components.js/Footer";
 import AllPosts from "./AllPosts";
@@ -205,6 +206,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   footer: {
+    paddingBottom: Constants.statusBarHeight,
+    bottom: "-3%",
     padding: 25,
     backgroundColor: "#484240",
   },
