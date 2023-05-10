@@ -8,6 +8,10 @@ const AllPosts = ({ props }) => {
   const colRef = collection(db, "forumPosts");
   const [isLoading, setIsLoading] = useState(true);
   const [forumPosts, setForumPosts] = useState([]);
+
+
+
+  
   useEffect(() => {
     const renderPosts = onSnapshot(colRef, (snapshot) => {
       const posts = [];
@@ -21,6 +25,9 @@ const AllPosts = ({ props }) => {
       renderPosts();
     };
   }, []);
+
+
+
 
   if (isLoading) {
     return (
