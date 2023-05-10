@@ -9,13 +9,14 @@ import {
   deleteUser,
   User,
 } from "firebase/auth";
+
 import { firebase } from "../../../firebaseConfig";
 type SettingProps = any;
 const auth = getAuth();
-const avatar =
-    "https://images.assetsdelivery.com/compings_v2/asmati/asmati2004/asmati200400435.jpg";
+
 const user: User | any = auth.currentUser;
- const url = avatar;
+
+
 const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
   const [newEmail, setNewEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -97,18 +98,22 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
   };
   function handleChangeAvatar(url: string) {
     const user = firebase.auth().currentUser;
+    let avatar =
+    "https://images.assetsdelivery.com/compings_v2/asmati/asmati2004/asmati200400435.jpg";
     if (user) {
       user
         .updateProfile({
-          photoURL: url,
+          photoURL: avatar,
         })
         .then(() => {
           console.log("Profile picture updated successfully");
           // show an alert or notification to the user
+          console.log(user)
         })
         .catch((error) => console.log(error));
     }
   }
+
   const settingsOptions = [
     { title: "Update email address", onPress: handleUpdateEmail, source: require("../../../assets/UpdateEmailButton.png")  },
     { title: "Change avatar", onPress: handleChangeAvatar, source: require("../../../assets/ChangeAvatarButton.png") },

@@ -67,6 +67,7 @@ export default function PlantsList(props, extraData) {
           source={require("../../../assets/AllPlantsTitleIcon.png")}
         />
       </View>
+
       <View style={[styles.content, { flex: 1 }]}>
         <View>
           <Text style={styles.filterText}>
@@ -88,7 +89,7 @@ export default function PlantsList(props, extraData) {
               step={1}
               value={0}
               onValueChange={(value) => setSliderValue(value)}
-              // onSlidingComplete={() => setSliding("Complete")}
+          
             />
           </View>
           {pageArray.map((plant) => {
@@ -124,6 +125,9 @@ export default function PlantsList(props, extraData) {
           })}
         </ScrollView>
       </View>
+      <TouchableOpacity   style={styles.backButton} onPress={() => navigation.goBack()}>
+        <Text style={styles.backButtonText}>Return</Text>
+       </TouchableOpacity>
       <View style={styles.footer}>
         <Footer navigation={navigation} />
       </View>
@@ -201,4 +205,18 @@ const styles = StyleSheet.create({
   titleContainer: {
     backgroundColor: "#484240",
   },
+  backButton: {
+    // borderRadius: 50,
+    // width: 70,
+    // margin: 10,
+  //  flexDirection: 'row',
+   alignItems: 'center',
+   backgroundColor: 'khaki'
+
+  },
+  backButtonText: {
+    textAlign: 'center',
+    color: 'green',
+    
+  }
 });

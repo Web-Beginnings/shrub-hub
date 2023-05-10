@@ -15,11 +15,12 @@ import {
 } from "@react-navigation/native";
 
 interface FooterProps {
-  props: any;
+  navigation: NavigationProp<ParamListBase>;
 }
 
-const Footer: React.FC<FooterProps> = ({ props }) => {
-  const navigation = useNavigation<NavigationProp<ParamListBase>>();
+
+const Footer: React.FC<FooterProps> = ({ navigation }) => {
+  // const navigation = useNavigation<NavigationProp<ParamListBase>>();
   const handleMapsNav = () => {
     navigation.navigate("MapsScreen");
   };
@@ -28,7 +29,7 @@ const Footer: React.FC<FooterProps> = ({ props }) => {
     <View style={styles.container}>
       <Pressable
         onPress={() => {
-          navigation.navigate("Forum", { props: props });
+          navigation.navigate("Forum", { props: navigation });
         }}
       >
         <Image
@@ -38,7 +39,7 @@ const Footer: React.FC<FooterProps> = ({ props }) => {
       </Pressable>
       <Pressable
         onPress={() => {
-          navigation.navigate("HomeScreen", { props: props });
+          navigation.navigate("HomeScreen", { props: navigation });
         }}
       >
         <Image
