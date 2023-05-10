@@ -87,7 +87,7 @@ export default function PlantsList(props, extraData) {
               step={1}
               value={0}
               onValueChange={(value) => setSliderValue(value)}
-              // onSlidingComplete={() => setSliding("Complete")}
+          
             />
           </View>
           {pageArray.map((plant) => {
