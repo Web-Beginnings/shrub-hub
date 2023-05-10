@@ -40,18 +40,16 @@ const Header = (props, extraData) => {
         {/* <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            navigation.navigate("Settings", { props: props });
+            navigation.navigate("Settings”, { props: props });
           }}
         >
-          <Text>⚙</Text>
+          <Text>:gear:</Text>
         </TouchableOpacity> */}
       </View>
     </View>
   );
 };
-
 export default Header;
-
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",

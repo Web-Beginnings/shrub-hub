@@ -21,18 +21,33 @@ import SelectDropdown from "react-native-select-dropdown";
 import { GOOGLE_API_KEY } from "../../../environment";
 import Footer from "../HomeScreen/Components.js/Footer";
 
-export default function MapsScreen({ navigation }) {
+interface PlantShop {
+  geometry: {
+    location: {
+      lat: number;
+      lng: number;
+    };
+  };
+  name: string;
+  formatted_address: string;
+}
+
+const MapsScreen: React.FC<{ navigation: any; props: any }> = ({
+  navigation,
+  props,
+}) => {
   const [findLocation, setFindLocation] = useState({
     latitude: 53.26573505600048,
     latitudeDelta: 4.2993060103804055,
     longitude: -1.519359592348337,
     longitudeDelta: 4.0593768283724785,
   });
-  const [plantShops, setPlantShops] = useState([]);
-  const [search, setSearch] = useState("United Kingdom");
-  const [buttonPress, setButtonPress] = useState(false);
+  const [plantShops, setPlantShops] = useState<PlantShop[]>([]);
+  const [search, setSearch] = useState<string>("United Kingdom");
+  const [buttonPress, setButtonPress] = useState<Boolean>(false);
+  const mapRef = useRef<MapView>(null);
 
-  const animate = (selectedItem) => {
+  const animate = (selectedItem: string) => {
     let chosenCity = {
       latitude: cityCoordinates[`${selectedItem}`].latitude,
       latitudeDelta: cityCoordinates[`${selectedItem}`].latitudeDelta,
@@ -40,7 +55,7 @@ export default function MapsScreen({ navigation }) {
       longitudeDelta: cityCoordinates[`${selectedItem}`].longitudeDelta,
     };
 
-    this.map.animateToRegion(chosenCity, 1000);
+    mapRef.current?.animateToRegion(chosenCity, 1000);
   };
 
   useEffect(() => {
@@ -53,17 +68,17 @@ export default function MapsScreen({ navigation }) {
       });
   }, [search]);
 
-  const onRegionChange = (region) => {
+  const onRegionChange = (region: any) => {
     // console.log(region);
   };
 
-  const handleOnSelect = (selectedItem) => {
+  const handleOnSelect = (selectedItem: string) => {
     setSearch(selectedItem);
     animate(selectedItem);
   };
 
   const showPlantShops = () => {
-    return plantShops.map((item, index) => {
+    return plantShops.map((item: PlantShop, index: number) => {
       return (
         <Marker
           key={index}
@@ -127,9 +142,7 @@ export default function MapsScreen({ navigation }) {
         </View>
         <MapView
           style={styles.map}
-          ref={(map) => {
-            this.map = map;
-          }}
+          ref={mapRef}
           provider={PROVIDER_GOOGLE}
           initialRegion={{
             latitude: 53.26573505600048,
@@ -143,11 +156,13 @@ export default function MapsScreen({ navigation }) {
         </MapView>
       </View>
       <View style={styles.footer}>
-        <Footer navigation={navigation} />
+        <Footer props={props} />
       </View>
     </View>
   );
-}
+};
+
+export default MapsScreen;
 
 // const { width, height } = Dimensions.get("window");
 // const ASPECT_RATIO = width / height;

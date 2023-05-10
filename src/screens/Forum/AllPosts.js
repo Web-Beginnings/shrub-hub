@@ -27,8 +27,6 @@ const AllPosts = ({ props }) => {
   }, []);
 
 
-
-
   if (isLoading) {
     return (
       <View style={styles.container}>
@@ -66,7 +64,7 @@ const styles = StyleSheet.create({
   container: {},
   content: {},
   individualPost: {
-    backgroundColor: "green",
+    backgroundColor: "#057673",
     padding: 5,
     borderRadius: 5,
     margin: 5,

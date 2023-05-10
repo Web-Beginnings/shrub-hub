@@ -34,6 +34,11 @@ export async function getPlants(): Promise<PlantData[]> {
   const pageNumbers = [1, 2, 3, 4, 5, 6];
   let result: Promise<PlantResponseObject>[] = [];
   pageNumbers.forEach((page) => {
+
+//     const axiosResponse: Promise<PlantResponseObject> = axios.get(
+//       `https://perenual.com/api/species-list?page=${page}&key=sk-BspO645a45359313e649
+//         &indoor=1`
+
     const axiosResponse: Promise<PlantResponseObject> =  axios
       .get(
         `https://perenual.com/api/species-list?page=${page}&key=sk-KjDj645b54bcbb04f849`
@@ -63,6 +68,7 @@ export async function sortPlantsByWatering(
   pageNumbers.forEach((page) => {
     const axiosResponse: Promise<PlantResponseObject> = axios.get(
       `https://perenual.com/api/species-list?page=${page}&key=sk-iNSs645a4a879844d827&indoor=1&watering=${watering}`
+
     );
     result.push(axiosResponse);
   });

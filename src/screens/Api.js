@@ -2,7 +2,7 @@ import axios from "axios";
 
 const plantAPI = axios.create({
   baseURL:
-    "https://perenual.com/api/species-list?key=sk-iNSs645a4a879844d827=&indoor=1",
+    "https://perenual.com/api/species-list?key=sk-BspO645a45359313e649&indoor=1",
 });
 
 export const getPlants = () => {
@@ -14,7 +14,8 @@ export const getPlants = () => {
 export const getPlantsById = (id) => {
   return axios
     .get(
-      `https://perenual.com/api/species/details/${id}?key=sk-KjDj645b54bcbb04f849`
+      `https://perenual.com/api/species/details/${id}?key=sk-BspO645a45359313e649
+      `
     )
     .then((response) => {
       // console.log("hereeeeee?", response);

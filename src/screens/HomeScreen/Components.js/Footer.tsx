@@ -6,9 +6,20 @@ import {
   TouchableOpacity,
   Image,
   Pressable,
+  ImageSourcePropType,
 } from "react-native";
+import {
+  NavigationProp,
+  ParamListBase,
+  useNavigation,
+} from "@react-navigation/native";
 
-const Footer = ({ navigation }, props) => {
+interface FooterProps {
+  props: any;
+}
+
+const Footer: React.FC<FooterProps> = ({ props }) => {
+  const navigation = useNavigation<NavigationProp<ParamListBase>>();
   const handleMapsNav = () => {
     navigation.navigate("MapsScreen");
   };
@@ -35,7 +46,7 @@ const Footer = ({ navigation }, props) => {
           source={require("../../../../assets/HomeIcon.png")}
         />
       </Pressable>
-      <Pressable onPress={() => handleMapsNav()}>
+      <Pressable onPress={handleMapsNav}>
         <Image
           style={styles.Icon}
           source={require("../../../../assets/MapIcon.png")}

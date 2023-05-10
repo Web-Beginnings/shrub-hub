@@ -6,6 +6,7 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  Pressable,
 } from "react-native";
 import { useState } from "react";
 import { firebase } from "../../../firebaseConfig";
@@ -34,7 +35,7 @@ const Forum = (props) => {
     body: body,
     photo: photo,
     username: props.user.fullName,
-    createdAt: Date.now()
+    createdAt: Date.now(),
   };
 
   const { navigation } = props;
@@ -58,13 +59,12 @@ const Forum = (props) => {
   }
 
   const handleSubmit = () => {
-
-    if(wholePost.title.length === 0) {
-      Alert.alert('Alert', 'Please include a title for your post')
+    if (wholePost.title.length === 0) {
+      Alert.alert("Alert", "Please include a title for your post");
       return;
     }
-    if(wholePost.body.length === 0) {
-      Alert.alert('Alert', 'Please include a body for your post')
+    if (wholePost.body.length === 0) {
+      Alert.alert("Alert", "Please include a body for your post");
       return;
     }
 
@@ -75,7 +75,7 @@ const Forum = (props) => {
       return;
     }
 
-    const dbRef = collection(db, "forumPosts")
+    const dbRef = collection(db, "forumPosts");
 
     addDoc(dbRef, wholePost)
       .then((docRef) => {
@@ -83,10 +83,10 @@ const Forum = (props) => {
       })
       .catch((error) => {
         console.log("Error", error.message);
-      })
-      setTitle('');
-      setBody('');
-      setPhoto('')
+      });
+    setTitle("");
+    setBody("");
+    setPhoto("");
   };
 
   // hello world
@@ -95,6 +95,10 @@ const Forum = (props) => {
     <View style={styles.container}>
       <View style={styles.newPostInput}>
         <View>
+          <Image
+            style={styles.Icon}
+            source={require("../../../assets/forumtitle.png")}
+          />
           <TextInput
             style={styles.titleInput}
             placeholder="Enter your title here.."
@@ -119,12 +123,26 @@ const Forum = (props) => {
               style={{ width: 110, height: 110, marginLeft: 16 }}
             />
           ) : null}
-          <TouchableOpacity onPress={handleAttachPhoto}>
+          <Pressable
+            onPress={() => {
+              navigation.navigate("PlantsList");
+            }}
+          >
+            <Image
+              style={styles.Icontwo}
+              source={require("../../../assets/ATPHotoButton.png")}
+            />
+          </Pressable>
+          <Image
+            style={styles.Icontwo}
+            source={require("../../../assets/SubmitButton.png")}
+          />
+          {/* <TouchableOpacity onPress={handleAttachPhoto}>
             <Text style={styles.button}>Attach Photo</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={handleSubmit}>
             <Text style={styles.button}>Submit</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
       <View style={styles.allPosts}>
@@ -138,15 +156,31 @@ const Forum = (props) => {
 };
 
 const styles = StyleSheet.create({
+  titleimage: {
+    height: "50%",
+    width: 100,
+  },
+  Icontwo: {
+    height: 5,
+    width: 5,
+    paddingRight: 80,
+    paddingLeft: 80,
+    // paddingVertical: 30,
+    paddingBottom: 50,
+    marginLeft: 30,
+    marginTop: 0,
+  },
   container: {
     justifyContent: "space-between",
     flex: 1,
+    backgroundColor: "#484240",
   },
   allPosts: {
     flex: 1,
     margin: 5,
     padding: 5,
     borderRadius: 5,
+    backgroundColor: "#2B937E",
   },
   bodyInput: {
     padding: 10,
@@ -163,7 +197,7 @@ const styles = StyleSheet.create({
   },
   button: {
     fontSize: 16,
-    backgroundColor: "#205930",
+    backgroundColor: "#2B937E",
     color: "#fff",
     height: 35,
     borderRadius: 8,
@@ -173,7 +207,17 @@ const styles = StyleSheet.create({
   },
   footer: {
     padding: 25,
-    backgroundColor: "blue",
+    backgroundColor: "#484240",
+  },
+  Icon: {
+    height: 10,
+    width: 10,
+    paddingRight: 120,
+    paddingLeft: 120,
+    // paddingVertical: 30,
+    paddingBottom: 100,
+    marginLeft: 70,
+    marginTop: 30,
   },
 });
 
