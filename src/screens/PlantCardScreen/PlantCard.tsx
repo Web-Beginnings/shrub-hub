@@ -177,7 +177,7 @@ export default function PlantCard(props: PlantCardProps) {
         </View>
       </ScrollView>
       <TouchableOpacity   style={styles.backButton} onPress={() => navigation.goBack()}>
-        <Text style={styles.backButtonText}>Return</Text>
+        <Text style={styles.backButtonText}>Back</Text>
        </TouchableOpacity>
       <View style={styles.footer}>
         
@@ -249,15 +249,17 @@ const styles = StyleSheet.create({
     bottom: "-3%",
   },
   backButton: {
-   
-   alignItems: 'center',
-   backgroundColor: 'khaki'
-
+    borderRadius: 50,
+    // width: 70,
+    // margin: 10,
+    //  flexDirection: 'row',
+    marginHorizontal: 140,
+    alignItems: "center",
+    backgroundColor: "#EA9547",
   },
   backButtonText: {
-    textAlign: 'center',
-    color: 'green',
-    
-  }
+    textAlign: "center",
+    color: "white",
+  },
 });
 
