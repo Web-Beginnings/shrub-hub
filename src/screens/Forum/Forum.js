@@ -5,7 +5,6 @@ import {
   Alert,
   TextInput,
   StyleSheet,
-  TouchableOpacity,
   Pressable,
 } from "react-native";
 import { useState } from "react";
@@ -14,12 +13,7 @@ import {
   getFirestore,
   collection,
   addDoc,
-  getDocs,
-  query,
-  doc,
-  onSnapshot,
-  where,
-  setDoc,
+
 } from "firebase/firestore";
 import Constants from "expo-constants";
 import * as ImagePicker from "expo-image-picker";
@@ -90,7 +84,7 @@ const Forum = (props) => {
     setPhoto("");
   };
 
-  // hello world
+
 
   return (
     <View style={styles.container}>
@@ -143,13 +137,6 @@ const Forum = (props) => {
               source={require("../../../assets/ATPHotoButton.png")}
             />
           </Pressable>
-
-          {/* <TouchableOpacity onPress={handleAttachPhoto}>
-            <Text style={styles.button}>Attach Photo</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleSubmit}>
-            <Text style={styles.button}>Submit</Text>
-          </TouchableOpacity> */}
         </View>
       </View>
       <View style={styles.allPosts}>
@@ -172,7 +159,6 @@ const styles = StyleSheet.create({
     width: 5,
     paddingRight: 80,
     paddingLeft: 90,
-    // paddingVertical: 30,
     paddingBottom: 50,
     marginLeft: -40,
     marginTop: 0,
@@ -223,7 +209,6 @@ const styles = StyleSheet.create({
     width: 10,
     paddingRight: 120,
     paddingLeft: 120,
-    // paddingVertical: 30,
     paddingBottom: 100,
     marginLeft: 70,
     marginTop: 30,

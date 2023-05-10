@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Footer from "../HomeScreen/Components.js/Footer";
-import Header from "../HomeScreen/Components.js/Header";
 import {
   View,
   Text,
@@ -163,13 +162,7 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
                 <Image style={styles.Icon} source={source} />
               </TouchableOpacity>
             ) : (
-              // <TouchableOpacity
-              //   key={title}
-              //   style={styles.sectionHeader}
-              //   onPress={() => onPress && onPress(newEmail, password) }
-              // >
-              //   <Text style={styles.sectionHeader}>{title}</Text>
-              // </TouchableOpacity>
+            
               <View style={styles.inputContainer}>
                 <Image
                   style={styles.Icon}
@@ -185,6 +178,7 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
                 >
                   Update email address
                 </Text> */}
+
                 <View>
                   <TextInput
                     style={styles.textInput}
@@ -199,6 +193,7 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
                   />
                 </View>
                 <View>
+
                   <TouchableOpacity
                     onPress={() => onPress && onPress(newEmail, password)}
                   >
@@ -207,12 +202,7 @@ const SettingsScreen: React.FC<SettingProps> = ({ navigation }) => {
                       source={require("../../../assets/SaveButton.png")}
                     />
                   </TouchableOpacity>
-                  {/* <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => handleUpdateEmail(newEmail, password)}
-                  >
-                    <Text style={styles.buttonText}>Save</Text>
-                  </TouchableOpacity> */}
+                  
                 </View>
               </View>
             )}
