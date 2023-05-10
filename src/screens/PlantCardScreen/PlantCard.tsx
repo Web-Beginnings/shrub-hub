@@ -54,7 +54,7 @@ export default function PlantCard(props: PlantCardProps) {
     setIsMyPlantAdded(true);
     setAddPlantButtonText('Added!')
     const user = firebase.auth().currentUser;
-    // init services
+    
     const db = getFirestore();
     if (!user) {
       console.log("No user found");
@@ -246,19 +246,10 @@ const styles = StyleSheet.create({
   },
   footer: {
     paddingBottom: Constants.statusBarHeight,
-    // position: "absolute",
     bottom: "-3%",
-    // left: 0,
-    // right: 0,
-    // height: 25,
-    // backgroundColor: "#32d953",
-    // justifyContent: "space-between",
   },
   backButton: {
     borderRadius: 50,
-    // width: 70,
-    // margin: 10,
-    //  flexDirection: 'row',
     marginHorizontal: 140,
     alignItems: "center",
     backgroundColor: "#EA9547",
