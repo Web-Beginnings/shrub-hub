@@ -45,7 +45,6 @@ export default function HomeScreen(props) {
           users.map((person) => {
             if (person.id === props.extraData.id) {
               currentUser.push(person);
-
               currentUser[0].myPlants.map((plantid) => {
                 getPlantsById(plantid).then((result) => {
                   plantsResArray.push(result);
