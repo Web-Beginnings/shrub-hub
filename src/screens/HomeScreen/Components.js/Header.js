@@ -27,7 +27,7 @@ const Header = (props, extraData) => {
         </Text>
       </View>
       <View>
-        <Pressable
+        <TouchableOpacity
           onPress={() => {
             navigation.navigate("Settings", { props: props });
           }}
@@ -36,7 +36,7 @@ const Header = (props, extraData) => {
             style={styles.Icon}
             source={require("../../../../assets/SettingsIcon.png")}
           />
-        </Pressable>
+        </TouchableOpacity>
         {/* <TouchableOpacity
           style={styles.button}
           onPress={() => {

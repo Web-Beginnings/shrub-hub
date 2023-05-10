@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import Constants from "expo-constants";
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -8,8 +9,11 @@ export default StyleSheet.create({
     flex: 1,
   },
   footer: {
+    paddingBottom: Constants.statusBarHeight,
+    bottom: "-3%",
     backgroundColor: "#484240",
-    padding: 25,
+    paddingTop: 10,
+    paddingHorizontal: 25,
   },
   section: {
     paddingVertical: 50,
