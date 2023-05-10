@@ -35,6 +35,8 @@ export default function PlantCard(props: PlantCardProps) {
   const [plant, setPlant] = useState<any>(null);
   const [isMyPlantAdded, setIsMyPlantAdded] = useState(false);
   const [isMyPlantAddedWishlist, setIsMyPlantAddedWishlist] = useState(false);
+  const [addPlantButtonText, setAddPlantButtonText] = useState('+ My Plants');
+  const [addWishlistButtonText, setAddWishlistButtonText] = useState('+ Wish List');
   const { route } = props;
   const navigation = useNavigation();
   const id = route.params.plantId;
@@ -50,6 +52,7 @@ export default function PlantCard(props: PlantCardProps) {
   }
   const updateMyPlants = (id: number) => {
     setIsMyPlantAdded(true);
+    setAddPlantButtonText('Added!')
     const user = firebase.auth().currentUser;
     // init services
     const db = getFirestore();
@@ -76,6 +79,7 @@ export default function PlantCard(props: PlantCardProps) {
 
   const updateWishlist = (id: number) => {
     setIsMyPlantAddedWishlist(true);
+    setAddWishlistButtonText('Added!')
     const user = firebase.auth().currentUser;
     // init services
     const db = getFirestore();
@@ -116,7 +120,7 @@ export default function PlantCard(props: PlantCardProps) {
             onPress={() => updateMyPlants(id)}
             disabled={isMyPlantAdded}
           >
-            + My Plants
+            {addPlantButtonText}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -130,7 +134,7 @@ export default function PlantCard(props: PlantCardProps) {
             onPress={() => updateWishlist(id)}
             disabled={isMyPlantAddedWishlist}
           >
-            + Wish List
+            {addWishlistButtonText}
           </Text>
         </TouchableOpacity>
         <View style={styles.info}>
