@@ -75,7 +75,7 @@ export default function HomeScreen(props) {
           >
             <Image
               style={styles.Icon}
-              source={require("../../../assets/ViewAllButton.png")}
+              source={require("../../../assets/AllPlantsWArrow.png")}
             />
           </Pressable>
           <Image
@@ -109,12 +109,17 @@ export default function HomeScreen(props) {
                       )}
 
                       <Text style={styles.title}>Scientific Name:</Text>
+
                       <Text> {plant.scientific_name}</Text>
                     </TouchableOpacity>
                   </View>
                 );
               })}
             </PagerView>
+            <Image
+              style={styles.arrows}
+              source={require("../../../assets/ArrowsIcon.png")}
+            />
           </View>
           <View>
             <Wishlist props={props}/>
