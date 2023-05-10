@@ -104,6 +104,8 @@ const SinglePost = (props) => {
   }
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>{post.title}</Text>
+      <Text style={styles.body}>{post.body}</Text>
       {post.img && (
         <Image
           style={styles.image}
@@ -111,9 +113,6 @@ const SinglePost = (props) => {
           // resizeMode="contain"
         />
       )}
-
-      <Text style={styles.title}>{post.title}</Text>
-      <Text style={styles.body}>{post.body}</Text>
       <Text style={styles.createdAt}>
         {post.username} posted at: {formattedDate}, {formattedTime}{" "}
       </Text>
@@ -185,6 +184,8 @@ const styles = StyleSheet.create({
     backgroundColor: "gainsboro",
     borderRadius: 10,
     paddingHorizontal: 10,
+    marginHorizontal: 20,
+    marginVertical: -5,
   },
   commentSubmitButton: {
     fontSize: 15,
@@ -199,7 +200,7 @@ const styles = StyleSheet.create({
   image: {
     width: 180,
     height: 70,
-    marginTop: 30,
+    marginTop: 0,
     borderRadius: 20,
     marginLeft: 95,
   },
@@ -214,7 +215,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 25,
     fontWeight: "bold",
-    marginTop: 10,
+    marginTop: 40,
     marginBottom: 10,
     marginLeft: 70,
     marginRight: 50,
@@ -237,7 +238,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     display: "flex",
     textAlign: "right",
-    paddingRight: 3,
+    paddingRight: 80,
     paddingTop: 3,
     color: "white",
   },
