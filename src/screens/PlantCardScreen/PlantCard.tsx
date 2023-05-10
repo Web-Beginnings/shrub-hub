@@ -178,7 +178,11 @@ export default function PlantCard(props: PlantCardProps) {
           </Text>
         </View>
       </ScrollView>
+      <TouchableOpacity   style={styles.backButton} onPress={() => navigation.goBack()}>
+        <Text style={styles.backButtonText}>Return</Text>
+       </TouchableOpacity>
       <View style={styles.footer}>
+        
         <Footer navigation={navigation} />
       </View>
     </View>
@@ -250,23 +254,19 @@ const styles = StyleSheet.create({
     backgroundColor: "#32d953",
     justifyContent: "space-between",
   },
+  backButton: {
+    // borderRadius: 50,
+    // width: 70,
+    // margin: 10,
+  //  flexDirection: 'row',
+   alignItems: 'center',
+   backgroundColor: 'khaki'
+
+  },
+  backButtonText: {
+    textAlign: 'center',
+    color: 'green',
+    
+  }
 });
 
-// const db = getFirestore();
-
-// // This code below gets the data from myPlants for the user - This will be needed for My Plants page.
-// const colRef = collection(db, "users");
-
-// const user = firebase.auth().currentUser;
-// const users: any = [];
-
-// getDocs(colRef)
-//   .then((snapshot) => {
-//     snapshot.docs.filter((doc) => {
-//       users.push({ ...doc.data().MyPlants });
-//     });
-//     console.log(users, "<-- users, myplants");
-//   })
-//   .catch((error) => {
-//     console.log(error);
-//   });
