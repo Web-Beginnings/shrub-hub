@@ -123,20 +123,19 @@ const Forum = (props) => {
               style={{ width: 110, height: 110, marginLeft: 16 }}
             />
           ) : null}
-          <Pressable
-            onPress={() => {
-              navigation.navigate("PlantsList");
-            }}
-          >
+          <Pressable onPress={handleSubmit}>
+            <Image
+              style={styles.Icontwo}
+              source={require("../../../assets/SubmitButton.png")}
+            />
+          </Pressable>
+          <Pressable onPress={handleAttachPhoto}>
             <Image
               style={styles.Icontwo}
               source={require("../../../assets/ATPHotoButton.png")}
             />
           </Pressable>
-          <Image
-            style={styles.Icontwo}
-            source={require("../../../assets/SubmitButton.png")}
-          />
+
           {/* <TouchableOpacity onPress={handleAttachPhoto}>
             <Text style={styles.button}>Attach Photo</Text>
           </TouchableOpacity>
@@ -167,7 +166,7 @@ const styles = StyleSheet.create({
     paddingLeft: 80,
     // paddingVertical: 30,
     paddingBottom: 50,
-    marginLeft: 30,
+    marginLeft: 10,
     marginTop: 0,
   },
   container: {
