@@ -12,12 +12,12 @@ export default StyleSheet.create({
     padding: 25,
   },
   section: {
+    paddingVertical: 50,
     paddingVertical: 40,
-    paddingHorizontal: 80,
+    paddingHorizontal: 24,
     justifyContent: "space-between",
-    alignContent: "center",
     alignItems: "center",
-    flexDirection: "row",
+    height: 180,
   },
   sectionHeader: {
     paddingVertical: 12,
