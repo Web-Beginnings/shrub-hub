@@ -11,7 +11,7 @@ import {
 import PagerView from "react-native-pager-view";
 import Footer from "./Components.js/Footer";
 import Header from "./Components.js/Header";
-import Wishlist from "./Wishlist.js"
+import Wishlist from "./Wishlist.js";
 import styles from "./styles";
 import {
   getFirestore,
@@ -68,7 +68,7 @@ export default function HomeScreen(props) {
       <Header props={user} navigation={navigation} />
       <ScrollView>
         <View style={styles.content}>
-          <Pressable
+          <TouchableOpacity
             onPress={() => {
               navigation.navigate("PlantsList");
             }}
@@ -77,7 +77,7 @@ export default function HomeScreen(props) {
               style={styles.Icon}
               source={require("../../../assets/AllPlantsWArrow.png")}
             />
-          </Pressable>
+          </TouchableOpacity>
           <Image
             style={styles.Icontwo}
             source={require("../../../assets/MPIconS.png")}
@@ -122,7 +122,7 @@ export default function HomeScreen(props) {
             />
           </View>
           <View>
-            <Wishlist props={props}/>
+            <Wishlist props={props} />
           </View>
         </View>
       </ScrollView>
