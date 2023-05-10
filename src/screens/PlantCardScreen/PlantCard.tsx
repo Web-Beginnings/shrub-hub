@@ -46,7 +46,6 @@ export default function PlantCard(props: PlantCardProps) {
   if (!plant) {
     return <Text>Loading Plant...</Text>;
   }
-
   const updateMyPlants = (id: number) => {
     setIsMyPlantAdded(true);
     const user = firebase.auth().currentUser;

@@ -2,15 +2,27 @@ import {
   View,
   Text,
   Image,
+  Alert,
   TextInput,
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
 import { useState } from "react";
+import { firebase } from "../../../firebaseConfig";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  doc,
+  onSnapshot,
+  where,
+  setDoc,
+} from "firebase/firestore";
 import * as ImagePicker from "expo-image-picker";
 import Footer from "../HomeScreen/Components.js/Footer";
 import AllPosts from "./AllPosts";
-import { getFirestore, collection, getDocs } from "@firebase/firestore";
 
 const Forum = (props) => {
   const [title, setTitle] = useState("");
@@ -19,8 +31,10 @@ const Forum = (props) => {
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
   const wholePost = {
     title: title,
-    text: body,
+    body: body,
     photo: photo,
+    username: props.user.fullName,
+    createdAt: Date.now()
   };
 
   const { navigation } = props;
@@ -43,7 +57,39 @@ const Forum = (props) => {
     return <Text>No access to internal storage</Text>;
   }
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+
+    if(wholePost.title.length === 0) {
+      Alert.alert('Alert', 'Please include a title for your post')
+      return;
+    }
+    if(wholePost.body.length === 0) {
+      Alert.alert('Alert', 'Please include a body for your post')
+      return;
+    }
+
+    const user = firebase.auth().currentUser;
+    const db = getFirestore();
+    if (!user) {
+      console.log("No user found");
+      return;
+    }
+
+    const dbRef = collection(db, "forumPosts")
+
+    addDoc(dbRef, wholePost)
+      .then((docRef) => {
+        console.log("Post has been added successfully");
+      })
+      .catch((error) => {
+        console.log("Error", error.message);
+      })
+      setTitle('');
+      setBody('');
+      setPhoto('')
+  };
+
+  // hello world
 
   return (
     <View style={styles.container}>
@@ -54,6 +100,7 @@ const Forum = (props) => {
             placeholder="Enter your title here.."
             multiline={true}
             numberOfLines={1}
+            value={title}
             onChangeText={(title) => setTitle(title)}
           />
           <TextInput
@@ -61,6 +108,7 @@ const Forum = (props) => {
             placeholder="Enter your post here.."
             multiline={true}
             numberOfLines={2}
+            value={body}
             onChangeText={(body) => setBody(body)}
           />
         </View>

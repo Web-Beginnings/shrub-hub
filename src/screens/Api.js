@@ -18,6 +18,7 @@ export const getPlantsById = (id) => {
       `
     )
     .then((response) => {
+      // console.log("hereeeeee?", response);
       return response.data;
     });
 };
