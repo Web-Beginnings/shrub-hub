@@ -11,7 +11,7 @@ export const getPlants = () => {
   });
 };
 
-export const getPlantsById = (id) => {
+export const getPlantsById = (id : any) => {
   return axios
     .get(
       `https://perenual.com/api/species/details/${id}?key=sk-a8dQ645bbd8560b1b871`

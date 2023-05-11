@@ -156,7 +156,7 @@ export default function HomeScreen(props) {
           </View>
           <Image
             style={styles.Icontwo}
-            source={require("../../../assets/MPIconS.png")}
+            source={require("../../../assets/wishlist.png")}
           />
           <View>
             <PagerView style={styles.pager} initialPage={0}>
