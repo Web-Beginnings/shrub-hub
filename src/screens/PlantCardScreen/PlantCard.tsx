@@ -19,9 +19,6 @@ import {
   getDocs,
   query,
   doc,
-  onSnapshot,
-  where,
-  setDoc,
   updateDoc,
   arrayUnion,
 } from "firebase/firestore";
@@ -34,9 +31,11 @@ interface PlantCardProps {
 export default function PlantCard(props: PlantCardProps) {
   const [plant, setPlant] = useState<any>(null);
   const [isMyPlantAdded, setIsMyPlantAdded] = useState(false);
-  const [isMyPlantAddedWishlist, setIsMyPlantAddedWishlist] = useState<boolean>(false);
-  const [addPlantButtonText, setAddPlantButtonText] = useState('+ My Plants');
-  const [addWishlistButtonText, setAddWishlistButtonText] = useState('+ Wish List');
+  const [isMyPlantAddedWishlist, setIsMyPlantAddedWishlist] =
+    useState<boolean>(false);
+  const [addPlantButtonText, setAddPlantButtonText] = useState("+ My Plants");
+  const [addWishlistButtonText, setAddWishlistButtonText] =
+    useState("+ Wish List");
   const { route } = props;
   const navigation = useNavigation();
   const id = route.params.plantId;
@@ -48,11 +47,17 @@ export default function PlantCard(props: PlantCardProps) {
   }, [id]);
 
   if (!plant) {
-    return <Text>Loading Plant...</Text>;
+    return (
+      <View style={styles.content}>
+        <Text style={styles.title}>Loading . . .</Text>
+        <View style={styles.loading}></View>
+        <View style={styles.loadingFooter}></View>
+      </View>
+    );
   }
   const updateMyPlants = (id: number) => {
     setIsMyPlantAdded(true);
-    setAddPlantButtonText('Added!')
+    setAddPlantButtonText("Added!");
     const user = firebase.auth().currentUser;
     // init services
     const db = getFirestore();
@@ -79,7 +84,7 @@ export default function PlantCard(props: PlantCardProps) {
 
   const updateWishlist = (id: number) => {
     setIsMyPlantAddedWishlist(true);
-    setAddWishlistButtonText('Added!')
+    setAddWishlistButtonText("Added!");
     const user = firebase.auth().currentUser;
     // init services
     const db = getFirestore();
@@ -176,11 +181,13 @@ export default function PlantCard(props: PlantCardProps) {
           </Text>
         </View>
       </ScrollView>
-      <TouchableOpacity   style={styles.backButton} onPress={() => navigation.goBack()}>
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => navigation.goBack()}
+      >
         <Text style={styles.backButtonText}>Back</Text>
-       </TouchableOpacity>
+      </TouchableOpacity>
       <View style={styles.footer}>
-        
         <Footer navigation={navigation} />
       </View>
     </View>
@@ -261,5 +268,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "white",
   },
+  loading: {
+    flex: 1,
+    alignItems: "center",
+    paddingBottom: "250%",
+  },
+  loadingFooter: {
+    paddingBottom: Constants.statusBarHeight,
+  },
 });
-
