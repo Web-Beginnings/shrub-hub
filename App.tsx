@@ -1,5 +1,6 @@
 import "react-native-gesture-handler";
 import React, { useEffect, useState } from "react";
+import { LogBox } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { LoginScreen, HomeScreen, RegistrationScreen } from "./src/screens";
@@ -14,6 +15,10 @@ import PlantCard from "./src/screens/PlantCardScreen/PlantCard";
 import { firebase } from "./firebaseConfig.js";
 import { View, Text } from "react-native";
 import SettingsScreen from "./src/screens/SettingsScreen/Settings";
+
+LogBox.ignoreLogs([
+  "Non-serializable values were found in the navigation state",
+]);
 
 if (!global.btoa) {
   global.btoa = encode;
@@ -73,10 +78,7 @@ export default function App() {
           options={{ headerShown: false }}
         />
 
-        
-
-        <Stack.Screen name="PlantsList" options={{ headerShown: false }}> 
-
+        <Stack.Screen name="PlantsList" options={{ headerShown: false }}>
           {(props) => <PlantsList {...props} />}
         </Stack.Screen>
         <Stack.Screen name="PlantCard" options={{ headerShown: false }}>
@@ -87,13 +89,21 @@ export default function App() {
         <Stack.Screen name="Forum" options={{ headerShown: false }}>
           {(props) => <Forum {...props} user={user} />}
         </Stack.Screen>
-        <Stack.Screen name="SinglePost" component={SinglePost} options={{ headerShown: false }} />
+        <Stack.Screen
+          name="SinglePost"
+          component={SinglePost}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name="Registration"
           component={RegistrationScreen}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="Settings" component={SettingsScreen} options={{ headerShown: false }}/>
+        <Stack.Screen
+          name="Settings"
+          component={SettingsScreen}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
