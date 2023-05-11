@@ -101,7 +101,7 @@ export default function HomeScreen(props) {
       <Header props={user} navigation={navigation} />
       <ScrollView>
         <View style={styles.content}>
-          <Pressable
+          <TouchableOpacity
             onPress={() => {
               navigation.navigate("PlantsList");
             }}
@@ -110,7 +110,7 @@ export default function HomeScreen(props) {
               style={styles.Icon}
               source={require("../../../assets/AllPlantsWArrow.png")}
             />
-          </Pressable>
+          </TouchableOpacity>
           <Image
             style={styles.Icontwo}
             source={require("../../../assets/MPIconS.png")}

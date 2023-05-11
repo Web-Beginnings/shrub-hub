@@ -6,15 +6,11 @@ import {
   TextInput,
   StyleSheet,
   Pressable,
+  TouchableOpacity,
 } from "react-native";
 import { useState } from "react";
 import { firebase } from "../../../firebaseConfig";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-
-} from "firebase/firestore";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 import Constants from "expo-constants";
 import * as ImagePicker from "expo-image-picker";
 import Footer from "../HomeScreen/Components.js/Footer";
@@ -84,8 +80,6 @@ const Forum = (props) => {
     setPhoto("");
   };
 
-
-
   return (
     <View style={styles.container}>
       <View style={styles.newPostInput}>
@@ -125,18 +119,18 @@ const Forum = (props) => {
               }}
             />
           ) : null}
-          <Pressable onPress={handleSubmit}>
+          <TouchableOpacity onPress={handleSubmit}>
             <Image
               style={styles.Icontwo}
               source={require("../../../assets/SubmitButton.png")}
             />
-          </Pressable>
-          <Pressable onPress={handleAttachPhoto}>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleAttachPhoto}>
             <Image
               style={styles.Icontwo}
               source={require("../../../assets/ATPHotoButton.png")}
             />
-          </Pressable>
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.allPosts}>
