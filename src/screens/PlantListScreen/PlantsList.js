@@ -47,7 +47,13 @@ export default function PlantsList(props, extraData) {
   }, [sliderValue]);
 
   if (!plantsArray) {
-    return <Text style={styles.title}>Loading Plants...</Text>;
+    return (
+      <View style={styles.content}>
+        <Text style={styles.title}>Loading . . .</Text>
+        <View style={styles.loading}></View>
+        <View style={styles.loadingFooter}></View>
+      </View>
+    );
   }
 
   useEffect(() => {
@@ -74,56 +80,58 @@ export default function PlantsList(props, extraData) {
             Filter by watering level: {wateringDisplay[sliderValue]}{" "}
           </Text>
         </View>
-        <ScrollView>
-          <View style={styles.slideContent}>
-            <Text style={styles.sliderText}>
-              {wateringDisplay[sliderValue]}
-            </Text>
-            <Slider
-              thumbImage={(source = "../../../assets/waterIcon.png")}
-              style={{ width: 300, height: 10 }}
-              minimumValue={0}
-              maximumValue={3}
-              minimumTrackTintColor="#FFFFFF"
-              maximumTrackTintColor="#000000"
-              thumbTintColor="#EA9547"
-              step={1}
-              value={0}
-              onValueChange={(value) => setSliderValue(value)}
-            />
-          </View>
-          {pageArray.map((plant) => {
-            return (
-              <TouchableOpacity
-                key={plant.id}
-                style={styles.plantContainer}
-                onPress={() => {
-                  navigation.navigate("PlantCard", { plantId: plant.id });
-                }}
-              >
-                <Text style={styles.title}>{plant.common_name}</Text>
-                {plant.default_image && (
-                  <Image
-                    source={{ uri: plant.default_image.small_url }}
-                    style={styles.plantImage}
-                  />
-                )}
-                <Text>
-                  <Text style={styles.plantTitles}>Scientific Name:</Text>{" "}
-                  {plant.scientific_name}
-                </Text>
-                <Text>
-                  <Text style={styles.plantTitles}>Sunlight:</Text>{" "}
-                  {plant.sunlight}
-                </Text>
-                <Text>
-                  <Text style={styles.plantTitles}>Watering:</Text>{" "}
-                  {plant.watering}
-                </Text>
-              </TouchableOpacity>
-            );
-          })}
-        </ScrollView>
+        <View style={styles.scroll}>
+          <ScrollView>
+            <View style={styles.slideContent}>
+              <Text style={styles.sliderText}>
+                {wateringDisplay[sliderValue]}
+              </Text>
+              <Slider
+                thumbImage={(source = "../../../assets/waterIcon.png")}
+                style={{ width: 300, height: 10 }}
+                minimumValue={0}
+                maximumValue={3}
+                minimumTrackTintColor="#FFFFFF"
+                maximumTrackTintColor="#000000"
+                thumbTintColor="#EA9547"
+                step={1}
+                value={0}
+                onValueChange={(value) => setSliderValue(value)}
+              />
+            </View>
+            {pageArray.map((plant) => {
+              return (
+                <TouchableOpacity
+                  key={plant.id}
+                  style={styles.plantContainer}
+                  onPress={() => {
+                    navigation.navigate("PlantCard", { plantId: plant.id });
+                  }}
+                >
+                  <Text style={styles.title}>{plant.common_name}</Text>
+                  {plant.default_image && (
+                    <Image
+                      source={{ uri: plant.default_image.small_url }}
+                      style={styles.plantImage}
+                    />
+                  )}
+                  <Text>
+                    <Text style={styles.plantTitles}>Scientific Name:</Text>{" "}
+                    {plant.scientific_name}
+                  </Text>
+                  <Text>
+                    <Text style={styles.plantTitles}>Sunlight:</Text>{" "}
+                    {plant.sunlight}
+                  </Text>
+                  <Text>
+                    <Text style={styles.plantTitles}>Watering:</Text>{" "}
+                    {plant.watering}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </ScrollView>
+        </View>
       </View>
       <TouchableOpacity
         style={styles.backButton}
@@ -162,7 +170,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#EA9547",
   },
-  slider: {},
+  scroll: {
+    height: "100%",
+  },
   plantContainer: {
     alignItems: "center",
     marginBottom: 10,

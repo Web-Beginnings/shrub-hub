@@ -181,14 +181,16 @@ export default function PlantCard(props: PlantCardProps) {
           </Text>
         </View>
       </ScrollView>
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => navigation.goBack()}
-      >
-        <Text style={styles.backButtonText}>Back</Text>
-      </TouchableOpacity>
-      <View style={styles.footer}>
-        <Footer navigation={navigation} />
+      <View style={styles.backPad}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Text style={styles.backButtonText}>Back</Text>
+        </TouchableOpacity>
+        <View style={styles.footer}>
+          <Footer navigation={navigation} />
+        </View>
       </View>
     </View>
   );
@@ -253,13 +255,15 @@ const styles = StyleSheet.create({
   },
   footer: {
     paddingBottom: Constants.statusBarHeight,
-    bottom: "-3%",
+    bottom: "3%",
+    backgroundColor: "#484240",
+    paddingTop: 5,
   },
   backButton: {
     borderRadius: 50,
-    // width: 70,
-    // margin: 10,
-    //  flexDirection: 'row',
+    width: 70,
+    margin: 10,
+    // flexDirection: "row",
     marginHorizontal: 140,
     alignItems: "center",
     backgroundColor: "#EA9547",
@@ -275,5 +279,9 @@ const styles = StyleSheet.create({
   },
   loadingFooter: {
     paddingBottom: Constants.statusBarHeight,
+  },
+  backPad: {
+    paddingBottom: Constants.statusBarHeight,
+    bottom: "1.8%",
   },
 });
