@@ -2,7 +2,7 @@ import axios from "axios";
 
 const plantAPI = axios.create({
   baseURL:
-    "https://perenual.com/api/species-list?key=sk-yjo9645ba6a2ab6c5863&indoor=1",
+    "https://perenual.com/api/species-list?key=sk-a8dQ645bbd8560b1b871&indoor=1",
 });
 
 export const getPlants = () => {
@@ -11,13 +11,13 @@ export const getPlants = () => {
   });
 };
 
-export const getPlantsById = (id: number) => {
+export const getPlantsById = (id) => {
   return axios
     .get(
-
-      `https://perenual.com/api/species/details/${id}?key=sk-fgc6645ba1a85a079861`
+      `https://perenual.com/api/species/details/${id}?key=sk-a8dQ645bbd8560b1b871`
     )
     .then((response) => {
+      // console.log("hereeeeee?", response);
       return response.data;
     });
 };

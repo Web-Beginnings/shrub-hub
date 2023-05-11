@@ -34,11 +34,8 @@ export async function getPlants(): Promise<PlantData[]> {
   const pageNumbers = [1, 2, 3, 4, 5, 6];
   let result: Promise<PlantResponseObject>[] = [];
   pageNumbers.forEach((page) => {
-
-    const axiosResponse: Promise<PlantResponseObject> =  axios
-      .get(
-        `https://perenual.com/api/species-list?page=${page}&key=sk-KjDj645b54bcbb04f849&indoor=1`
-
+    const axiosResponse: Promise<PlantResponseObject> = axios.get(
+      `https://perenual.com/api/species-list?page=${page}&key=sk-a8dQ645bbd8560b1b871&indoor=1`
     );
     result.push(axiosResponse);
   });
@@ -63,7 +60,7 @@ export async function sortPlantsByWatering(
   let result: Promise<PlantResponseObject>[] = [];
   pageNumbers.forEach((page) => {
     const axiosResponse: Promise<PlantResponseObject> = axios.get(
-      `https://perenual.com/api/species-list?page=${page}&key=sk-fgc6645ba1a85a079861&indoor=1&watering=${watering}`
+      `https://perenual.com/api/species-list?page=${page}&key=sk-a8dQ645bbd8560b1b871&indoor=1&watering=${watering}`
     );
     result.push(axiosResponse);
   });
