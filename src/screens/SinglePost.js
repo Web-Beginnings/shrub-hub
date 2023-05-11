@@ -196,9 +196,10 @@ const styles = StyleSheet.create({
     color: "#fff",
     height: 35,
     borderRadius: 50,
-    padding: 5,
-    marginBottom: 15,
+    // padding: 5,
+    marginHorizontal: 150,
     textAlign: "center",
+    marginBottom: -13,
   },
   image: {
     width: 180,
