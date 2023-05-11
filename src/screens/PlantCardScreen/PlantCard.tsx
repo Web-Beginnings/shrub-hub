@@ -19,9 +19,6 @@ import {
   getDocs,
   query,
   doc,
-  onSnapshot,
-  where,
-  setDoc,
   updateDoc,
   arrayUnion,
 } from "firebase/firestore";
