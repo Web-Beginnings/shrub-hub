@@ -31,9 +31,14 @@ export default function HomeScreen(props) {
   const db = getFirestore();
   const colRef = collection(db, "users");
   const users = [];
+  const usersWish = [];
   const currentUser = [];
+  const currentUserWish = [];
   const [myPlantsArray, setMyPlantsArray] = useState([]);
+  const [myPlantsArrayWish, setMyPlantsArrayWish] = useState([]);
   const plantsResArray = [];
+  const plantsResArrayWish = [];
+
   useEffect(() => {
     getDocs(colRef)
       .then((snapshot) => {
@@ -60,6 +65,34 @@ export default function HomeScreen(props) {
         console.log("error");
       });
   }, [setMyPlantsArray]);
+
+  useEffect(() => {
+    getDocs(colRef)
+      .then((snapshot) => {
+        snapshot.docs.filter((doc) => {
+          usersWish.push({
+            wishlist: Object.values({ ...doc.data().Wishlist }),
+            id: doc.id,
+          });
+          usersWish.map((person) => {
+            if (person.id === props.extraData.id) {
+              currentUserWish.push(person);
+              currentUserWish[0].wishlist.map((plantid) => {
+                getPlantsById(plantid).then((result) => {
+                  plantsResArrayWish.push(result);
+                  setMyPlantsArrayWish(plantsResArrayWish);
+                  // return result;
+                });
+              });
+            }
+          });
+        });
+      })
+      .catch((error) => {
+        console.log("error");
+      });
+  }, [setMyPlantsArrayWish]);
+
   const user = props.extraData.fullName;
   const { navigation } = props;
   return (
@@ -86,12 +119,55 @@ export default function HomeScreen(props) {
               {/* <View key={100}>
             <Text>{myPlantsArray[0].common_name}</Text>
           </View> */}
-              {myPlantsArray.map((plant) => {
+              {myPlantsArray.map((plant, index) => {
                 {
-                  console.log("heloooooo", plant);
+                  // console.log("heloooooo", plant);
                 }
                 return (
-                  <View key={plant.id} style={styles.plantcard}>
+                  <View key={index} style={styles.plantcard}>
+                    <TouchableOpacity
+                      key={plant.id}
+                      style={styles.plantContainer}
+                      onPress={() => {
+                        navigation.navigate("PlantCard", { plantId: plant.id });
+                      }}
+                    >
+                      <Text style={styles.title}>{plant.common_name}</Text>
+                      {plant.default_image && (
+                        <Image
+                          source={{ uri: plant.default_image.thumbnail }}
+                          style={styles.plantImage}
+                        />
+                      )}
+
+                      <Text style={styles.title}>Scientific Name:</Text>
+
+                      <Text> {plant.scientific_name}</Text>
+                    </TouchableOpacity>
+                  </View>
+                );
+              })}
+            </PagerView>
+            <Image
+              style={styles.arrows}
+              source={require("../../../assets/ArrowsIcon.png")}
+            />
+          </View>
+          <Image
+            style={styles.Icontwo}
+            source={require("../../../assets/MPIconS.png")}
+          />
+          <View>
+            <PagerView style={styles.pager} initialPage={0}>
+              {/* <View key={100}>
+            <Text>{myPlantsArray[0].common_name}</Text>
+          </View> */}
+              {myPlantsArrayWish.map((plant, index) => {
+                {
+                  // console.log("heloooooo", plant);
+                }
+                return (
+                  <View key={index} style={styles.plantcard}>
                     <TouchableOpacity
                       key={plant.id}
                       style={styles.plantContainer}
