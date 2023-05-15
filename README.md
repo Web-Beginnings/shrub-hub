@@ -7,3 +7,5 @@ It is a mobile app to guide people who are interested with growing house plants.
 Users can log their own plants to the app. They also can log their wished plants to a list. The app has a forum that they can ask questions and get answers about house plants.
 
 The project is made by 5 junior software developers, Zak, Daniel, Elif, Sarah and Matt.
+
+The demo presentation of the project can be viewed with the following link: https://youtu.be/2G2Bumg1ob4
